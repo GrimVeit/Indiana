@@ -88,9 +88,9 @@ public class ClothesDragView : View
         OnStartMove_Action?.Invoke();
     }
 
-    private void OnEndMove(ItemClothes item)
+    private void OnEndMove(ItemClothes item, Vector2 vector)
     {
-        OnEndMove_Action?.Invoke(item);
+        OnEndMove_Action?.Invoke(item, vector);
     }
 
     public event Action<ClothesDrag> OnGrabClothesItem_Action;
@@ -99,7 +99,7 @@ public class ClothesDragView : View
 
     public event Action OnStartMove_Action;
 
-    public event Action<ItemClothes> OnEndMove_Action;
+    public event Action<ItemClothes, Vector2> OnEndMove_Action;
 
     #endregion
 }

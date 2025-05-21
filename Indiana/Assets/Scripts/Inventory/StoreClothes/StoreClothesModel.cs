@@ -1,73 +1,74 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using UnityEngine;
 
 public class StoreClothesModel
 {
-    //private readonly ItemCollectionGroup itemGroup;
+    public event Action<int> OnChooseDesign;
 
-    //private List<ItemCollectionData> itemCollectionDatas = new List<ItemCollectionData>();
+    private readonly ClothesDesignGroup clothesDesignGroup;
 
-    //public readonly string FilePath = Path.Combine(Application.persistentDataPath, "ItemCollections.json");
+    private ClothesData clothesData;
+    private int currentDesign;
 
-    //public StoreCollectionModel(ItemCollectionGroup itemCollectionGroup)
-    //{
-    //    itemGroup = itemCollectionGroup;
+    public readonly string FilePath = Path.Combine(Application.persistentDataPath, "Clothes.json");
 
-    //    if (File.Exists(FilePath))
-    //    {
-    //        string loadedJson = File.ReadAllText(FilePath);
-    //        ItemCollectionDatas itemCollectionDatas = JsonUtility.FromJson<ItemCollectionDatas>(loadedJson);
+    public StoreClothesModel(ClothesDesignGroup clothesDesignGroup)
+    {
+        this.clothesDesignGroup = clothesDesignGroup;
 
-    //        Debug.Log("Load data");
+        if (File.Exists(FilePath))
+        {
+            string loadedJson = File.ReadAllText(FilePath);
+            clothesData = JsonUtility.FromJson<ClothesData>(loadedJson);
 
-    //        this.itemCollectionDatas = itemCollectionDatas.Datas.ToList();
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("New Data");
+            Debug.Log("Load data");
+        }
+        else
+        {
+            Debug.Log("New Data");
+            clothesData = new ClothesData(0, 0);
+        }
 
-    //        itemCollectionDatas = new List<ItemCollectionData>();
+        currentDesign = clothesDesignGroup.GetDesignByData(clothesData.idHat, clothesData.idJeans);
+    }
 
-    //        for (int i = 0; i < itemCollectionGroup.itemCollections.Count; i++)
-    //        {
-    //            itemCollectionDatas.Add(new ItemCollectionData(0));
-    //        }
-    //    }
+    public void Initialize()
+    {
+        OnChooseDesign?.Invoke(currentDesign);
+    }
 
-    //    for (int i = 0; i < itemCollectionGroup.itemCollections.Count; i++)
-    //    {
-    //        itemCollectionGroup.itemCollections[i].SetData(itemCollectionDatas[i]);
-    //    }
-    //}
+    public void ChooseClothes(int typeClothes, int id)
+    {
+        switch (typeClothes)
+        {
+            case 0:
+                clothesData.idHat = id;
+                break;
+            case 1:
+                clothesData.idJeans = id;
+                break;
+        }
 
-    //public void Initialize()
-    //{
-    //    for (int i = 0; i < itemGroup.itemCollections.Count; i++)
-    //    {
-    //        OnChangeCountItem?.Invoke(itemGroup.itemCollections[i], itemGroup.itemCollections[i].Data.Count);
-    //    }
-    //}
+        currentDesign = clothesDesignGroup.GetDesignByData(clothesData.idHat, clothesData.idJeans);
+        OnChooseDesign?.Invoke(currentDesign);
+    }
 
-    //public void Dispose()
-    //{
-    //    string json = JsonUtility.ToJson(new ItemCollectionDatas(itemCollectionDatas.ToArray()));
-    //    File.WriteAllText(FilePath, json);
-    //}
+    public void Dispose()
+    {
+        string json = JsonUtility.ToJson(clothesData);
+        File.WriteAllText(FilePath, json);
+    }
+}
 
-    //public void AddItemCollection(int id)
-    //{
-    //    var itemCollection = itemGroup.GetItemCollectionById(id);
+public class ClothesData
+{
+    public int idHat;
+    public int idJeans;
+    public ClothesData(int idHat, int idJeans)
+    {
+        this.idHat = idHat;
+        this.idJeans = idJeans;
 
-    //    if (itemCollection == null)
-    //    {
-    //        Debug.LogError($"Not found item collection by id - {id}");
-    //        return;
-    //    }
-
-    //    itemCollection.Data.AddItem(1);
-    //    OnChangeCountItem?.Invoke(itemCollection, itemCollection.Data.Count);
-    //}
+    }
 }

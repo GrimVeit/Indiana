@@ -6,6 +6,8 @@ public class MainMenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private ItemCollectionGroup itemCollectionGroup;
+    [SerializeField] private DesignIndianaPreviewGroup designIndianaPreviewGroup;
+    [SerializeField] private ClothesDesignGroup clothesDesignGroup;
     [SerializeField] private UIMainMenuRoot menuRootPrefab;
 
     private UIMainMenuRoot sceneRoot;
@@ -18,7 +20,10 @@ public class MainMenuEntryPoint : MonoBehaviour
     private StoreCollectionPresenter storeCollectionPresenter;
     private CollectionVisualPresenter collectionVisualPresenter;
 
+    private StoreClothesPresenter storeClothesPresenter;
+    private IndianaPreviewInputPresenter indianaPreviewInputPresenter;
     private ClothesDragPresenter clothesDragPresenter;
+    private IndianaDesignPreviewPresenter indianaDesignPreviewPresenter;
 
     private bool isSceneActive = false;
 
@@ -46,7 +51,10 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup));
         collectionVisualPresenter = new CollectionVisualPresenter(new CollectionVisualModel(storeCollectionPresenter), viewContainer.GetView<CollectionVisualView>());
 
+        storeClothesPresenter = new StoreClothesPresenter(new StoreClothesModel(clothesDesignGroup));
+        indianaPreviewInputPresenter = new IndianaPreviewInputPresenter(new IndianaPreviewInputModel(storeClothesPresenter), viewContainer.GetView<IndianaPreviewInputView>());
         clothesDragPresenter = new ClothesDragPresenter(new ClothesDragModel(soundPresenter), viewContainer.GetView<ClothesDragView>());
+        indianaDesignPreviewPresenter = new IndianaDesignPreviewPresenter(new IndianaDesignPreviewModel(designIndianaPreviewGroup, storeClothesPresenter), viewContainer.GetView<IndianaDesignPreviewView>());
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -67,6 +75,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeCollectionPresenter.Initialize();
 
         clothesDragPresenter.Initialize();
+        indianaDesignPreviewPresenter.Initialize();
+        indianaPreviewInputPresenter.Initialize();
+        storeClothesPresenter.Initialize();
     }
 
     private void DeactivateEvents()
@@ -105,6 +116,9 @@ public class MainMenuEntryPoint : MonoBehaviour
             storeCollectionPresenter.Dispose();
 
             clothesDragPresenter.Dispose();
+            indianaDesignPreviewPresenter.Dispose();
+            indianaPreviewInputPresenter.Dispose();
+            storeClothesPresenter.Dispose();
         }
     }
 

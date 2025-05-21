@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class IndianaDesignPreviewView : MonoBehaviour
+public class IndianaDesignPreviewView : View
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Image imageIndiana;
 
-    // Update is called once per frame
-    void Update()
+    public void SetData(Sprite sprite)
     {
-        
+        imageIndiana.sprite = sprite;
     }
 }

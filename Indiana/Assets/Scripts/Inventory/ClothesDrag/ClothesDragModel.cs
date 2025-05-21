@@ -42,8 +42,21 @@ public class ClothesDragModel
         OnMove?.Invoke(vector);
     }
 
-    public void EndMove(ItemClothes itemClothes)
+    public void EndMove(ItemClothes itemClothes, Vector2 vector)
     {
+        Collider2D collider = Physics2D.OverlapPoint(vector);
+
+        if (collider != null)
+        {
+            if (collider.gameObject.TryGetComponent(out IIndianaPreviewInput indianaPreview))
+            {
+                indianaPreview.SetData(itemClothes);
+                Teleport();
+                return;
+            }
+        }
+
+        _soundProvider.PlayOneShot("Whoosh");
         OnEndMove?.Invoke();
     }
 

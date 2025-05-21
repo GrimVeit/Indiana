@@ -7,7 +7,7 @@ public class ClothesDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 {
     public event Action<ClothesDrag> OnGrabbing;
     public event Action OnStartMove;
-    public event Action<ItemClothes> OnEndMove;
+    public event Action<ItemClothes, Vector2> OnEndMove;
     public event Action<Vector2> OnMove;
 
     [SerializeField] private ItemClothes item;
@@ -69,7 +69,7 @@ public class ClothesDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        OnEndMove?.Invoke(item);
+        OnEndMove?.Invoke(item, transform.position);
     }
 
     #endregion

@@ -16,20 +16,24 @@ public class IndianaDesignPreviewPresenter
     public void Initialize()
     {
         ActivateEvents();
+
+        _model.Initialize();
     }
 
     public void Dispose()
     {
         DeactivateEvents();
+
+        _model.Dispose();
     }
 
     private void ActivateEvents()
     {
-
+        _model.OnChooseDesign += _view.SetData;
     }
 
     private void DeactivateEvents()
     {
-
+        _model.OnChooseDesign -= _view.SetData;
     }
 }
