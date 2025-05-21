@@ -5,6 +5,7 @@ using UnityEngine;
 public class MainMenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private ItemCollectionGroup itemCollectionGroup;
     [SerializeField] private UIMainMenuRoot menuRootPrefab;
 
     private UIMainMenuRoot sceneRoot;
@@ -14,8 +15,17 @@ public class MainMenuEntryPoint : MonoBehaviour
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
 
+    private StoreCollectionPresenter storeCollectionPresenter;
+    private CollectionVisualPresenter collectionVisualPresenter;
+
+    private ClothesDragPresenter clothesDragPresenter;
+
+    private bool isSceneActive = false;
+
     public void Run(UIRootView uIRootView)
     {
+        isSceneActive = true;
+
         sceneRoot = menuRootPrefab;
 
         uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
@@ -33,6 +43,11 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
+        storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup));
+        collectionVisualPresenter = new CollectionVisualPresenter(new CollectionVisualModel(storeCollectionPresenter), viewContainer.GetView<CollectionVisualView>());
+
+        clothesDragPresenter = new ClothesDragPresenter(new ClothesDragModel(soundPresenter), viewContainer.GetView<ClothesDragView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -47,6 +62,11 @@ public class MainMenuEntryPoint : MonoBehaviour
     private void ActivateEvents()
     {
         ActivateTransitions();
+
+        collectionVisualPresenter.Initialize();
+        storeCollectionPresenter.Initialize();
+
+        clothesDragPresenter.Initialize();
     }
 
     private void DeactivateEvents()
@@ -72,12 +92,20 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private void Dispose()
     {
-        DeactivateEvents();
+        if (isSceneActive)
+        {
+            DeactivateEvents();
 
-        soundPresenter?.Dispose();
-        sceneRoot?.Dispose();
-        particleEffectPresenter?.Dispose();
-        bankPresenter?.Dispose();
+            soundPresenter.Dispose();
+            sceneRoot.Dispose();
+            particleEffectPresenter.Dispose();
+            bankPresenter?.Dispose();
+
+            collectionVisualPresenter.Dispose();
+            storeCollectionPresenter.Dispose();
+
+            clothesDragPresenter.Dispose();
+        }
     }
 
     private void OnDestroy()
