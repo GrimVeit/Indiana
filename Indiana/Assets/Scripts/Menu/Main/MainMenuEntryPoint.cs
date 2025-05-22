@@ -25,6 +25,9 @@ public class MainMenuEntryPoint : MonoBehaviour
     private ClothesDragPresenter clothesDragPresenter;
     private IndianaDesignPreviewPresenter indianaDesignPreviewPresenter;
 
+    private StoreLevelPresenter storeLevelPresenter;
+    private LevelVisualPresenter levelVisualPresenter;
+
     private bool isSceneActive = false;
 
     public void Run(UIRootView uIRootView)
@@ -56,6 +59,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         clothesDragPresenter = new ClothesDragPresenter(new ClothesDragModel(soundPresenter), viewContainer.GetView<ClothesDragView>());
         indianaDesignPreviewPresenter = new IndianaDesignPreviewPresenter(new IndianaDesignPreviewModel(designIndianaPreviewGroup, storeClothesPresenter), viewContainer.GetView<IndianaDesignPreviewView>());
 
+        storeLevelPresenter = new StoreLevelPresenter(new StoreLevelModel());
+        levelVisualPresenter = new LevelVisualPresenter(new LevelVisualModel(storeLevelPresenter), viewContainer.GetView<LevelVisualView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -78,6 +84,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         indianaDesignPreviewPresenter.Initialize();
         indianaPreviewInputPresenter.Initialize();
         storeClothesPresenter.Initialize();
+
+        levelVisualPresenter.Initialize();
+        storeLevelPresenter.Initialize();
     }
 
     private void DeactivateEvents()
@@ -101,6 +110,24 @@ public class MainMenuEntryPoint : MonoBehaviour
         soundPresenter?.Dispose();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            storeLevelPresenter.OpenLevel(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            storeLevelPresenter.OpenLevel(2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            storeLevelPresenter.OpenLevel(3);
+        }
+    }
+
     private void Dispose()
     {
         if (isSceneActive)
@@ -119,6 +146,9 @@ public class MainMenuEntryPoint : MonoBehaviour
             indianaDesignPreviewPresenter.Dispose();
             indianaPreviewInputPresenter.Dispose();
             storeClothesPresenter.Dispose();
+
+            levelVisualPresenter.Dispose();
+            storeLevelPresenter.Dispose();
         }
     }
 
