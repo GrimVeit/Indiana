@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,16 @@ public class LevelVisual : MonoBehaviour
     [SerializeField] private Sprite spriteOpen;
     [SerializeField] private Sprite spriteClose;
 
+    public void Initialize()
+    {
+        buttonLevel.onClick.AddListener(() => OnChooseLevel?.Invoke(id));
+    }
+
+    public void Dispose()
+    {
+        buttonLevel.onClick.RemoveListener(() => OnChooseLevel?.Invoke(id));
+    }
+
     public void Open()
     {
         buttonLevel.enabled = true;
@@ -24,4 +35,10 @@ public class LevelVisual : MonoBehaviour
         buttonLevel.enabled = false;
         imageLevel.sprite = spriteClose;
     }
+
+    #region Output
+
+    public event Action<int> OnChooseLevel;
+
+    #endregion
 }

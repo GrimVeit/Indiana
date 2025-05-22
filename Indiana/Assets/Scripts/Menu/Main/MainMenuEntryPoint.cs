@@ -27,6 +27,9 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private StoreLevelPresenter storeLevelPresenter;
     private LevelVisualPresenter levelVisualPresenter;
+    private LevelPresenter levelPresenter;
+
+    private MenuStateMachine stateMachine;
 
     private bool isSceneActive = false;
 
@@ -60,7 +63,10 @@ public class MainMenuEntryPoint : MonoBehaviour
         indianaDesignPreviewPresenter = new IndianaDesignPreviewPresenter(new IndianaDesignPreviewModel(designIndianaPreviewGroup, storeClothesPresenter), viewContainer.GetView<IndianaDesignPreviewView>());
 
         storeLevelPresenter = new StoreLevelPresenter(new StoreLevelModel());
-        levelVisualPresenter = new LevelVisualPresenter(new LevelVisualModel(storeLevelPresenter), viewContainer.GetView<LevelVisualView>());
+        levelVisualPresenter = new LevelVisualPresenter(new LevelVisualModel(storeLevelPresenter, storeLevelPresenter), viewContainer.GetView<LevelVisualView>());
+        levelPresenter = new LevelPresenter(new LevelModel(storeLevelPresenter), viewContainer.GetView<LevelView>());
+
+        stateMachine = new MenuStateMachine(sceneRoot);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -71,11 +77,6 @@ public class MainMenuEntryPoint : MonoBehaviour
         particleEffectPresenter.Initialize();
         sceneRoot.Initialize();
         bankPresenter.Initialize();
-    }
-
-    private void ActivateEvents()
-    {
-        ActivateTransitions();
 
         collectionVisualPresenter.Initialize();
         storeCollectionPresenter.Initialize();
@@ -86,7 +87,15 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeClothesPresenter.Initialize();
 
         levelVisualPresenter.Initialize();
+        levelPresenter.Initialize();
         storeLevelPresenter.Initialize();
+
+        stateMachine.Initialize();
+    }
+
+    private void ActivateEvents()
+    {
+        ActivateTransitions();
     }
 
     private void DeactivateEvents()
@@ -148,7 +157,10 @@ public class MainMenuEntryPoint : MonoBehaviour
             storeClothesPresenter.Dispose();
 
             levelVisualPresenter.Dispose();
+            levelPresenter.Dispose();
             storeLevelPresenter.Dispose();
+
+            stateMachine.Dispose();
         }
     }
 

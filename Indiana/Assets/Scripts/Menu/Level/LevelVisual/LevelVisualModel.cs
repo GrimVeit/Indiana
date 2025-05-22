@@ -8,12 +8,14 @@ public class LevelVisualModel
     public event Action<int> OnOpenVisual;
     public event Action<int> OnCloseVisual;
 
-    private readonly IStoreLevelEventsProvider _storeLevelEventsProvider;
+    private readonly IStoreStatusLevelEventsProvider _storeLevelEventsProvider;
+    private readonly IStoreSelectLevelProvider _selectLevelProvider;
 
-    public LevelVisualModel(IStoreLevelEventsProvider storeLevelEventsProvider)
+    public LevelVisualModel(IStoreStatusLevelEventsProvider storeLevelEventsProvider, IStoreSelectLevelProvider selectLevelProvider)
     {
         _storeLevelEventsProvider = storeLevelEventsProvider;
         _storeLevelEventsProvider.OnChangeStatusLevel += SetStatusLevelVisual;
+        _selectLevelProvider = selectLevelProvider;
     }
 
     public void Initialize()
@@ -24,6 +26,11 @@ public class LevelVisualModel
     public void Dispose()
     {
         _storeLevelEventsProvider.OnChangeStatusLevel -= SetStatusLevelVisual;
+    }
+
+    public void SelectLevel(int id)
+    {
+        _selectLevelProvider.SelectLevel(id);
     }
 
     private void SetStatusLevelVisual(int id, bool isOpen)

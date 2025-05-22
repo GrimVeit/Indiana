@@ -15,12 +15,18 @@ public class MainState_Menu : IState
 
     public void EnterState()
     {
+        _sceneRoot.OnClickToLevel_Main += ChangeStateToLevel;
+        _sceneRoot.OnClickToCollection_Main += ChangeStateToCollection;
+        _sceneRoot.OnClickToInventory_Main += ChangeStateToInventory;
 
+        _sceneRoot.OpenMainPanel();
     }
 
     public void ExitState()
     {
-
+        _sceneRoot.OnClickToLevel_Main -= ChangeStateToLevel;
+        _sceneRoot.OnClickToCollection_Main -= ChangeStateToCollection;
+        _sceneRoot.OnClickToInventory_Main -= ChangeStateToInventory;
     }
 
     private void ChangeStateToLevel()

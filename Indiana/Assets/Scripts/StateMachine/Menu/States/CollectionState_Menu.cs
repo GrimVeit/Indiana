@@ -15,12 +15,14 @@ public class CollectionState_Menu : IState
 
     public void EnterState()
     {
+        _sceneRoot.OnClickToBack_Collection += ChangeStateToMain;
 
+        _sceneRoot.OpenCollectionPanel();
     }
 
     public void ExitState()
     {
-
+        _sceneRoot.OnClickToBack_Collection -= ChangeStateToMain;
     }
 
     private void ChangeStateToMain()

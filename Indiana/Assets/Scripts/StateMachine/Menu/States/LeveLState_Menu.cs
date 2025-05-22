@@ -15,12 +15,14 @@ public class LeveLState_Menu : IState
 
     public void EnterState()
     {
+        _sceneRoot.OnClickToBack_Level += ChangeStateToMain;
 
+        _sceneRoot.OpenLevelPanel();
     }
 
     public void ExitState()
     {
-
+        _sceneRoot.OnClickToBack_Level -= ChangeStateToMain;
     }
 
     private void ChangeStateToMain()

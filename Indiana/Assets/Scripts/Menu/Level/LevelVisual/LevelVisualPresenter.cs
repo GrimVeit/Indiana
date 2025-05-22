@@ -18,6 +18,7 @@ public class LevelVisualPresenter
         ActivateEvents();
 
         _model.Initialize();
+        _view.Initialize();
     }
 
     public void Dispose()
@@ -25,16 +26,21 @@ public class LevelVisualPresenter
         DeactivateEvents();
 
         _model.Dispose();
+        _view.Dispose();
     }
 
     private void ActivateEvents()
     {
+        _view.OnChooseLevel += _model.SelectLevel;
+
         _model.OnOpenVisual += _view.Open;
         _model.OnCloseVisual += _view.Close;
     }
 
     private void DeactivateEvents()
     {
+        _view.OnChooseLevel -= _model.SelectLevel;
+
         _model.OnOpenVisual -= _view.Open;
         _model.OnCloseVisual -= _view.Close;
     }

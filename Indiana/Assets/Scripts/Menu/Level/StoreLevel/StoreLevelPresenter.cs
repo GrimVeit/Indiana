@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-public class StoreLevelPresenter : IStoreLevelProvider, IStoreLevelEventsProvider
+public class StoreLevelPresenter : IStoreOpenLevelProvider, IStoreSelectLevelProvider, IStoreStatusLevelEventsProvider, IStoreSelectLevelEventsProvider
 {
     private readonly StoreLevelModel _model;
 
@@ -32,6 +29,12 @@ public class StoreLevelPresenter : IStoreLevelProvider, IStoreLevelEventsProvide
         remove => _model.OnChangeStatusLevel -= value;
     }
 
+    public event Action<int> OnSelectLevel
+    {
+        add => _model.OnSelectLevel += value;
+        remove => _model.OnSelectLevel -= value;
+    }
+
     #endregion
 
 
@@ -43,15 +46,30 @@ public class StoreLevelPresenter : IStoreLevelProvider, IStoreLevelEventsProvide
         _model.OpenLevel(id);
     }
 
+    public void SelectLevel(int id)
+    {
+        _model.SelectLevel(id);
+    }
+
     #endregion
 }
 
-public interface IStoreLevelProvider
+public interface IStoreOpenLevelProvider
 {
     void OpenLevel(int id);
 }
 
-public interface IStoreLevelEventsProvider
+public interface IStoreSelectLevelProvider
+{
+    void SelectLevel(int id);
+}
+
+public interface IStoreStatusLevelEventsProvider
 {
     public event Action<int, bool> OnChangeStatusLevel;
+}
+
+public interface IStoreSelectLevelEventsProvider
+{
+    public event Action<int> OnSelectLevel;
 }

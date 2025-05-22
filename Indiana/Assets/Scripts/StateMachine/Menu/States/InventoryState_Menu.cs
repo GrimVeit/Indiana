@@ -15,12 +15,14 @@ public class InventoryState_Menu : IState
 
     public void EnterState()
     {
+        _sceneRoot.OnClickToBack_Inventory += ChangeStateToMain;
 
+        _sceneRoot.OpenInventoryPanel();
     }
 
     public void ExitState()
     {
-
+        _sceneRoot.OnClickToBack_Inventory -= ChangeStateToMain;
     }
 
     private void ChangeStateToMain()
