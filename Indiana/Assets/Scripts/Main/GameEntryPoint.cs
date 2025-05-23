@@ -19,7 +19,7 @@ public class GameEntryPoint
 
     }
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void Autorun()
     {
         GlobalGameSettings();
