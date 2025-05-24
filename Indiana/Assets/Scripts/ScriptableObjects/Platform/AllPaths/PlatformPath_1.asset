@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53af6c26c694f94c83babc9e75685ee, type: 3}
+  m_Name: PlatformPath_1
+  m_EditorClassIdentifier: 
+  platformsUnit:
+  - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
+    highLevel: 0
+  - platform: {fileID: 11400000, guid: fd39a0e0a4c923146a0f2afdc6e6807c, type: 2}
+    highLevel: 1
+  - platform: {fileID: 11400000, guid: 0867f6337ffab8f4896107346c949cd0, type: 2}
+    highLevel: 0
+  - platform: {fileID: 11400000, guid: 64f38993d8abacf46a5bf632d904685e, type: 2}
+    highLevel: 1
+  - platform: {fileID: 11400000, guid: 64f38993d8abacf46a5bf632d904685e, type: 2}
+    highLevel: 2
+  - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
+    highLevel: 1
+  - platform: {fileID: 11400000, guid: 0867f6337ffab8f4896107346c949cd0, type: 2}
+    highLevel: 2
+  - platform: {fileID: 11400000, guid: fd39a0e0a4c923146a0f2afdc6e6807c, type: 2}
+    highLevel: 2
+  - platform: {fileID: 11400000, guid: 64f38993d8abacf46a5bf632d904685e, type: 2}
+    highLevel: 1
+  - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
+    highLevel: 0

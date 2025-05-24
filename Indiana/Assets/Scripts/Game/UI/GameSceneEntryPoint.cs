@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameSceneEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private PlatformPathGroup platformPathGroup;
     [SerializeField] private UIGameSceneRoot_Game menuRootPrefab;
 
     private UIGameSceneRoot_Game sceneRoot;
@@ -15,11 +16,20 @@ public class GameSceneEntryPoint : MonoBehaviour
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
 
-    public void Run(UIRootView uIRootView)
+    private PlatformSpawnPresenter platformSpawnPresenter;
+
+    private CameraPresenter cameraPresenter;
+
+    private void Start()
+    {
+        Run();
+    }
+
+    public void Run()
     {
         sceneRoot = menuRootPrefab;
 
-        uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
+        //uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
 
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
@@ -34,6 +44,10 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
+        platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup), viewContainer.GetView<PlatformSpawnView>());
+
+        cameraPresenter = new CameraPresenter(new CameraModel(), viewContainer.GetView<CameraView>());
+
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
 
@@ -43,6 +57,11 @@ public class GameSceneEntryPoint : MonoBehaviour
         particleEffectPresenter.Initialize();
         sceneRoot.Initialize();
         bankPresenter.Initialize();
+
+        cameraPresenter.Initialize();
+
+        platformSpawnPresenter.Initialize();
+        platformSpawnPresenter.SpawnPlatforms();
     }
 
     private void ActivateEvents()
@@ -79,6 +98,22 @@ public class GameSceneEntryPoint : MonoBehaviour
         sceneRoot?.Dispose();
         particleEffectPresenter?.Dispose();
         bankPresenter?.Dispose();
+
+        cameraPresenter?.Dispose();
+        platformSpawnPresenter?.Dispose();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            cameraPresenter.ActivateLookAt();
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            cameraPresenter.DeactivateLookAt();
+        }
     }
 
     private void OnDestroy()

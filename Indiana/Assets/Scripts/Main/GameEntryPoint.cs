@@ -68,7 +68,7 @@ public class GameEntryPoint
         yield return new WaitForEndOfFrame();
 
         var sceneEntryPoint = Object.FindObjectOfType<GameSceneEntryPoint>();
-        sceneEntryPoint.Run(rootView);
+        //sceneEntryPoint.Run(rootView);
 
         sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
 
