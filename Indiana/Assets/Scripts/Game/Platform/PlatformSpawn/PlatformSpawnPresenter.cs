@@ -25,11 +25,15 @@ public class PlatformSpawnPresenter
 
     private void ActivateEvents()
     {
+        _view.OnSpawnedPlatform += _model.SpawnPlatform;
+
         _model.OnSpawnPlatform += _view.SpawnPlatform;
     }
 
     private void DeactivateEvents()
     {
+        _view.OnSpawnedPlatform -= _model.SpawnPlatform;
+
         _model.OnSpawnPlatform -= _view.SpawnPlatform;
     }
 

@@ -17,6 +17,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private SoundPresenter soundPresenter;
 
     private PlatformSpawnPresenter platformSpawnPresenter;
+    private ObstacleSpawnerPresenter obstacleSpawnerPresenter;
 
     private CameraPresenter cameraPresenter;
 
@@ -44,7 +45,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
-        platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup), viewContainer.GetView<PlatformSpawnView>());
+        obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(), viewContainer.GetView<ObstacleSpawnerView>());
+        platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter), viewContainer.GetView<PlatformSpawnView>());
 
         cameraPresenter = new CameraPresenter(new CameraModel(), viewContainer.GetView<CameraView>());
 
@@ -60,6 +62,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         cameraPresenter.Initialize();
 
+        obstacleSpawnerPresenter.Initialize();
         platformSpawnPresenter.Initialize();
         platformSpawnPresenter.SpawnPlatforms();
     }
@@ -100,6 +103,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         bankPresenter?.Dispose();
 
         cameraPresenter?.Dispose();
+        obstacleSpawnerPresenter?.Dispose();
         platformSpawnPresenter?.Dispose();
     }
 

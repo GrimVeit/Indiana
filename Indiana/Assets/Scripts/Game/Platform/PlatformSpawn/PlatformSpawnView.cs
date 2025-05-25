@@ -12,7 +12,7 @@ public class PlatformSpawnView : View
 
     [SerializeField] private PlatformIndexes platformIndexes;
     
-    private List<GameObject> _spawnerPlatforms = new();
+    private readonly List<GameObject> _spawnerPlatforms = new();
 
     private float currentX;
 
@@ -21,29 +21,37 @@ public class PlatformSpawnView : View
         currentX = transformLow.position.x;
     }
 
-    public void SpawnPlatform(Platform platformData, PathLevel pathLevel)
+    public void SpawnPlatform(PlatformUnit platformUnit)
     {
-        var prefab = platformIndexes.GetPlatformByIndex(platformData.Id);
-        float y = GetYPosition(pathLevel);
+        var prefab = platformIndexes.GetPlatformByIndex(platformUnit.Platform.Id);
+        float y = GetYPosition(platformUnit.PathLevel);
         Vector3 spawnPos = new(currentX, y, 0);
 
         var platform = Instantiate(prefab, spawnPos, prefab.transform.rotation);
 
         _spawnerPlatforms.Add(platform);
 
-        currentX += platformData.Width;
+        currentX += platformUnit.Platform.Width;
+
+        OnSpawnedPlatform?.Invoke(platformUnit, platform.transform.GetChild(0).transform.position.ToSystemVector3());
     }
 
     private float GetYPosition(PathLevel pathLevel)
     {
-        switch (pathLevel)
+        return pathLevel switch
         {
-            case PathLevel.Low: return transformLow.position.y;
-            case PathLevel.Middle: return transformMid.position.y;
-            case PathLevel.High: return transformHigh.position.y;
-            default: return transformHigh.position.y;
-        }
+            PathLevel.Low => transformLow.position.y,
+            PathLevel.Middle => transformMid.position.y,
+            PathLevel.High => transformHigh.position.y,
+            _ => transformHigh.position.y,
+        };
     }
+
+    #region Output
+
+    public event Action<PlatformUnit, System.Numerics.Vector3> OnSpawnedPlatform;
+
+    #endregion
 }
 
 [Serializable]

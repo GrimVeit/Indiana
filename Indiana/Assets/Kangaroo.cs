@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Kangaroo : MonoBehaviour
+public class Kangaroo : Obstacle
 {
     [SerializeField] private Transform firstJumpPoint;
     [SerializeField] private Transform secondJumpPoint;
@@ -18,12 +18,7 @@ public class Kangaroo : MonoBehaviour
 
     private IEnumerator timer;
 
-    private void Awake()
-    {
-        StartJump();
-    }
-
-    void StartJump()
+    override public void Activate()
     {
         Sequence seq = DOTween.Sequence();
 

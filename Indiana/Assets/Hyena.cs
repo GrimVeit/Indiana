@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Hyena : MonoBehaviour
+public class Hyena : Obstacle
 {
     [SerializeField] private Transform startJumpPoint;
     [SerializeField] private Transform firstJumpPoint;
@@ -19,14 +19,7 @@ public class Hyena : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float frameDuration;
 
-    private IEnumerator timer;
-
-    private void Awake()
-    {
-        StartJump();
-    }
-
-    void StartJump()
+    override public void Activate()
     {
         Sequence seq = DOTween.Sequence();
 

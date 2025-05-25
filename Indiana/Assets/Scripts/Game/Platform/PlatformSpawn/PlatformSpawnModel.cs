@@ -1,17 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Numerics;
 
 public class PlatformSpawnModel
 {
-    public event Action<Platform, PathLevel> OnSpawnPlatform;
+    public event Action<PlatformUnit> OnSpawnPlatform;
 
     private readonly PlatformPathGroup _platformPathGroup;
+    private readonly IObstacleSpawnerProvider _obstacleSpawnerProvider;
 
-    public PlatformSpawnModel(PlatformPathGroup platformPathGroup)
+    public PlatformSpawnModel(PlatformPathGroup platformPathGroup, IObstacleSpawnerProvider obstacleSpawnerProvider)
     {
         _platformPathGroup = platformPathGroup;
+        _obstacleSpawnerProvider = obstacleSpawnerProvider;
+
     }
 
     public void SpawnRandoomPath()
@@ -20,7 +23,12 @@ public class PlatformSpawnModel
 
         for (int i = 0; i < path.platformsUnit.Count; i++)
         {
-            OnSpawnPlatform?.Invoke(path.platformsUnit[i].Platform, path.platformsUnit[i].HighLevel);
+            OnSpawnPlatform?.Invoke(path.platformsUnit[i]);
         }
+    }
+
+    public void SpawnPlatform(PlatformUnit platform, Vector3 position)
+    {
+        _obstacleSpawnerProvider.SpawnObstacle(platform.ObstacleChances, position);
     }
 }

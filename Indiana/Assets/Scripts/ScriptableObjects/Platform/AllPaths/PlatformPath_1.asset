@@ -14,22 +14,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformsUnit:
   - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
-    highLevel: 0
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 1
+      isSpawnedObstacle: 1
   - platform: {fileID: 11400000, guid: fd39a0e0a4c923146a0f2afdc6e6807c, type: 2}
-    highLevel: 1
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
   - platform: {fileID: 11400000, guid: 0867f6337ffab8f4896107346c949cd0, type: 2}
-    highLevel: 0
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
   - platform: {fileID: 11400000, guid: 64f38993d8abacf46a5bf632d904685e, type: 2}
-    highLevel: 1
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
   - platform: {fileID: 11400000, guid: 64f38993d8abacf46a5bf632d904685e, type: 2}
-    highLevel: 2
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
   - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
-    highLevel: 1
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 1
+      isSpawnedObstacle: 1
   - platform: {fileID: 11400000, guid: 0867f6337ffab8f4896107346c949cd0, type: 2}
-    highLevel: 2
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
   - platform: {fileID: 11400000, guid: fd39a0e0a4c923146a0f2afdc6e6807c, type: 2}
-    highLevel: 2
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
   - platform: {fileID: 11400000, guid: 64f38993d8abacf46a5bf632d904685e, type: 2}
-    highLevel: 1
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
   - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
-    highLevel: 0
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
