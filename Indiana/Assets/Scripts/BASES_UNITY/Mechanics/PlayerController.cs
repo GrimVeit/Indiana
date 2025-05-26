@@ -14,6 +14,7 @@ namespace Platformer.Mechanics
     /// </summary>
     public class PlayerController : KinematicObject
     {
+        public float speedX;
         public AudioClip jumpAudio;
         public AudioClip respawnAudio;
         public AudioClip ouchAudio;
@@ -51,7 +52,7 @@ namespace Platformer.Mechanics
             animator = GetComponent<Animator>();
         }
 
-        protected override void Update()
+        protected override void FixedUpdate()
         {
             if (controlEnabled)
             {
@@ -69,7 +70,7 @@ namespace Platformer.Mechanics
                 move.x = 0;
             }
             UpdateJumpState();
-            base.Update();
+            base.FixedUpdate();
         }
 
         void UpdateJumpState()
