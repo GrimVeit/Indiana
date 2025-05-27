@@ -88,11 +88,11 @@ namespace Platformer.Mechanics
             contactFilter.useLayerMask = true;
         }
 
-        //protected virtual void Update()
-        //{
-        //    targetVelocity = Vector2.zero;
-        //    ComputeVelocity();
-        //}
+        protected virtual void Update()
+        {
+            targetVelocity = Vector2.zero;
+            ComputeVelocity();
+        }
 
         protected virtual void ComputeVelocity()
         {
@@ -101,10 +101,6 @@ namespace Platformer.Mechanics
 
         protected virtual void FixedUpdate()
         {
-            targetVelocity = Vector2.zero;
-            ComputeVelocity();
-
-
             //if already falling, fall faster than the jump speed, otherwise use normal gravity.
             if (velocity.y < 0)
                 velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;

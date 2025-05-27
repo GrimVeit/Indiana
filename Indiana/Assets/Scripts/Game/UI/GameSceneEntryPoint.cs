@@ -18,6 +18,11 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private PlatformSpawnPresenter platformSpawnPresenter;
     private ObstacleSpawnerPresenter obstacleSpawnerPresenter;
+    private TrophySpawnerPresenter trophySpawnerPresenter;
+
+    private HealthPresenter healthPresenter;
+
+    private PlayerDamageEffectPresenter playerDamageEffectPresenter;
 
     private CameraPresenter cameraPresenter;
 
@@ -45,8 +50,12 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
+        playerDamageEffectPresenter = new PlayerDamageEffectPresenter(new PlayerDamageEffectModel(), viewContainer.GetView<PlayerDamageEffectView>());
+        healthPresenter = new HealthPresenter(new HealthModel(5, playerDamageEffectPresenter), viewContainer.GetView<HealthView>());
+
+        trophySpawnerPresenter = new TrophySpawnerPresenter(new TrophySpawnerModel(), viewContainer.GetView<TrophySpawnerView>());
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(), viewContainer.GetView<ObstacleSpawnerView>());
-        platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter), viewContainer.GetView<PlatformSpawnView>());
+        platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter), viewContainer.GetView<PlatformSpawnView>());
 
         cameraPresenter = new CameraPresenter(new CameraModel(), viewContainer.GetView<CameraView>());
 
@@ -62,6 +71,11 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         cameraPresenter.Initialize();
 
+        playerDamageEffectPresenter.Initialize();
+
+        healthPresenter.Initialize();
+
+        trophySpawnerPresenter.Initialize();
         obstacleSpawnerPresenter.Initialize();
         platformSpawnPresenter.Initialize();
         platformSpawnPresenter.SpawnPlatforms();
@@ -102,7 +116,12 @@ public class GameSceneEntryPoint : MonoBehaviour
         particleEffectPresenter?.Dispose();
         bankPresenter?.Dispose();
 
+        playerDamageEffectPresenter?.Dispose();
+
+        healthPresenter?.Dispose();
+
         cameraPresenter?.Dispose();
+        trophySpawnerPresenter?.Dispose();
         obstacleSpawnerPresenter?.Dispose();
         platformSpawnPresenter?.Dispose();
     }
@@ -111,12 +130,12 @@ public class GameSceneEntryPoint : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            cameraPresenter.ActivateLookAt();
+            healthPresenter.AddHealth(2);
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            cameraPresenter.DeactivateLookAt();
+            healthPresenter.RemoveHealth(2);
         }
     }
 

@@ -30,7 +30,7 @@ public class Player : KinematicObject
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    protected override void FixedUpdate()
+    protected override void Update()
     {
         if (controlEnabled)
         {
@@ -48,7 +48,7 @@ public class Player : KinematicObject
             move.x = 0;
         }
         UpdateJumpState();
-        base.FixedUpdate();
+        base.Update();
     }
 
     public void Jump()

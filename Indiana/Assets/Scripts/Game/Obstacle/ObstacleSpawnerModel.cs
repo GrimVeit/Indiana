@@ -6,6 +6,8 @@ public class ObstacleSpawnerModel
 
     public void SpawnObstacle(ObstacleChances obstacleChances, Vector3 position)
     {
+        if(!obstacleChances.IsSpawnerObstacle) return;
+
         var index = obstacleChances.GetRandomIndexObstacle();
 
         if(index < 0)
