@@ -4,6 +4,13 @@ public class ObstacleSpawnerModel
 {
     public event Action<int, Vector3> OnSpawnObstacle;
 
+    private readonly IHealthRemoveProvider _healthRemoveProvider;
+
+    public ObstacleSpawnerModel(IHealthRemoveProvider healthRemoveProvider)
+    {
+        _healthRemoveProvider = healthRemoveProvider;
+    }
+
     public void SpawnObstacle(ObstacleChances obstacleChances, Vector3 position)
     {
         if(!obstacleChances.IsSpawnerObstacle) return;
@@ -17,5 +24,10 @@ public class ObstacleSpawnerModel
         }
 
         OnSpawnObstacle?.Invoke(index, position);
+    }
+
+    public void SendObstacle(int damage)
+    {
+        _healthRemoveProvider.RemoveHealth(damage);
     }
 }

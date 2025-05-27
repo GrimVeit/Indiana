@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Kangaroo : Obstacle
 {
+    [SerializeField] private int damage;
+    [SerializeField] private ObstacleTrigger trigger;
     [SerializeField] private Transform firstJumpPoint;
     [SerializeField] private Transform secondJumpPoint;
     [SerializeField] private Transform kangarooTransform;
@@ -17,6 +19,16 @@ public class Kangaroo : Obstacle
     [SerializeField] private float frameDuration;
 
     private IEnumerator timer;
+
+    private void Awake()
+    {
+        trigger.OnTriggerEnter += Enter;
+    }
+
+    private void OnDestroy()
+    {
+        trigger.OnTriggerEnter -= Enter;
+    }
 
     override public void Activate()
     {
@@ -40,5 +52,10 @@ public class Kangaroo : Obstacle
             spriteRenderer.sprite = sprites[i];
             yield return new WaitForSeconds(frameDuration);
         }
+    }
+
+    private void Enter()
+    {
+        OnSendObstacle?.Invoke(damage);
     }
 }

@@ -54,7 +54,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         healthPresenter = new HealthPresenter(new HealthModel(5, playerDamageEffectPresenter), viewContainer.GetView<HealthView>());
 
         trophySpawnerPresenter = new TrophySpawnerPresenter(new TrophySpawnerModel(), viewContainer.GetView<TrophySpawnerView>());
-        obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(), viewContainer.GetView<ObstacleSpawnerView>());
+        obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
         platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter), viewContainer.GetView<PlatformSpawnView>());
 
         cameraPresenter = new CameraPresenter(new CameraModel(), viewContainer.GetView<CameraView>());

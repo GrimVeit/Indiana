@@ -4,11 +4,23 @@ using UnityEngine;
 
 public class Idol : Obstacle
 {
+    [SerializeField] private int damage;
+    [SerializeField] private ObstacleTrigger trigger;
     [SerializeField] private List<Sprite> sprites = new List<Sprite>();
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float frameDuration;
 
     private IEnumerator timer;
+
+    private void Awake()
+    {
+        trigger.OnTriggerEnter += Enter;
+    }
+
+    private void OnDestroy()
+    {
+        trigger.OnTriggerEnter -= Enter;
+    }
 
     public override void Activate()
     {
@@ -33,5 +45,10 @@ public class Idol : Obstacle
     public override void Deactivate()
     {
 
+    }
+
+    private void Enter()
+    {
+        OnSendObstacle?.Invoke(damage);
     }
 }

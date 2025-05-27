@@ -15,6 +15,7 @@ public class ObstacleSpawnerView : View
         var prefab = obstacleIndexes.GetObstacleByIndex(index);
 
         var obstacle = Instantiate(prefab, new Vector3(position.X, position.Y, position.Z), prefab.transform.rotation);
+        obstacle.OnSendObstacle += SendObstacle;
         obstacle.Activate();
         _spawnedObstacles.Add(obstacle);
     }
@@ -23,8 +24,21 @@ public class ObstacleSpawnerView : View
     {
         _spawnedObstacles.Remove(obstacle);
 
+        obstacle.OnSendObstacle -= SendObstacle;
+
         obstacle.Deactivate();
     }
+
+    #region Output
+
+    public event Action<int> OnSendObstacle;
+
+    private void SendObstacle(int damage)
+    {
+        OnSendObstacle?.Invoke(damage);
+    }
+
+    #endregion
 }
 
 [Serializable]

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Hyena : Obstacle
 {
+    [SerializeField] private int damage;
+    [SerializeField] private ObstacleTrigger trigger;
     [SerializeField] private Transform startJumpPoint;
     [SerializeField] private Transform firstJumpPoint;
     [SerializeField] private Transform secondJumpPoint;
@@ -18,6 +20,16 @@ public class Hyena : Obstacle
     [SerializeField] private List<Sprite> sprites = new List<Sprite>();
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float frameDuration;
+
+    private void Awake()
+    {
+        trigger.OnTriggerEnter += Enter;
+    }
+
+    private void OnDestroy()
+    {
+        trigger.OnTriggerEnter -= Enter;
+    }
 
     override public void Activate()
     {
@@ -43,5 +55,10 @@ public class Hyena : Obstacle
             spriteRenderer.sprite = sprites[i];
             yield return new WaitForSeconds(frameDuration);
         }
+    }
+
+    private void Enter()
+    {
+        OnSendObstacle?.Invoke(damage);
     }
 }

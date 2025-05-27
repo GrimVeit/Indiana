@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPresenter
+public class HealthPresenter : IHealthRemoveProvider
 {
     private readonly HealthModel _model;
     private readonly HealthView _view;
@@ -49,4 +49,9 @@ public class HealthPresenter
     }
 
     #endregion
+}
+
+public interface IHealthRemoveProvider
+{
+    void RemoveHealth(int health);
 }

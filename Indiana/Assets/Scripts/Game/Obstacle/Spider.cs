@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Spider : Obstacle
 {
+    [SerializeField] private int damage;
+    [SerializeField] private ObstacleTrigger trigger;
     [SerializeField] private Transform topLeft;
     [SerializeField] private Transform topRight;
     [SerializeField] private Transform bottomLeft;
@@ -23,6 +25,16 @@ public class Spider : Obstacle
 
     private IEnumerator timer;
     private IEnumerator timerFrame;
+
+    private void Awake()
+    {
+        trigger.OnTriggerEnter += Enter;
+    }
+
+    private void OnDestroy()
+    {
+        trigger.OnTriggerEnter -= Enter;
+    }
 
     public override void Activate()
     {
@@ -79,5 +91,10 @@ public class Spider : Obstacle
             index = (index + 1) % sprites.Count;
             yield return new WaitForSeconds(frameDuration);
         }
+    }
+
+    private void Enter()
+    {
+        OnSendObstacle?.Invoke(damage);
     }
 }

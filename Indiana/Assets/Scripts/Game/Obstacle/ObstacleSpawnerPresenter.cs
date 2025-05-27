@@ -25,11 +25,15 @@ public class ObstacleSpawnerPresenter : IObstacleSpawnerProvider
 
     private void ActivateEvents()
     {
+        _view.OnSendObstacle += _model.SendObstacle;
+
         _model.OnSpawnObstacle += _view.SpawnObstacle;
     }
 
     private void DeactivateEvents()
     {
+        _view.OnSendObstacle -= _model.SendObstacle;
+
         _model.OnSpawnObstacle -= _view.SpawnObstacle;
     }
 
