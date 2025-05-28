@@ -38,6 +38,10 @@ public class HealthModel
         if(_currentHealth < 0)
         {
             _currentHealth = 0;
+        }
+
+        if(_currentHealth == 0)
+        {
             OnLose?.Invoke();
         }
 

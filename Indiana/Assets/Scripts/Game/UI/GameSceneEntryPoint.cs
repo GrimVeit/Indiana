@@ -25,8 +25,11 @@ public class GameSceneEntryPoint : MonoBehaviour
     private PlayerDamageEffectPresenter playerDamageEffectPresenter;
 
     private ZonePresenter zonePresenter;
+    private DeadZonePresenter deadZonePresenter;
 
     private CameraPresenter cameraPresenter;
+
+    private GameStateMachine gameStateMachine;
 
     private void Start()
     {
@@ -57,10 +60,13 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         cameraPresenter = new CameraPresenter(new CameraModel(), viewContainer.GetView<CameraView>());
 
+        deadZonePresenter = new DeadZonePresenter(new DeadZoneModel(healthPresenter), viewContainer.GetView<DeadZoneView>());
         zonePresenter = new ZonePresenter(new ZoneModel(cameraPresenter), viewContainer.GetView<ZoneView>());
         trophySpawnerPresenter = new TrophySpawnerPresenter(new TrophySpawnerModel(), viewContainer.GetView<TrophySpawnerView>());
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
         platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter), viewContainer.GetView<PlatformSpawnView>());
+
+        gameStateMachine = new GameStateMachine(sceneRoot, zonePresenter, healthPresenter, cameraPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -78,11 +84,14 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         healthPresenter.Initialize();
 
+        deadZonePresenter.Initialize();
         zonePresenter.Initialize();
         trophySpawnerPresenter.Initialize();
         obstacleSpawnerPresenter.Initialize();
         platformSpawnPresenter.Initialize();
         platformSpawnPresenter.SpawnPlatforms();
+
+        gameStateMachine.Initialize();
     }
 
     private void ActivateEvents()
@@ -125,10 +134,14 @@ public class GameSceneEntryPoint : MonoBehaviour
         healthPresenter?.Dispose();
 
         cameraPresenter?.Dispose();
+
+        deadZonePresenter?.Dispose();
         zonePresenter?.Dispose();
         trophySpawnerPresenter?.Dispose();
         obstacleSpawnerPresenter?.Dispose();
         platformSpawnPresenter?.Dispose();
+
+        gameStateMachine?.Dispose();
     }
 
     private void Update()

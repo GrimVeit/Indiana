@@ -7,32 +7,52 @@ public class MainState_Game : IState
     private readonly IGlobalStateMachineProvider _machineProvider;
     private readonly UIGameSceneRoot_Game _sceneRoot;
 
-    private ILoseEventProvider _loseEventProvider;
-    private IZoneSpawnerProvider
+    private readonly ILoseEventProvider _loseEventProvider;
+    private readonly IGameEventsProvider _gameEventsProvider;
 
-    public MainState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot)
+    public MainState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
+        _loseEventProvider = loseEventProvider;
+        _gameEventsProvider = gameEventsProvider;
     }
 
     public void EnterState()
     {
+        Debug.Log("<color=red>ACTIVATE STATE - MAIN STATE / GAME</color>");
+
         _loseEventProvider.OnLose += ChangeStateToLose;
+        _gameEventsProvider.OnStop += ChangeStateToWin;
+        _sceneRoot.OnClickToPause_Header += ChangeStateToPause;
+
+        _sceneRoot.OpenFooterPanel();
+        _sceneRoot.OpenHeaderPanel();
+        
     }
 
     public void ExitState()
     {
         _loseEventProvider.OnLose -= ChangeStateToLose;
+        _gameEventsProvider.OnStop -= ChangeStateToWin;
+        _sceneRoot.OnClickToPause_Header -= ChangeStateToPause;
+
+        _sceneRoot.CloseFooterPanel();
+        _sceneRoot.CloseHeaderPanel();
+    }
+
+    private void ChangeStateToPause()
+    {
+        _machineProvider.SetState(_machineProvider.GetState<PauseState_Game>());
     }
 
     private void ChangeStateToWin()
     {
-        _machineProvider.SetState(_machineProvider.GetState<MainState_Menu>());
+        _machineProvider.SetState(_machineProvider.GetState<WinState_Game>());
     }
 
     private void ChangeStateToLose()
     {
-        _machineProvider.SetState(_machineProvider.GetState<MainState_Menu>());
+        _machineProvider.SetState(_machineProvider.GetState<LoseState_Game>());
     }
 }

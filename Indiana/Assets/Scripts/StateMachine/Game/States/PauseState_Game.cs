@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PauseState_Game : IState
 {
@@ -14,16 +15,22 @@ public class PauseState_Game : IState
     
     public void EnterState()
     {
+        Debug.Log("<color=red>ACTIVATE STATE - PAUSE STATE / GAME</color>");
 
+        _sceneRoot.OnClickToResume_Pause += ChangeStateToMain;
+
+        _sceneRoot.OpenPausePanel();
     }
 
     public void ExitState()
     {
+        _sceneRoot.OnClickToResume_Pause -= ChangeStateToMain;
 
+        _sceneRoot.ClosePausePanel();
     }
 
-    private void ChangeStateToWin()
+    private void ChangeStateToMain()
     {
-        _machineProvider.SetState(_machineProvider.GetState<MainState_Menu>());
+        _machineProvider.SetState(_machineProvider.GetState<MainState_Game>());
     }
 }

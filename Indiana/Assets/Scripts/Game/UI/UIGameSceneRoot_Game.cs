@@ -5,31 +5,139 @@ using UnityEngine;
 
 public class UIGameSceneRoot_Game : UIRoot
 {
+    [SerializeField] private HeaderPanel_Game headerPanel;
+    [SerializeField] private FooterPanel_Game footerPanel;
+
+    [SerializeField] private PausePanel_Game pausePanel;
+    [SerializeField] private WinPanel_Game winPanel;
+    [SerializeField] private LosePanel_Game losePanel;
+
     private ISoundProvider _soundProvider;
 
     public void SetSoundProvider(ISoundProvider soundProvider)
     {
-        this._soundProvider = soundProvider;
+        _soundProvider = soundProvider;
     }
 
     public void Initialize()
     {
+        headerPanel.Initialize();
+        footerPanel.Initialize();
 
+        pausePanel.Initialize();
+        winPanel.Initialize();
+        losePanel.Initialize();
     }
 
     public void Dispose()
     {
+        headerPanel.Dispose();
+        footerPanel.Dispose();
 
+        pausePanel.Dispose();
+        winPanel.Dispose();
+        losePanel.Dispose();
     }
 
     public void Activate()
     {
-
+        headerPanel.OnClickToPause += HandleClickToPause_Header;
+        pausePanel.OnClickToResume += HandleClickToResume_Pause;
     }
 
     public void Deactivate()
     {
+        headerPanel.OnClickToPause -= HandleClickToPause_Header;
+        pausePanel.OnClickToResume -= HandleClickToResume_Pause;
+
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
     }
+
+    #region Output
+
+    #region HEADER
+
+    public event Action OnClickToPause_Header;
+
+    private void HandleClickToPause_Header()
+    {
+        OnClickToPause_Header?.Invoke();
+    }
+
+    #endregion
+
+    #region PAUSE
+
+    public event Action OnClickToResume_Pause;
+
+    private void HandleClickToResume_Pause()
+    {
+        OnClickToResume_Pause?.Invoke();
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Input
+
+    public void OpenHeaderPanel()
+    {
+        OpenOtherPanel(headerPanel);
+    }
+
+    public void CloseHeaderPanel()
+    {
+        CloseOtherPanel(headerPanel);
+    }
+
+
+
+    public void OpenFooterPanel()
+    {
+        OpenOtherPanel(footerPanel);
+    }
+
+    public void CloseFooterPanel()
+    {
+        CloseOtherPanel(footerPanel);
+    }
+
+
+
+    public void OpenPausePanel()
+    {
+        OpenOtherPanel(pausePanel);
+    }
+
+    public void ClosePausePanel()
+    {
+        CloseOtherPanel(pausePanel);
+    }
+
+
+
+    public void OpenWinPanel()
+    {
+        OpenOtherPanel(winPanel);
+    }
+
+    public void CloseWinPanel()
+    {
+        CloseOtherPanel(winPanel);
+    }
+
+
+
+    public void OpenLosePanel()
+    {
+        OpenOtherPanel(losePanel);
+    }
+
+    public void CloseLosePanel()
+    {
+        CloseOtherPanel(losePanel);
+    }
+    #endregion
 }
