@@ -24,6 +24,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private PlayerDamageEffectPresenter playerDamageEffectPresenter;
 
+    private ZonePresenter zonePresenter;
+
     private CameraPresenter cameraPresenter;
 
     private void Start()
@@ -53,11 +55,12 @@ public class GameSceneEntryPoint : MonoBehaviour
         playerDamageEffectPresenter = new PlayerDamageEffectPresenter(new PlayerDamageEffectModel(), viewContainer.GetView<PlayerDamageEffectView>());
         healthPresenter = new HealthPresenter(new HealthModel(5, playerDamageEffectPresenter), viewContainer.GetView<HealthView>());
 
+        cameraPresenter = new CameraPresenter(new CameraModel(), viewContainer.GetView<CameraView>());
+
+        zonePresenter = new ZonePresenter(new ZoneModel(cameraPresenter), viewContainer.GetView<ZoneView>());
         trophySpawnerPresenter = new TrophySpawnerPresenter(new TrophySpawnerModel(), viewContainer.GetView<TrophySpawnerView>());
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
-        platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter), viewContainer.GetView<PlatformSpawnView>());
-
-        cameraPresenter = new CameraPresenter(new CameraModel(), viewContainer.GetView<CameraView>());
+        platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter), viewContainer.GetView<PlatformSpawnView>());
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -75,6 +78,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         healthPresenter.Initialize();
 
+        zonePresenter.Initialize();
         trophySpawnerPresenter.Initialize();
         obstacleSpawnerPresenter.Initialize();
         platformSpawnPresenter.Initialize();
@@ -121,6 +125,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         healthPresenter?.Dispose();
 
         cameraPresenter?.Dispose();
+        zonePresenter?.Dispose();
         trophySpawnerPresenter?.Dispose();
         obstacleSpawnerPresenter?.Dispose();
         platformSpawnPresenter?.Dispose();

@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPresenter : IHealthRemoveProvider
+public class HealthPresenter : IHealthRemoveProvider, ILoseEventProvider
 {
     private readonly HealthModel _model;
     private readonly HealthView _view;
@@ -49,9 +50,24 @@ public class HealthPresenter : IHealthRemoveProvider
     }
 
     #endregion
+
+    #region Output
+
+    public event Action OnLose
+    {
+        add => _model.OnLose += value;
+        remove => _model.OnLose -= value;
+    }
+
+    #endregion
 }
 
 public interface IHealthRemoveProvider
 {
     void RemoveHealth(int health);
+}
+
+public interface ILoseEventProvider
+{
+    public event Action OnLose;
 }

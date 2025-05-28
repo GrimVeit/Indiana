@@ -11,8 +11,6 @@ public class GameStateMachine : IGlobalStateMachineProvider
 
     public GameStateMachine(UIGameSceneRoot_Game sceneRoot)
     {
-        states[typeof(IntroState_Game)] = new IntroState_Game(this, sceneRoot);
-        states[typeof(CameraFollowState_Game)] = new CameraFollowState_Game(this, sceneRoot);
         states[typeof(MainState_Game)] = new MainState_Game(this, sceneRoot);
         states[typeof(PauseState_Game)] = new PauseState_Game(this, sceneRoot);
         states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot);
@@ -21,7 +19,7 @@ public class GameStateMachine : IGlobalStateMachineProvider
 
     public void Initialize()
     {
-        SetState(GetState<IntroState_Game>());
+        SetState(GetState<MainState_Game>());
     }
 
     public void Dispose()

@@ -14,12 +14,14 @@ public class PlatformPath : ScriptableObject
 public class PlatformUnit
 {
     public Platform Platform => platform;
+    public ZoneType ZoneType => zoneType;
     public PathLevel PathLevel => pathLevel;
     public ObstacleChances ObstacleChances => obstacleChances;
     public TrophyChances TrophyChances => trophyChances;
 
 
     [SerializeField] private Platform platform;
+    [SerializeField] private ZoneType zoneType;
 
     [Header("Level")]
     [SerializeField] private PathLevel pathLevel;
@@ -30,6 +32,11 @@ public class PlatformUnit
     [Header("Trophy")]
     [SerializeField] private TrophyChances trophyChances;
 
+}
+
+public enum ZoneType
+{
+    Usual, Start, End
 }
 
 public enum PathLevel

@@ -8,13 +8,15 @@ public class PlatformSpawnModel
     private readonly PlatformPathGroup _platformPathGroup;
 
     private readonly IObstacleSpawnerProvider _obstacleSpawnerProvider;
-    private readonly ITrophySpawnerProvider _trophySpawnerProvider;   
+    private readonly ITrophySpawnerProvider _trophySpawnerProvider;
+    private readonly IZoneSpawnerProvider _zoneSpawnerProvider;
 
-    public PlatformSpawnModel(PlatformPathGroup platformPathGroup, IObstacleSpawnerProvider obstacleSpawnerProvider, ITrophySpawnerProvider trophySpawnerProvider)
+    public PlatformSpawnModel(PlatformPathGroup platformPathGroup, IObstacleSpawnerProvider obstacleSpawnerProvider, ITrophySpawnerProvider trophySpawnerProvider, IZoneSpawnerProvider zoneSpawnerProvider)
     {
         _platformPathGroup = platformPathGroup;
         _obstacleSpawnerProvider = obstacleSpawnerProvider;
         _trophySpawnerProvider = trophySpawnerProvider;
+        _zoneSpawnerProvider = zoneSpawnerProvider;
     }
 
     public void SpawnRandoomPath()
@@ -31,5 +33,6 @@ public class PlatformSpawnModel
     {
         _obstacleSpawnerProvider.SpawnObstacle(platform.ObstacleChances, position);
         _trophySpawnerProvider.SpawnTrophy(platform.TrophyChances, position);
+        _zoneSpawnerProvider.SpawnZone(platform.ZoneType, position);
     }
 }

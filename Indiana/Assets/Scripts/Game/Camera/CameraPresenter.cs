@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraPresenter
+public class CameraPresenter : ICameraProvider
 {
     private readonly CameraModel _model;
     private readonly CameraView _view;
@@ -48,4 +48,10 @@ public class CameraPresenter
     }
 
     #endregion
+}
+
+public interface ICameraProvider
+{
+    void ActivateLookAt();
+    void DeactivateLookAt();
 }

@@ -7,6 +7,9 @@ public class MainState_Game : IState
     private readonly IGlobalStateMachineProvider _machineProvider;
     private readonly UIGameSceneRoot_Game _sceneRoot;
 
+    private ILoseEventProvider _loseEventProvider;
+    private IZoneSpawnerProvider
+
     public MainState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot)
     {
         _machineProvider = machineProvider;
@@ -15,12 +18,12 @@ public class MainState_Game : IState
 
     public void EnterState()
     {
-
+        _loseEventProvider.OnLose += ChangeStateToLose;
     }
 
     public void ExitState()
     {
-
+        _loseEventProvider.OnLose -= ChangeStateToLose;
     }
 
     private void ChangeStateToWin()

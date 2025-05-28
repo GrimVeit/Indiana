@@ -6,6 +6,7 @@ using UnityEngine;
 public class HealthModel
 {
     public event Action<int> OnChangeHealth;
+    public event Action OnLose;
 
     private readonly int _maxHealth;
     private int _currentHealth = 0;
@@ -35,7 +36,10 @@ public class HealthModel
         _currentHealth -= health;
 
         if(_currentHealth < 0)
+        {
             _currentHealth = 0;
+            OnLose?.Invoke();
+        }
 
         _damageEffectProvider.PlayEffect();
         OnChangeHealth?.Invoke(_currentHealth);
