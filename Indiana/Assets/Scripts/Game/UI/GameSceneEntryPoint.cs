@@ -23,6 +23,8 @@ public class GameSceneEntryPoint : MonoBehaviour
     private HealthPresenter healthPresenter;
 
     private PlayerDamageEffectPresenter playerDamageEffectPresenter;
+    private PlayerMovePresenter playerMovePresenter;
+    private PlayerInputPresenter playerInputPresenter;
 
     private ZonePresenter zonePresenter;
     private DeadZonePresenter deadZonePresenter;
@@ -55,6 +57,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
+        playerMovePresenter = new PlayerMovePresenter(new PlayerMoveModel(), viewContainer.GetView<PlayerMoveView>());
+        playerInputPresenter = new PlayerInputPresenter(new PlayerInputModel(playerMovePresenter), viewContainer.GetView<PlayerInputView>());
         playerDamageEffectPresenter = new PlayerDamageEffectPresenter(new PlayerDamageEffectModel(), viewContainer.GetView<PlayerDamageEffectView>());
         healthPresenter = new HealthPresenter(new HealthModel(5, playerDamageEffectPresenter), viewContainer.GetView<HealthView>());
 
@@ -80,6 +84,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         cameraPresenter.Initialize();
 
+        playerMovePresenter.Initialize();
+        playerInputPresenter.Initialize();
         playerDamageEffectPresenter.Initialize();
 
         healthPresenter.Initialize();
@@ -129,6 +135,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         particleEffectPresenter?.Dispose();
         bankPresenter?.Dispose();
 
+        playerMovePresenter?.Dispose();
+        playerInputPresenter?.Dispose();
         playerDamageEffectPresenter?.Dispose();
 
         healthPresenter?.Dispose();

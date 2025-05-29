@@ -57,8 +57,3 @@ public class PlayerPresenter
 
     #endregion
 }
-
-public enum AttackType
-{
-    Punch, Knife, Whip
-}

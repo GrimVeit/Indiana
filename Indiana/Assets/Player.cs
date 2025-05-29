@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using Platformer.Core;
-using Platformer.Gameplay;
 using Platformer.Mechanics;
 using Platformer.Model;
 using UnityEngine;
 
 public class Player : KinematicObject
 {
-    public float speedX;
+    public float speedX = 3;
     public float maxSpeed = 7;
     public float jumpTakeOffSpeed = 7;
 
     public JumpState jumpState = JumpState.Grounded;
     private bool stopJump;
     public Collider2D collider2d;
-    public bool controlEnabled = true;
+    public bool isActive = true;
 
     bool jump;
     Vector2 move;
@@ -30,18 +28,36 @@ public class Player : KinematicObject
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    public void Jump()
+    {
+        //if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
+        //    jumpState = JumpState.PrepareToJump;
+
+        jumpState = JumpState.PrepareToJump;
+    }
+
+    public void ChangeSpeed(float speedMove)
+    {
+        speedX = speedMove;
+    }
+
+    public void StartRun()
+    {
+        isActive = true;
+    }
+
+    public void StopRun()
+    {
+        isActive = false;
+    }
+
+    #region Base
+
     protected override void Update()
     {
-        if (controlEnabled)
+        if (isActive)
         {
-            move.x = Input.GetAxis("Horizontal");
-
-            Jump();
-            
-            if (Input.GetButtonUp("Jump"))
-            {
-                stopJump = true;
-            }
+            move.x = speedX;
         }
         else
         {
@@ -51,13 +67,7 @@ public class Player : KinematicObject
         base.Update();
     }
 
-    public void Jump()
-    {
-        if (jumpState == JumpState.Grounded && Input.GetButtonDown("Jump"))
-            jumpState = JumpState.PrepareToJump;
-    }
-
-    void UpdateJumpState()
+    private void UpdateJumpState()
     {
         jump = false;
         switch (jumpState)
@@ -83,6 +93,8 @@ public class Player : KinematicObject
                 jumpState = JumpState.Grounded;
                 break;
         }
+
+        OnChangeJumpState?.Invoke(jumpState);
     }
 
     protected override void ComputeVelocity()
@@ -109,12 +121,20 @@ public class Player : KinematicObject
         targetVelocity = move * maxSpeed;
     }
 
-    public enum JumpState
-    {
-        Grounded,
-        PrepareToJump,
-        Jumping,
-        InFlight,
-        Landed
-    }
+    #endregion
+
+    #region Output
+
+    public event Action<JumpState> OnChangeJumpState;
+
+    #endregion
+}
+
+public enum JumpState
+{
+    Grounded,
+    PrepareToJump,
+    Jumping,
+    InFlight,
+    Landed
 }
