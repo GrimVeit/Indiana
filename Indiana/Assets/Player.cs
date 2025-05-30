@@ -55,13 +55,13 @@ public class Player : KinematicObject
 
     protected override void Update()
     {
-        if (isActive)
-        {
-            move.x = speedX;
-        }
-        else
+        if (!isActive && jumpState == JumpState.Grounded)
         {
             move.x = 0;
+        }
+        else if(isActive)
+        {
+            move.x = speedX;
         }
         UpdateJumpState();
         base.Update();

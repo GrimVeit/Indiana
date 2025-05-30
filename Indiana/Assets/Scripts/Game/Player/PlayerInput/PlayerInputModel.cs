@@ -6,15 +6,18 @@ using UnityEngine;
 public class PlayerInputModel
 {
     private IPlayerJumpMoveProvider _jumpMoveProvider;
+    private IPlayerAnimationProvider _animationProvider;
 
-    public PlayerInputModel(IPlayerJumpMoveProvider jumpMoveProvider)
+    public PlayerInputModel(IPlayerJumpMoveProvider jumpMoveProvider, IPlayerAnimationProvider animationProvider)
     {
         _jumpMoveProvider = jumpMoveProvider;
+        _animationProvider = animationProvider;
     }
 
     public void Jump()
     {
         _jumpMoveProvider.Jump();
+        _animationProvider.Jump();
     }
 
     public void HitPunch()

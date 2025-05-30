@@ -7,12 +7,16 @@ public class LoseState_Game : IState
     private readonly IGlobalStateMachineProvider _machineProvider;
     private readonly UIGameSceneRoot_Game _sceneRoot;
     private readonly ICameraProvider _cameraProvider;
+    private readonly IPlayerMoveProvider _playerMoveProvider;
+    private readonly IPlayerAnimationProvider _playerAnimationProvider;
 
-    public LoseState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ICameraProvider cameraProvider)
+    public LoseState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ICameraProvider cameraProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _cameraProvider = cameraProvider;
+        _playerMoveProvider = playerMoveProvider;
+        _playerAnimationProvider = playerAnimationProvider;
 
     }
 
@@ -22,6 +26,8 @@ public class LoseState_Game : IState
 
         _sceneRoot.OpenLosePanel();
         _cameraProvider.DeactivateLookAt();
+        _playerMoveProvider.StopRun();
+        _playerAnimationProvider.Die();
     }
 
     public void ExitState()

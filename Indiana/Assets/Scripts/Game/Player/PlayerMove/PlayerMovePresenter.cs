@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovePresenter : IPlayerMoveProvider, IPlayerJumpMoveProvider
+public class PlayerMovePresenter : IPlayerMoveProvider, IPlayerJumpMoveProvider, IPlayerGroundEventsProvider
 {
     private readonly PlayerMoveModel _model;
     private readonly PlayerMoveView _view;
@@ -91,4 +91,11 @@ public interface IPlayerMoveProvider
 {
     void StartRun();
     void StopRun();
+}
+
+public interface IPlayerGroundEventsProvider
+{
+    public event Action OnPlayerInGround;
+
+    public event Action OnPlayerOutGround;
 }

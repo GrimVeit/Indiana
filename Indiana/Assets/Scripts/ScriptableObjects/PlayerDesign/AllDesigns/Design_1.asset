@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99f1c5c61c74ce24cbfd11810a128753, type: 3}
+  m_Name: Design_1
+  m_EditorClassIdentifier: 
+  id: 1
+  spritesRun:
+  - {fileID: 21300000, guid: c511b299c93dbd74091c1bd1e10fb950, type: 3}
+  - {fileID: 21300000, guid: 0a1232cd871b8974095c3ac1ad0fcbe9, type: 3}
+  - {fileID: 21300000, guid: 3c3c8922af38e2d4c8f92a57d575759d, type: 3}
+  - {fileID: 21300000, guid: b4d9c075a02012c4497f68a85c0f531c, type: 3}
+  - {fileID: 21300000, guid: 3431633cdf682e94f8edcfa4589e108b, type: 3}
+  - {fileID: 21300000, guid: 79c9e14ed879e35478ec44c79162378f, type: 3}
+  - {fileID: 21300000, guid: eac42033832d4924aa42a002b1726787, type: 3}
+  spritesJump:
+  - {fileID: 21300000, guid: 331fa9023a5a18b4688c38d67a76e845, type: 3}
+  - {fileID: 21300000, guid: da21fb380aaa03741b3c3fa3f4a23c43, type: 3}
+  - {fileID: 21300000, guid: 7daaa16f4862ff44ca8cc0297621860e, type: 3}
+  - {fileID: 21300000, guid: 8700e2af531bb744ab96932a30b43bda, type: 3}
+  - {fileID: 21300000, guid: 9d8acc6cf7b01f743b7baf8321011a51, type: 3}
+  spritesDie:
+  - {fileID: 21300000, guid: 2920b726ac7dada40a7eaab61d8d2e59, type: 3}
+  - {fileID: 21300000, guid: 6674e5f38b3852144bb7c74c07009b5e, type: 3}
+  - {fileID: 21300000, guid: 9788ff7618836334b93663190385b449, type: 3}
+  spritesHitPunch:
+  - {fileID: 21300000, guid: 4b7a340ef2598e0478e8351657412d38, type: 3}
+  - {fileID: 21300000, guid: 23b4b6a0373c2b74f90d9497712bc327, type: 3}
+  - {fileID: 21300000, guid: 88da3a3a135883148b2b537309030903, type: 3}
+  - {fileID: 21300000, guid: a97594d3e5a6755439af0db81f79a7e2, type: 3}
+  - {fileID: 21300000, guid: 83ef166db41d66040a8a25833ad061f0, type: 3}
+  spritesHitKnife:
+  - {fileID: 21300000, guid: dbab563ff9e628743a4fe0b73b58b4c5, type: 3}
+  - {fileID: 21300000, guid: 672ab8f8c29313543aeb21391a2a4f50, type: 3}
+  - {fileID: 21300000, guid: 61ac5d731a7904d4a9f15c4dfb1e35ea, type: 3}
+  - {fileID: 21300000, guid: 23b93c72f7b93ad459a7f64da9002bb8, type: 3}
+  - {fileID: 21300000, guid: 8dcd0bf0853e34b439849368da68a4de, type: 3}
+  spritesHitWhip:
+  - {fileID: 21300000, guid: 73060f7ea62e8994fa8a0d4c08bbc8af, type: 3}
+  - {fileID: 21300000, guid: 9e56e0b18d3ff3e46ac6b458b4d378f0, type: 3}
+  - {fileID: 21300000, guid: 1a541cc1347725341b8fc7e80090f32f, type: 3}
+  - {fileID: 21300000, guid: 758be58d3c9069440aa95f24b7fb1e89, type: 3}
+  - {fileID: 21300000, guid: 496bc123f9a75394887e5863f8a58343, type: 3}
+  - {fileID: 21300000, guid: f21d4a7782233ba4e9a68d31a3d21676, type: 3}
+  - {fileID: 21300000, guid: 2f83aedddf898a345a1453bbabb2071e, type: 3}
+  - {fileID: 21300000, guid: 06f1a8e9dadefa845b9d5354887b0474, type: 3}
+  - {fileID: 21300000, guid: a43c596c904f12c4c87cea5975244a54, type: 3}
+  - {fileID: 21300000, guid: d572b1c355796fe46ae4d6294b77acbd, type: 3}
+  - {fileID: 21300000, guid: b26be6504292b0b4b89e5eef12ec585e, type: 3}

@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerAnimationPresenter : IPlayerAnimationProvider
+{
+    private readonly PlayerAnimationModel _model;
+    private readonly PlayerAnimationView _view;
+
+    public PlayerAnimationPresenter(PlayerAnimationModel model, PlayerAnimationView view)
+    {
+        _model = model; _view = view;
+    }
+
+    public void Initialize()
+    {
+        ActivateEvents();
+
+        _model.Initialize();
+    }
+
+    public void Dispose()
+    {
+        DeactivateEvents();
+
+        _model.Dispose();
+    }
+
+    private void ActivateEvents()
+    {
+        _model.OnChangeSprite += _view.SetSprite;
+    }
+
+    private void DeactivateEvents()
+    {
+        _model.OnChangeSprite -= _view.SetSprite;
+    }
+
+    #region Input
+
+    public void Run()
+    {
+        _model.Run();
+    }
+
+    public void Jump()
+    {
+        _model.Jump();
+    }
+
+    public void Die()
+    {
+        _model.Die();
+    }
+
+    #endregion
+}
+
+public interface IPlayerAnimationProvider
+{
+    void Run();
+    void Jump();
+    void Die();
+}

@@ -6,6 +6,8 @@ using UnityEngine;
 public class GameSceneEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private ClothesDesignGroup clothesDesignGroup;
+    [SerializeField] private PlayerDesignGroup playerDesignGroup;
     [SerializeField] private PlatformPathGroup platformPathGroup;
     [SerializeField] private UIGameSceneRoot_Game menuRootPrefab;
 
@@ -16,6 +18,9 @@ public class GameSceneEntryPoint : MonoBehaviour
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
 
+    private StoreClothesPresenter storeClothesPresenter;
+    private StorePlayerPresenter storePlayerPresenter;
+
     private PlatformSpawnPresenter platformSpawnPresenter;
     private ObstacleSpawnerPresenter obstacleSpawnerPresenter;
     private TrophySpawnerPresenter trophySpawnerPresenter;
@@ -25,6 +30,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private PlayerDamageEffectPresenter playerDamageEffectPresenter;
     private PlayerMovePresenter playerMovePresenter;
     private PlayerInputPresenter playerInputPresenter;
+    private PlayerAnimationPresenter playerAnimationPresenter;
 
     private ZonePresenter zonePresenter;
     private DeadZonePresenter deadZonePresenter;
@@ -57,8 +63,12 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
+        storeClothesPresenter = new StoreClothesPresenter(new StoreClothesModel(clothesDesignGroup));
+        storePlayerPresenter = new StorePlayerPresenter(new StorePlayerModel(storeClothesPresenter, playerDesignGroup));
+
         playerMovePresenter = new PlayerMovePresenter(new PlayerMoveModel(), viewContainer.GetView<PlayerMoveView>());
-        playerInputPresenter = new PlayerInputPresenter(new PlayerInputModel(playerMovePresenter), viewContainer.GetView<PlayerInputView>());
+        playerAnimationPresenter = new PlayerAnimationPresenter(new PlayerAnimationModel(storePlayerPresenter, playerMovePresenter), viewContainer.GetView<PlayerAnimationView>());
+        playerInputPresenter = new PlayerInputPresenter(new PlayerInputModel(playerMovePresenter, playerAnimationPresenter), viewContainer.GetView<PlayerInputView>());
         playerDamageEffectPresenter = new PlayerDamageEffectPresenter(new PlayerDamageEffectModel(), viewContainer.GetView<PlayerDamageEffectView>());
         healthPresenter = new HealthPresenter(new HealthModel(5, playerDamageEffectPresenter), viewContainer.GetView<HealthView>());
 
@@ -70,7 +80,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
         platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter), viewContainer.GetView<PlatformSpawnView>());
 
-        gameStateMachine = new GameStateMachine(sceneRoot, zonePresenter, healthPresenter, cameraPresenter);
+        gameStateMachine = new GameStateMachine(sceneRoot, zonePresenter, healthPresenter, cameraPresenter, playerMovePresenter, playerAnimationPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -87,6 +97,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         playerMovePresenter.Initialize();
         playerInputPresenter.Initialize();
         playerDamageEffectPresenter.Initialize();
+        playerAnimationPresenter.Initialize();
 
         healthPresenter.Initialize();
 
@@ -97,7 +108,12 @@ public class GameSceneEntryPoint : MonoBehaviour
         platformSpawnPresenter.Initialize();
         platformSpawnPresenter.SpawnPlatforms();
 
+        storePlayerPresenter.Initialize();
+        storeClothesPresenter.Initialize();
+
         gameStateMachine.Initialize();
+
+        playerAnimationPresenter.Run();
     }
 
     private void ActivateEvents()
@@ -149,6 +165,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         obstacleSpawnerPresenter?.Dispose();
         platformSpawnPresenter?.Dispose();
 
+        storePlayerPresenter?.Dispose();
+        storeClothesPresenter?.Dispose();
+
         gameStateMachine?.Dispose();
     }
 
@@ -157,6 +176,16 @@ public class GameSceneEntryPoint : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             healthPresenter.AddHealth(2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            playerMovePresenter.StopRun();
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftAlt))
+        {
+            playerMovePresenter.StartRun();
         }
 
         if (Input.GetKeyDown(KeyCode.X))
