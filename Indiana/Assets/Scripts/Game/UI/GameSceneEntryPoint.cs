@@ -29,6 +29,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private PlayerDamageEffectPresenter playerDamageEffectPresenter;
     private PlayerMovePresenter playerMovePresenter;
+    private PlayerColliderPresenter playerColliderPresenter;
     private PlayerInputPresenter playerInputPresenter;
     private PlayerZoneActionPresenter playerZoneActionPresenter;
     private PlayerAnimationPresenter playerAnimationPresenter;
@@ -68,6 +69,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         storePlayerPresenter = new StorePlayerPresenter(new StorePlayerModel(storeClothesPresenter, playerDesignGroup));
 
         playerMovePresenter = new PlayerMovePresenter(new PlayerMoveModel(), viewContainer.GetView<PlayerMoveView>());
+        playerColliderPresenter = new PlayerColliderPresenter(new PlayerColliderModel(), viewContainer.GetView<PlayerColliderView>());
         playerAnimationPresenter = new PlayerAnimationPresenter(new PlayerAnimationModel(storePlayerPresenter, playerMovePresenter), viewContainer.GetView<PlayerAnimationView>());
         playerInputPresenter = new PlayerInputPresenter(new PlayerInputModel(playerMovePresenter, playerAnimationPresenter), viewContainer.GetView<PlayerInputView>());
         playerDamageEffectPresenter = new PlayerDamageEffectPresenter(new PlayerDamageEffectModel(), viewContainer.GetView<PlayerDamageEffectView>());
@@ -82,7 +84,16 @@ public class GameSceneEntryPoint : MonoBehaviour
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
         platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter), viewContainer.GetView<PlatformSpawnView>());
 
-        gameStateMachine = new GameStateMachine(sceneRoot, zonePresenter, healthPresenter, cameraPresenter, playerMovePresenter, playerAnimationPresenter, playerInputPresenter, playerZoneActionPresenter);
+        gameStateMachine = new GameStateMachine
+            (sceneRoot, 
+            zonePresenter, 
+            healthPresenter, 
+            cameraPresenter, 
+            playerMovePresenter, 
+            playerAnimationPresenter, 
+            playerInputPresenter, 
+            playerZoneActionPresenter, 
+            playerColliderPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -97,6 +108,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         cameraPresenter.Initialize();
 
         playerMovePresenter.Initialize();
+        playerColliderPresenter.Initialize();
         playerInputPresenter.Initialize();
         playerDamageEffectPresenter.Initialize();
         playerAnimationPresenter.Initialize();
@@ -155,6 +167,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         bankPresenter?.Dispose();
 
         playerMovePresenter?.Dispose();
+        playerColliderPresenter?.Dispose();
         playerInputPresenter?.Dispose();
         playerDamageEffectPresenter?.Dispose();
         playerAnimationPresenter?.Dispose();

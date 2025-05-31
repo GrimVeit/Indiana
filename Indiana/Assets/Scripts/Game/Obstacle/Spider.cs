@@ -71,7 +71,7 @@ public class Spider : Obstacle
 
         seq.Append(spider.DORotate(new Vector3(0, 0, 720), 2, RotateMode.FastBeyond360))
             .Join(spider.DOScale(Vector3.zero, 2))
-            .OnComplete(() => Destroy(gameObject));
+            .OnComplete(() => Destroy(spider.gameObject));
     }
 
     private IEnumerator Timer()

@@ -6,11 +6,13 @@ public class IntroState_Game : IState
 {
     private readonly IGlobalStateMachineProvider _machineProvider;
     private readonly IGameEventsProvider _gameEventsProvider;
+    private readonly IPlayerColliderProvider _playerColliderProvider;
 
-    public IntroState_Game(IGlobalStateMachineProvider machineProvider, IGameEventsProvider gameEventsProvider)
+    public IntroState_Game(IGlobalStateMachineProvider machineProvider, IGameEventsProvider gameEventsProvider, IPlayerColliderProvider playerColliderProvider)
     {
         _machineProvider = machineProvider;
         _gameEventsProvider = gameEventsProvider;
+        _playerColliderProvider = playerColliderProvider;
     }
 
     public void EnterState()
@@ -18,6 +20,8 @@ public class IntroState_Game : IState
         Debug.Log("<color=red>ACTIVATE STATE - INTRO STATE / GAME</color>");
 
         _gameEventsProvider.OnStart += ChangeStateToMain;
+
+        _playerColliderProvider.ActivateNormal();
     }
 
     public void ExitState()
