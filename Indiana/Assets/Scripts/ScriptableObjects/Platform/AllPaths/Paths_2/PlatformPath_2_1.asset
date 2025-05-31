@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53af6c26c694f94c83babc9e75685ee, type: 3}
+  m_Name: PlatformPath_2_1
+  m_EditorClassIdentifier: 
+  platformsUnit:
+  - platform: {fileID: 11400000, guid: d17551372066a0847ae6180f7b65cd52, type: 2}
+    zoneType: 1
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+  - platform: {fileID: 11400000, guid: c579ecac6cc58634ea85969b600fba45, type: 2}
+    zoneType: 0
+    pathLevel: 2
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+  - platform: {fileID: 11400000, guid: d17551372066a0847ae6180f7b65cd52, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 1
+      - idObstacle: 1
+        dropChance: 1
+      - idObstacle: 2
+        dropChance: 1
+      isSpawnedObstacle: 1
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+  - platform: {fileID: 11400000, guid: c579ecac6cc58634ea85969b600fba45, type: 2}
+    zoneType: 0
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 1
+      - idObstacle: 1
+        dropChance: 1
+      - idObstacle: 2
+        dropChance: 1
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+  - platform: {fileID: 11400000, guid: c579ecac6cc58634ea85969b600fba45, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+  - platform: {fileID: 11400000, guid: d17551372066a0847ae6180f7b65cd52, type: 2}
+    zoneType: 0
+    pathLevel: 2
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 1
+      - idObstacle: 1
+        dropChance: 1
+      - idObstacle: 2
+        dropChance: 1
+      isSpawnedObstacle: 1
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
