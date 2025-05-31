@@ -9,13 +9,15 @@ public class MainState_Game : IState
 
     private readonly ILoseEventProvider _loseEventProvider;
     private readonly IGameEventsProvider _gameEventsProvider;
+    private readonly IPlayerInputEventsProvider _playerInputEventsProvider;
 
-    public MainState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider)
+    public MainState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider, IPlayerInputEventsProvider playerInputEventsProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _loseEventProvider = loseEventProvider;
         _gameEventsProvider = gameEventsProvider;
+        _playerInputEventsProvider = playerInputEventsProvider;
     }
 
     public void EnterState()
@@ -25,6 +27,10 @@ public class MainState_Game : IState
         _loseEventProvider.OnLose += ChangeStateToLose;
         _gameEventsProvider.OnStop += ChangeStateToWin;
         _sceneRoot.OnClickToPause_Header += ChangeStateToPause;
+
+        _playerInputEventsProvider.OnClickToHitPunch += ChangeStateToAttackPunch;
+        _playerInputEventsProvider.OnClickToHitKnife += ChangeStateToAttackKnife;
+        _playerInputEventsProvider.OnClickToHitWhip += ChangeStateToAttackWhip;
 
         _sceneRoot.OpenFooterPanel();
         _sceneRoot.OpenHeaderPanel();
@@ -36,6 +42,10 @@ public class MainState_Game : IState
         _loseEventProvider.OnLose -= ChangeStateToLose;
         _gameEventsProvider.OnStop -= ChangeStateToWin;
         _sceneRoot.OnClickToPause_Header -= ChangeStateToPause;
+
+        _playerInputEventsProvider.OnClickToHitPunch -= ChangeStateToAttackPunch;
+        _playerInputEventsProvider.OnClickToHitKnife -= ChangeStateToAttackKnife;
+        _playerInputEventsProvider.OnClickToHitWhip -= ChangeStateToAttackWhip;
 
         _sceneRoot.CloseFooterPanel();
         _sceneRoot.CloseHeaderPanel();
@@ -54,5 +64,21 @@ public class MainState_Game : IState
     private void ChangeStateToLose()
     {
         _machineProvider.SetState(_machineProvider.GetState<LoseState_Game>());
+    }
+
+
+    private void ChangeStateToAttackPunch()
+    {
+        _machineProvider.SetState(_machineProvider.GetState<AttackPunchState_Game>());
+    }
+
+    private void ChangeStateToAttackKnife()
+    {
+        _machineProvider.SetState(_machineProvider.GetState<AttackKnifeState_Game>());
+    }
+
+    private void ChangeStateToAttackWhip()
+    {
+        _machineProvider.SetState(_machineProvider.GetState<AttackWhipState_Game>());
     }
 }

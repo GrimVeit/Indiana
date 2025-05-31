@@ -7121,7 +7121,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   speedX: 0
   maxSpeed: 4
-  jumpTakeOffSpeed: 7
+  jumpTakeOffSpeed: 5
   jumpState: 0
   collider2d: {fileID: 0}
   isActive: 1

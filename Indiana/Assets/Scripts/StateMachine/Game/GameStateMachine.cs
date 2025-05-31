@@ -14,10 +14,15 @@ public class GameStateMachine : IGlobalStateMachineProvider
         ILoseEventProvider loseEventProvider,
         ICameraProvider cameraProvider,
         IPlayerMoveProvider playerMoveProvider,
-        IPlayerAnimationProvider playerAnimationProvider)
+        IPlayerAnimationProvider playerAnimationProvider, 
+        IPlayerInputEventsProvider playerInputEventsProvider)
     {
         states[typeof(IntroState_Game)] = new IntroState_Game(this, gameEventsProvider);
-        states[typeof(MainState_Game)] = new MainState_Game(this, sceneRoot, loseEventProvider, gameEventsProvider);
+        states[typeof(MainState_Game)] = new MainState_Game(this, sceneRoot, loseEventProvider, gameEventsProvider, playerInputEventsProvider);
+        states[typeof(RunState_Game)] = new RunState_Game(this, playerMoveProvider, playerAnimationProvider, loseEventProvider, gameEventsProvider);
+        states[typeof(AttackPunchState_Game)] = new AttackPunchState_Game(this, playerMoveProvider, playerAnimationProvider, loseEventProvider, gameEventsProvider);
+        states[typeof(AttackKnifeState_Game)] = new AttackKnifeState_Game(this, playerMoveProvider, playerAnimationProvider, loseEventProvider, gameEventsProvider);
+        states[typeof(AttackWhipState_Game)] = new AttackWhipState_Game(this, playerMoveProvider, playerAnimationProvider, loseEventProvider, gameEventsProvider);
         states[typeof(PauseState_Game)] = new PauseState_Game(this, sceneRoot);
         states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider);
         states[typeof(LoseState_Game)] = new LoseState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider);

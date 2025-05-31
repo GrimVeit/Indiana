@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerInputModel
 {
@@ -22,16 +19,24 @@ public class PlayerInputModel
 
     public void HitPunch()
     {
-
+        OnClickToHitPunch?.Invoke();
     }
 
     public void HitKnife()
     {
-
+        OnClickToHitKnife?.Invoke();
     }
 
     public void HitWhip()
     {
-
+        OnClickToHitWhip?.Invoke();
     }
+
+    #region Output
+
+    public event Action OnClickToHitPunch;
+    public event Action OnClickToHitKnife;
+    public event Action OnClickToHitWhip;
+
+    #endregion
 }

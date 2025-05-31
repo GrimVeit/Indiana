@@ -80,7 +80,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
         platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter), viewContainer.GetView<PlatformSpawnView>());
 
-        gameStateMachine = new GameStateMachine(sceneRoot, zonePresenter, healthPresenter, cameraPresenter, playerMovePresenter, playerAnimationPresenter);
+        gameStateMachine = new GameStateMachine(sceneRoot, zonePresenter, healthPresenter, cameraPresenter, playerMovePresenter, playerAnimationPresenter, playerInputPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();

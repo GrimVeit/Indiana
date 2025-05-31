@@ -53,6 +53,21 @@ public class PlayerAnimationPresenter : IPlayerAnimationProvider
         _model.Die();
     }
 
+    public void AttackPunch()
+    {
+        _model.AttackPunch();
+    }
+
+    public void AttackKnife()
+    {
+        _model.AttackKnife();
+    }
+
+    public void AttackWhip()
+    {
+        _model.AttackWhip();
+    }
+
     #endregion
 }
 
@@ -61,4 +76,8 @@ public interface IPlayerAnimationProvider
     void Run();
     void Jump();
     void Die();
+
+    public void AttackPunch();
+    public void AttackKnife();
+    public void AttackWhip();
 }

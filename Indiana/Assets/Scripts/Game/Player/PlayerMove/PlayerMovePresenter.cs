@@ -91,6 +91,7 @@ public interface IPlayerMoveProvider
 {
     void StartRun();
     void StopRun();
+    void Jump();
 }
 
 public interface IPlayerGroundEventsProvider

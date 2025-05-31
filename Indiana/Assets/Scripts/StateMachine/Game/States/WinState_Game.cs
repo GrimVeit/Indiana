@@ -25,8 +25,8 @@ public class WinState_Game : IState
 
         _sceneRoot.OpenWinPanel();
         _cameraProvider.DeactivateLookAt();
-        _playerMoveProvider.StopRun();
-        _playerAnimationProvider.Die();
+        _playerAnimationProvider.Jump();
+        _playerMoveProvider.Jump();
     }
 
     public void ExitState()

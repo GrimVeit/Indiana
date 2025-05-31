@@ -120,7 +120,8 @@ public class PlayerAnimationModel
         }
 
         action?.Invoke();
-    }
+    }
+
 
     private void SetDesign(PlayerDesign playerDesign)
     {
