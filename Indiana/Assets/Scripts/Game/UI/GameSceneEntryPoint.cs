@@ -30,6 +30,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private PlayerDamageEffectPresenter playerDamageEffectPresenter;
     private PlayerMovePresenter playerMovePresenter;
     private PlayerInputPresenter playerInputPresenter;
+    private PlayerZoneActionPresenter playerZoneActionPresenter;
     private PlayerAnimationPresenter playerAnimationPresenter;
 
     private ZonePresenter zonePresenter;
@@ -74,13 +75,14 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         cameraPresenter = new CameraPresenter(new CameraModel(), viewContainer.GetView<CameraView>());
 
+        playerZoneActionPresenter = new PlayerZoneActionPresenter(new PlayerZoneActionModel(), viewContainer.GetView<PlayerZoneActionView>());
         deadZonePresenter = new DeadZonePresenter(new DeadZoneModel(healthPresenter), viewContainer.GetView<DeadZoneView>());
         zonePresenter = new ZonePresenter(new ZoneModel(cameraPresenter), viewContainer.GetView<ZoneView>());
         trophySpawnerPresenter = new TrophySpawnerPresenter(new TrophySpawnerModel(), viewContainer.GetView<TrophySpawnerView>());
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
         platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter), viewContainer.GetView<PlatformSpawnView>());
 
-        gameStateMachine = new GameStateMachine(sceneRoot, zonePresenter, healthPresenter, cameraPresenter, playerMovePresenter, playerAnimationPresenter, playerInputPresenter);
+        gameStateMachine = new GameStateMachine(sceneRoot, zonePresenter, healthPresenter, cameraPresenter, playerMovePresenter, playerAnimationPresenter, playerInputPresenter, playerZoneActionPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -98,6 +100,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         playerInputPresenter.Initialize();
         playerDamageEffectPresenter.Initialize();
         playerAnimationPresenter.Initialize();
+        playerZoneActionPresenter.Initialize();
 
         healthPresenter.Initialize();
 
@@ -154,6 +157,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         playerMovePresenter?.Dispose();
         playerInputPresenter?.Dispose();
         playerDamageEffectPresenter?.Dispose();
+        playerAnimationPresenter?.Dispose();
+        playerZoneActionPresenter?.Dispose();
 
         healthPresenter?.Dispose();
 

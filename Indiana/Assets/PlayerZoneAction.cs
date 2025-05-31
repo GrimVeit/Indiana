@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerZoneAction : MonoBehaviour
 {
-    [SerializeField] private float radius;
-
     public void ZoneAttack(float radius)
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, radius);
@@ -16,14 +14,6 @@ public class PlayerZoneAction : MonoBehaviour
             {
                 zoneAction.DoAction();
             }
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            ZoneAttack(radius);
         }
     }
 }

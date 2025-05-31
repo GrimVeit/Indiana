@@ -10,16 +10,18 @@ public class AttackPunchState_Game : IState
 
     private readonly ILoseEventProvider _loseEventProvider;
     private readonly IGameEventsProvider _gameEventsProvider;
+    private readonly IPlayerZoneActionProvider _playerZoneActionProvider;
 
     private IEnumerator timer;
 
-    public AttackPunchState_Game(IGlobalStateMachineProvider machineProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider)
+    public AttackPunchState_Game(IGlobalStateMachineProvider machineProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider, IPlayerZoneActionProvider playerZoneActionProvider)
     {
         _machineProvider = machineProvider;
         _playerMoveProvider = playerMoveProvider;
         _playerAnimationProvider = playerAnimationProvider;
         _loseEventProvider = loseEventProvider;
         _gameEventsProvider = gameEventsProvider;
+        _playerZoneActionProvider = playerZoneActionProvider;
     }
     
     public void EnterState()
@@ -48,7 +50,13 @@ public class AttackPunchState_Game : IState
 
     private IEnumerator Timer(float time)
     {
-        yield return new WaitForSeconds(time);
+        float timeAttack = 0.6f;
+
+        yield return new WaitForSeconds(timeAttack);
+
+        _playerZoneActionProvider.ActivateSmallZone();
+
+        yield return new WaitForSeconds(time - timeAttack);
 
         ChangeStateToRun();
     }

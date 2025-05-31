@@ -9,16 +9,18 @@ public class AttackKnifeState_Game : IState
 
     private readonly ILoseEventProvider _loseEventProvider;
     private readonly IGameEventsProvider _gameEventsProvider;
+    private readonly IPlayerZoneActionProvider _playerZoneActionProvider;
 
     private IEnumerator timer;
 
-    public AttackKnifeState_Game(IGlobalStateMachineProvider machineProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider)
+    public AttackKnifeState_Game(IGlobalStateMachineProvider machineProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider, IPlayerZoneActionProvider playerZoneActionProvider)
     {
         _machineProvider = machineProvider;
         _playerMoveProvider = playerMoveProvider;
         _playerAnimationProvider = playerAnimationProvider;
         _loseEventProvider = loseEventProvider;
         _gameEventsProvider = gameEventsProvider;
+        _playerZoneActionProvider = playerZoneActionProvider;
     }
 
     public void EnterState()
@@ -47,7 +49,13 @@ public class AttackKnifeState_Game : IState
 
     private IEnumerator Timer(float time)
     {
-        yield return new WaitForSeconds(time);
+        float timeAttack = 0.6f;
+
+        yield return new WaitForSeconds(timeAttack);
+
+        _playerZoneActionProvider.ActivateMiddleZone();
+
+        yield return new WaitForSeconds(time - timeAttack);
 
         ChangeStateToRun();
     }

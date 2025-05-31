@@ -10,4 +10,5 @@ public class Obstacle : MonoBehaviour
 
 
     public Action<int> OnSendObstacle;
+    public Action<Obstacle> OnSendZoneAction;
 }

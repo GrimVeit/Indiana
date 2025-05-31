@@ -21,31 +21,49 @@ public class Hyena : Obstacle
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private float frameDuration;
 
+    private Sequence seq;
+    private IEnumerator timer;
+
     private void Awake()
     {
         trigger.OnTriggerEnter += Enter;
+        trigger.OnZoneAction += ZoneAction;
     }
 
     private void OnDestroy()
     {
         trigger.OnTriggerEnter -= Enter;
+        trigger.OnZoneAction -= ZoneAction;
     }
 
     override public void Activate()
     {
-        Sequence seq = DOTween.Sequence();
+        seq = DOTween.Sequence();
 
         seq.AppendInterval(pauseDuration);
         seq.AppendCallback(() => spriteRenderer.flipX = false);
-        seq.AppendCallback(() => Coroutines.Start(Timer()));
+        seq.AppendCallback(() => Coroutines.Start(timer = Timer()));
         seq.Append(hyenaTransform.DOLocalJump(firstJumpPoint.localPosition, jumpPowerFirst, 1, durationJumpFirst).SetEase(Ease.Linear));
         seq.Append(hyenaTransform.DOLocalJump(secondJumpPoint.localPosition, jumpPowerSecond, 1, durationJumpSecond).SetEase(Ease.Linear));
         seq.AppendInterval(pauseDuration);
         seq.AppendCallback(() => spriteRenderer.flipX = true);
-        seq.AppendCallback(() => Coroutines.Start(Timer()));
+        seq.AppendCallback(() => Coroutines.Start(timer = Timer()));
         seq.Append(hyenaTransform.DOLocalJump(firstJumpPoint.localPosition, jumpPowerFirst, 1, durationJumpFirst).SetEase(Ease.Linear));
         seq.Append(hyenaTransform.DOLocalJump(startJumpPoint.localPosition, jumpPowerSecond, 1, durationJumpSecond).SetEase(Ease.Linear));
         seq.SetLoops(-1);
+    }
+
+    public override void Deactivate()
+    {
+        seq?.Kill();
+
+        Coroutines.Stop(timer);
+
+        seq = DOTween.Sequence();
+
+        seq.Append(hyenaTransform.DORotate(new Vector3(0, 0, 720), 2, RotateMode.FastBeyond360))
+            .Join(hyenaTransform.DOScale(Vector3.zero, 2))
+            .OnComplete(() => Destroy(gameObject));
     }
 
     private IEnumerator Timer()
@@ -60,5 +78,10 @@ public class Hyena : Obstacle
     private void Enter()
     {
         OnSendObstacle?.Invoke(damage);
+    }
+
+    private void ZoneAction()
+    {
+        OnSendZoneAction?.Invoke(this);
     }
 }

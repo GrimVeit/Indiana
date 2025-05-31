@@ -198,4 +198,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a317751d6168dfe4bad601208990e1bb, type: 3}
   - {fileID: 21300000, guid: 3612578b24d0d514c9987264e6efc5bc, type: 3}
   spriteRenderer: {fileID: 6692673089640964640}
+  idolTransform: {fileID: 3249637559881716}
   frameDuration: 0.15

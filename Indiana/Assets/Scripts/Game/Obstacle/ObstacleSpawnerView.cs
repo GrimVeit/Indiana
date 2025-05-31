@@ -16,26 +16,28 @@ public class ObstacleSpawnerView : View
 
         var obstacle = Instantiate(prefab, new Vector3(position.X, position.Y, position.Z), prefab.transform.rotation);
         obstacle.OnSendObstacle += SendObstacle;
+        obstacle.OnSendZoneAction += DestroyObstacle;
         obstacle.Activate();
         _spawnedObstacles.Add(obstacle);
     }
 
-    public void DestroyObstacle(Obstacle obstacle)
+    #region Output
+
+    public event Action<int> OnSendObstacle;
+    public event Action<Obstacle> OnDestroyObstacle;
+
+    private void SendObstacle(int damage)
+    {
+        OnSendObstacle?.Invoke(damage);
+    }
+
+    private void DestroyObstacle(Obstacle obstacle)
     {
         _spawnedObstacles.Remove(obstacle);
 
         obstacle.OnSendObstacle -= SendObstacle;
 
         obstacle.Deactivate();
-    }
-
-    #region Output
-
-    public event Action<int> OnSendObstacle;
-
-    private void SendObstacle(int damage)
-    {
-        OnSendObstacle?.Invoke(damage);
     }
 
     #endregion

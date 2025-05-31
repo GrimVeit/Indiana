@@ -23,17 +23,21 @@ public class Spider : Obstacle
     private Vector2 minBounds;
     private Vector2 maxBounds;
 
+    private Sequence seq;
+
     private IEnumerator timer;
     private IEnumerator timerFrame;
 
     private void Awake()
     {
         trigger.OnTriggerEnter += Enter;
+        trigger.OnZoneAction += ZoneAction;
     }
 
     private void OnDestroy()
     {
         trigger.OnTriggerEnter -= Enter;
+        trigger.OnZoneAction -= ZoneAction;
     }
 
     public override void Activate()
@@ -56,6 +60,20 @@ public class Spider : Obstacle
         Coroutines.Start(timerFrame);
     }
 
+    public override void Deactivate()
+    {
+        seq?.Kill();
+
+        Coroutines.Stop(timer);
+        Coroutines.Stop(timerFrame);
+
+        seq = DOTween.Sequence();
+
+        seq.Append(spider.DORotate(new Vector3(0, 0, 720), 2, RotateMode.FastBeyond360))
+            .Join(spider.DOScale(Vector3.zero, 2))
+            .OnComplete(() => Destroy(gameObject));
+    }
+
     private IEnumerator Timer()
     {
         while (true)
@@ -65,9 +83,12 @@ public class Spider : Obstacle
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            spider.DORotate(new Vector3(0, 0, angle + 90), 0.3f);
+            seq?.Kill();
 
-            spider.DOLocalMove(targetPos, moveDuration);
+            seq = DOTween.Sequence();
+
+            seq.Append(spider.DORotate(new Vector3(0, 0, angle + 90), 0.3f))
+                .Join(spider.DOLocalMove(targetPos, moveDuration));
 
             yield return new WaitForSeconds(moveDuration + waitTime);
         }
@@ -96,5 +117,10 @@ public class Spider : Obstacle
     private void Enter()
     {
         OnSendObstacle?.Invoke(damage);
+    }
+
+    private void ZoneAction()
+    {
+        OnSendZoneAction?.Invoke(this);
     }
 }
