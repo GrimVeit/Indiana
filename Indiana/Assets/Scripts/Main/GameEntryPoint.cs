@@ -19,7 +19,7 @@ public class GameEntryPoint
 
     }
 
-    //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void Autorun()
     {
         GlobalGameSettings();
@@ -53,7 +53,7 @@ public class GameEntryPoint
 
         sceneEntryPoint.Run(rootView);
 
-        sceneEntryPoint.OnGoToGame += () => coroutines.StartCoroutine(LoadAndStartGameScene());
+        sceneEntryPoint.OnGoToLevel1 += () => coroutines.StartCoroutine(LoadAndStartGameScene());
 
         yield return rootView.HideLoadingScreen(0);
     }

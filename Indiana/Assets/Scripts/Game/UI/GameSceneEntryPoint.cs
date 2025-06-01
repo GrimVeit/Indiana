@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameSceneEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
+    [SerializeField] private WeaponGroup weaponGroup;
     [SerializeField] private ClothesDesignGroup clothesDesignGroup;
     [SerializeField] private PlayerDesignGroup playerDesignGroup;
     [SerializeField] private PlatformPathGroup platformPathGroup;
@@ -17,6 +18,9 @@ public class GameSceneEntryPoint : MonoBehaviour
     private BankPresenter bankPresenter;
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
+
+    private StoreWeaponPresenter storeWeaponPresenter;
+    private WeaponGameVisualPresenter weaponGameVisualPresenter;
 
     private StoreClothesPresenter storeClothesPresenter;
     private StorePlayerPresenter storePlayerPresenter;
@@ -65,6 +69,9 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
+        storeWeaponPresenter = new StoreWeaponPresenter(new StoreWeaponModel(weaponGroup));
+        weaponGameVisualPresenter = new WeaponGameVisualPresenter(new WeaponGameVisualModel(storeWeaponPresenter), viewContainer.GetView<WeaponGameVisualView>());
+
         storeClothesPresenter = new StoreClothesPresenter(new StoreClothesModel(clothesDesignGroup));
         storePlayerPresenter = new StorePlayerPresenter(new StorePlayerModel(storeClothesPresenter, playerDesignGroup));
 
@@ -94,7 +101,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             playerInputPresenter, 
             playerZoneActionPresenter, 
             playerColliderPresenter,
-            obstacleSpawnerPresenter);
+            obstacleSpawnerPresenter, 
+            storeWeaponPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -107,6 +115,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         bankPresenter.Initialize();
 
         cameraPresenter.Initialize();
+
+        weaponGameVisualPresenter.Initialize();
+        storeWeaponPresenter.Initialize();
 
         playerMovePresenter.Initialize();
         playerColliderPresenter.Initialize();
@@ -166,6 +177,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         sceneRoot?.Dispose();
         particleEffectPresenter?.Dispose();
         bankPresenter?.Dispose();
+
+        weaponGameVisualPresenter?.Dispose();
+        storeWeaponPresenter?.Dispose();
 
         playerMovePresenter?.Dispose();
         playerColliderPresenter?.Dispose();

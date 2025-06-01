@@ -4,7 +4,7 @@ public class LevelModel
 { 
     private readonly IStoreSelectLevelEventsProvider _eventsProvider;
 
-    private int _levelId;
+    private int _levelId = 0;
 
     public LevelModel(IStoreSelectLevelEventsProvider eventsProvider)
     {
@@ -24,16 +24,21 @@ public class LevelModel
 
     public void ActivateLevel()
     {
+        UnityEngine.Debug.Log(_levelId);
+
         switch (_levelId)
         {
             case 0:
                 OnActivate1Level?.Invoke();
                 break;
             case 1:
+                OnActivate2Level?.Invoke();
                 break;
             case 2:
+                OnActivate3Level?.Invoke();
                 break;
             case 3:
+                OnActivate4Level?.Invoke();
                 break;
         }
     }

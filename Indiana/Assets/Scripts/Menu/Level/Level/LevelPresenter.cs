@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 public class LevelPresenter
 {
@@ -37,4 +35,32 @@ public class LevelPresenter
     {
         _view.OnActivateLevel -= _model.ActivateLevel;
     }
+
+    #region Output
+
+    public event Action OnActivate1Level
+    {
+        add => _model.OnActivate1Level += value;
+        remove => _model.OnActivate1Level -= value;
+    }
+
+    public event Action OnActivate2Level
+    {
+        add => _model.OnActivate2Level += value;
+        remove => _model.OnActivate2Level -= value;
+    }
+
+    public event Action OnActivate3Level
+    {
+        add => _model.OnActivate3Level += value;
+        remove => _model.OnActivate3Level -= value;
+    }
+
+    public event Action OnActivate4Level
+    {
+        add => _model.OnActivate4Level += value;
+        remove => _model.OnActivate4Level -= value;
+    }
+
+    #endregion
 }

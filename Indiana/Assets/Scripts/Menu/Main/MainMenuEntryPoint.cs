@@ -5,6 +5,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 {
     [SerializeField] private Sounds sounds;
     [SerializeField] private ItemCollectionGroup itemCollectionGroup;
+    [SerializeField] private WeaponGroup weaponGroup;
     [SerializeField] private DesignIndianaPreviewGroup designIndianaPreviewGroup;
     [SerializeField] private ClothesDesignGroup clothesDesignGroup;
     [SerializeField] private UIMainMenuRoot menuRootPrefab;
@@ -18,6 +19,9 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private StoreCollectionPresenter storeCollectionPresenter;
     private CollectionVisualPresenter collectionVisualPresenter;
+
+    private StoreWeaponPresenter storeWeaponPresenter;
+    private WeaponMenuVisualPresenter weaponMenuVisualPresenter;
 
     private StoreClothesPresenter storeClothesPresenter;
     private IndianaPreviewInputPresenter indianaPreviewInputPresenter;
@@ -56,6 +60,9 @@ public class MainMenuEntryPoint : MonoBehaviour
         storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup));
         collectionVisualPresenter = new CollectionVisualPresenter(new CollectionVisualModel(storeCollectionPresenter), viewContainer.GetView<CollectionVisualView>());
 
+        storeWeaponPresenter = new StoreWeaponPresenter(new StoreWeaponModel(weaponGroup));
+        weaponMenuVisualPresenter = new WeaponMenuVisualPresenter(new WeaponMenuVisualModel(storeWeaponPresenter), viewContainer.GetView<WeaponMenuVisualView>());
+
         storeClothesPresenter = new StoreClothesPresenter(new StoreClothesModel(clothesDesignGroup));
         indianaPreviewInputPresenter = new IndianaPreviewInputPresenter(new IndianaPreviewInputModel(storeClothesPresenter), viewContainer.GetView<IndianaPreviewInputView>());
         clothesDragPresenter = new ClothesDragPresenter(new ClothesDragModel(soundPresenter), viewContainer.GetView<ClothesDragView>());
@@ -79,6 +86,9 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         collectionVisualPresenter.Initialize();
         storeCollectionPresenter.Initialize();
+
+        weaponMenuVisualPresenter.Initialize();
+        storeWeaponPresenter.Initialize();
 
         clothesDragPresenter.Initialize();
         indianaDesignPreviewPresenter.Initialize();
@@ -104,36 +114,24 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private void ActivateTransitions()
     {
-
+        levelPresenter.OnActivate1Level += HandleGoToLevel1;
+        levelPresenter.OnActivate2Level += HandleGoToLevel2;
+        levelPresenter.OnActivate3Level += HandleGoToLevel3;
+        levelPresenter.OnActivate4Level += HandleGoToLevel4;
     }
 
     private void DeactivateTransitions()
     {
-
+        levelPresenter.OnActivate1Level -= HandleGoToLevel1;
+        levelPresenter.OnActivate2Level -= HandleGoToLevel2;
+        levelPresenter.OnActivate3Level -= HandleGoToLevel3;
+        levelPresenter.OnActivate4Level -= HandleGoToLevel4;
     }
 
     private void Deactivate()
     {
         sceneRoot.Deactivate();
         soundPresenter?.Dispose();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            storeLevelPresenter.OpenLevel(1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            storeLevelPresenter.OpenLevel(2);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            storeLevelPresenter.OpenLevel(3);
-        }
     }
 
     private void Dispose()
@@ -149,6 +147,9 @@ public class MainMenuEntryPoint : MonoBehaviour
 
             collectionVisualPresenter.Dispose();
             storeCollectionPresenter.Dispose();
+
+            weaponMenuVisualPresenter.Dispose();
+            storeWeaponPresenter.Dispose();
 
             clothesDragPresenter.Dispose();
             indianaDesignPreviewPresenter.Dispose();
@@ -170,12 +171,33 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     #region Output
 
-    public event Action OnGoToGame;
+    public event Action OnGoToLevel1;
+    public event Action OnGoToLevel2;
+    public event Action OnGoToLevel3;
+    public event Action OnGoToLevel4;
 
-    private void HandleGoToGame()
+    private void HandleGoToLevel1()
     {
         Deactivate();
-        OnGoToGame?.Invoke();
+        OnGoToLevel1?.Invoke();
+    }
+
+    private void HandleGoToLevel2()
+    {
+        Deactivate();
+        OnGoToLevel1?.Invoke();
+    }
+
+    private void HandleGoToLevel3()
+    {
+        Deactivate();
+        OnGoToLevel1?.Invoke();
+    }
+
+    private void HandleGoToLevel4()
+    {
+        Deactivate();
+        OnGoToLevel1?.Invoke();
     }
 
     #endregion
