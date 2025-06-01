@@ -39,6 +39,11 @@ public class Spider : Obstacle
     {
         trigger.OnTriggerEnter -= Enter;
         trigger.OnZoneAction -= ZoneAction;
+
+        seq?.Kill();
+
+        Coroutines.Stop(timer);
+        Coroutines.Stop(timerFrame);
     }
 
     public override void Activate()

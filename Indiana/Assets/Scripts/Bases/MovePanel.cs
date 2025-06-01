@@ -8,21 +8,21 @@ public class MovePanel : Panel
 {
     public bool IsActive => isActive;
 
-    [SerializeField] protected Vector3 from;
-    [SerializeField] protected Vector3 to;
+    [SerializeField] protected Vector3 moveFrom;
+    [SerializeField] protected Vector3 moveTo;
     [SerializeField] protected float time;
     [SerializeField] protected CanvasGroup canvasGroup;
-    protected Tween tween;
+    protected Tween tweenMove;
 
     private bool isActive;
 
     public override void ActivatePanel()
     {
-        if (tween != null) { tween?.Kill(); }
+        if (tweenMove != null) { tweenMove?.Kill(); }
 
         panel.SetActive(true);
         isActive = true;
-        tween = panel.transform.DOLocalMove(to, time).OnComplete(() =>
+        tweenMove = panel.transform.DOLocalMove(moveTo, time).OnComplete(() =>
         {
             OnActivatePanel?.Invoke();
             OnActivatePanel_Data?.Invoke(this);
@@ -32,16 +32,23 @@ public class MovePanel : Panel
 
     public override void DeactivatePanel()
     {
-        if (tween != null) { tween?.Kill(); }
+        if (tweenMove != null) { tweenMove?.Kill(); }
 
         isActive = false;
-        tween = panel.transform.DOLocalMove(from, time).OnComplete(() => 
+        tweenMove = panel.transform.DOLocalMove(moveFrom, time).OnComplete(() => 
         {
             panel.SetActive(false);
             OnDeactivatePanel?.Invoke();
             OnDeactivatePanel_Data?.Invoke(this);
         });
         CanvasGroupAlpha(canvasGroup, 1, 0, time);
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+
+        tweenMove?.Kill();
     }
 
     private void CanvasGroupAlpha(CanvasGroup canvasGroup, float from, float to, float time)

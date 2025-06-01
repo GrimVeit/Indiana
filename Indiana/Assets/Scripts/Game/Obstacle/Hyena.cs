@@ -36,6 +36,10 @@ public class Hyena : Obstacle
     {
         trigger.OnTriggerEnter -= Enter;
         trigger.OnZoneAction -= ZoneAction;
+
+        seq?.Kill();
+
+        Coroutines.Stop(timer);
     }
 
     override public void Activate()

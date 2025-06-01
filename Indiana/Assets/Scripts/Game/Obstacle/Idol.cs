@@ -24,6 +24,8 @@ public class Idol : Obstacle
     {
         trigger.OnTriggerEnter -= Enter;
         trigger.OnZoneAction -= ZoneAction;
+
+        Coroutines.Stop(timer);
     }
 
     public override void Activate()

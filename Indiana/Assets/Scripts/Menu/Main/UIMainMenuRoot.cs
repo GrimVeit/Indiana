@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class UIMainMenuRoot : UIRoot
 {
+    [SerializeField] private MoveRotatePanel backgroundPanel;
     [SerializeField] private MainPanel_Menu mainPanel;
     [SerializeField] private LevelPanel_Menu levelPanel;
     [SerializeField] private CollectionPanel_Menu collectionPanel;
@@ -17,6 +18,7 @@ public class UIMainMenuRoot : UIRoot
 
     public void Initialize()
     {
+        backgroundPanel.Initialize();
         mainPanel.Initialize();
         levelPanel.Initialize();
         collectionPanel.Initialize();
@@ -32,6 +34,8 @@ public class UIMainMenuRoot : UIRoot
         levelPanel.OnClickToBack += HandleClickToBack_Level;
         collectionPanel.OnClickToBack += HandleClickToBack_Collection;
         inventoryPanel.OnClickToBack += HandleClickToBack_Inventory;
+
+        backgroundPanel.ActivatePanel();
     }
 
 
@@ -47,10 +51,13 @@ public class UIMainMenuRoot : UIRoot
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
+
+        backgroundPanel.DeactivatePanel();
     }
 
     public void Dispose()
     {
+        backgroundPanel.Dispose();
         mainPanel.Dispose();
         levelPanel.Dispose();
         collectionPanel.Dispose();
