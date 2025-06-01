@@ -34,6 +34,16 @@ public class PlayerMoveView : View
         player.Jump();
     }
 
+    public void Freeze()
+    {
+        player.Freeze();
+    }
+
+    public void Unfreeze()
+    {
+        player.Unfreeze();
+    }
+
     #region Output
 
     public event Action<JumpState> OnChangeState;

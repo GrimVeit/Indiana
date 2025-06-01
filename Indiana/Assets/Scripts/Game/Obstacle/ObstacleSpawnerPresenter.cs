@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 
-public class ObstacleSpawnerPresenter : IObstacleSpawnerProvider
+public class ObstacleSpawnerPresenter : IObstacleSpawnerProvider, IObstacleStateProvider
 {
     private readonly ObstacleSpawnerModel _model;
     private readonly ObstacleSpawnerView _view;
@@ -44,10 +44,26 @@ public class ObstacleSpawnerPresenter : IObstacleSpawnerProvider
         _model.SpawnObstacle(obstacleChances, spawnPosition);
     }
 
+    public void Pause()
+    {
+        _view.Pause();
+    }
+
+    public void Resume()
+    {
+        _view.Resume();
+    }
+
     #endregion
 }
 
 public interface IObstacleSpawnerProvider
 {
     void SpawnObstacle(ObstacleChances obstacleChances, Vector3 spawnPosition);
+}
+
+public interface IObstacleStateProvider
+{
+    void Pause();
+    void Resume();
 }

@@ -24,6 +24,8 @@ public class Hyena : Obstacle
     private Sequence seq;
     private IEnumerator timer;
 
+    private bool isPaused = false;
+
     private void Awake()
     {
         trigger.OnTriggerEnter += Enter;
@@ -70,9 +72,25 @@ public class Hyena : Obstacle
     {
         for (int i = 0; i < sprites.Count; i++)
         {
+            yield return new WaitUntil(() => !isPaused);
+
             spriteRenderer.sprite = sprites[i];
             yield return new WaitForSeconds(frameDuration);
         }
+    }
+
+    public override void Pause()
+    {
+        isPaused = true;
+
+        seq?.Pause();
+    }
+
+    public override void Resume()
+    {
+        isPaused = false;
+
+        seq?.Play();
     }
 
     private void Enter()

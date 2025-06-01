@@ -93,7 +93,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             playerAnimationPresenter, 
             playerInputPresenter, 
             playerZoneActionPresenter, 
-            playerColliderPresenter);
+            playerColliderPresenter,
+            obstacleSpawnerPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();

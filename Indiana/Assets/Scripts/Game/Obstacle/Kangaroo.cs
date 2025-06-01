@@ -20,6 +20,7 @@ public class Kangaroo : Obstacle
 
     private Sequence seq;
     private IEnumerator timer;
+    private bool isPaused = false;
 
     private void Awake()
     {
@@ -65,9 +66,25 @@ public class Kangaroo : Obstacle
     {
         for (int i = 0; i < sprites.Count; i++)
         {
+            yield return new WaitUntil(() => !isPaused);
+
             spriteRenderer.sprite = sprites[i];
             yield return new WaitForSeconds(frameDuration);
         }
+    }
+
+    public override void Pause()
+    {
+        isPaused = true;
+
+        seq?.Pause();
+    }
+
+    public override void Resume()
+    {
+        isPaused = false;
+
+        seq?.Play();
     }
 
     private void Enter()

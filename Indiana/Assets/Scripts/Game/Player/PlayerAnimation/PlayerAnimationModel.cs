@@ -14,6 +14,8 @@ public class PlayerAnimationModel
 
     private bool isDie = false;
 
+    private bool isResume = true;
+
     public PlayerAnimationModel(IStorePlayerDesignEventsProvider storePlayerDesignEventsProvider, IPlayerGroundEventsProvider playerGroundEventsProvider)
     {
         _storePlayerDesignEventsProvider = storePlayerDesignEventsProvider;
@@ -32,6 +34,16 @@ public class PlayerAnimationModel
     {
         _storePlayerDesignEventsProvider.OnChooseDesign -= SetDesign;
         _playerGroundEventsProvider.OnPlayerOutGround -= EndJump;
+    }
+
+    public void Pause()
+    {
+        isResume = false;
+    }
+
+    public void Resume()
+    {
+        isResume = true;
     }
 
     public void Run()
@@ -105,6 +117,8 @@ public class PlayerAnimationModel
 
         while (true)
         {
+            yield return new WaitUntil(() => isResume);
+
             OnChangeSprite?.Invoke(sprites[index]);
             index = (index + 1) % sprites.Count;
             yield return new WaitForSeconds(duration);
@@ -115,6 +129,8 @@ public class PlayerAnimationModel
     {
         for (int i = 0; i < sprites.Count; i++)
         {
+            yield return new WaitUntil(() => isResume);
+
             OnChangeSprite?.Invoke(sprites[i]);
             yield return new WaitForSeconds(duration);
         }

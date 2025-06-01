@@ -27,6 +27,7 @@ public class Spider : Obstacle
 
     private IEnumerator timer;
     private IEnumerator timerFrame;
+    private bool isPaused = false;
 
     private void Awake()
     {
@@ -74,10 +75,26 @@ public class Spider : Obstacle
             .OnComplete(() => Destroy(spider.gameObject));
     }
 
+    public override void Pause()
+    {
+        isPaused = true;
+
+        seq?.Pause();
+    }
+
+    public override void Resume()
+    {
+        isPaused = false;
+
+        seq?.Play();
+    }
+
     private IEnumerator Timer()
     {
         while (true)
         {
+            yield return new WaitUntil(() => !isPaused);
+
             Vector3 targetPos = GetRandomPoint();
             Vector3 direction = (targetPos - spider.localPosition).normalized;
 
@@ -108,6 +125,8 @@ public class Spider : Obstacle
 
         while (true)
         {
+            yield return new WaitUntil(() => !isPaused);
+
             spriteRenderer.sprite = sprites[index];
             index = (index + 1) % sprites.Count;
             yield return new WaitForSeconds(frameDuration);

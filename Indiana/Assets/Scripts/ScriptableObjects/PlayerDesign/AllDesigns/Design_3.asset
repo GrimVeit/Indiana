@@ -22,11 +22,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 28b70eb4764d6f84195dec4d433f5dbc, type: 3}
   - {fileID: 21300000, guid: 67c1a5513d6ea9b4d9ea85cb1155d89b, type: 3}
   spritesJump:
-  - {fileID: 21300000, guid: 120953ed30c361540902a74e8716fff9, type: 3}
   - {fileID: 21300000, guid: c305e11b34ae98448bebd6543bfc2b1f, type: 3}
   - {fileID: 21300000, guid: cff9b02463252af45b7d32a6245a9dc0, type: 3}
   - {fileID: 21300000, guid: 68bda1114269a3c4d9fc0071165f84a9, type: 3}
-  - {fileID: 21300000, guid: 821a3841d42d7dd47a80153cf67851b5, type: 3}
   spritesDie:
   - {fileID: 21300000, guid: c3cb0897ef7d0ae4aaad0eaf2144fbac, type: 3}
   - {fileID: 21300000, guid: 36f78c8f20f4e2741b7354e2164c56aa, type: 3}
@@ -55,3 +53,5 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4c579c3d8db81374d885a8cdca0b6298, type: 3}
   - {fileID: 21300000, guid: fb39aba77c9e96147ac9a7128fae40d5, type: 3}
   - {fileID: 21300000, guid: abf40aad3dbd8c74f98173cb7a0b8280, type: 3}
+  spritesEndJump:
+  - {fileID: 21300000, guid: 821a3841d42d7dd47a80153cf67851b5, type: 3}

@@ -21,6 +21,16 @@ public class ObstacleSpawnerView : View
         _spawnedObstacles.Add(obstacle);
     }
 
+    public void Pause()
+    {
+        _spawnedObstacles.ForEach(data => data.Pause());
+    }
+
+    public void Resume()
+    {
+        _spawnedObstacles.ForEach(data => data.Resume());
+    }
+
     #region Output
 
     public event Action<int> OnSendObstacle;

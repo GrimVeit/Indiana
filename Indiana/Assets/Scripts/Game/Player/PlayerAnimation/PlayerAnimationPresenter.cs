@@ -68,6 +68,16 @@ public class PlayerAnimationPresenter : IPlayerAnimationProvider
         _model.AttackWhip();
     }
 
+    public void Pause()
+    {
+        _model.Pause();
+    }
+
+    public void Resume()
+    {
+        _model.Resume();
+    }
+
     #endregion
 }
 
@@ -80,4 +90,8 @@ public interface IPlayerAnimationProvider
     public void AttackPunch();
     public void AttackKnife();
     public void AttackWhip();
+
+
+    void Pause();
+    void Resume();
 }

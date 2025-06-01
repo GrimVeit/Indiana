@@ -35,6 +35,9 @@ public class PlayerMovePresenter : IPlayerMoveProvider, IPlayerJumpMoveProvider,
         _model.OnJump += _view.Jump;
         _model.OnStartRun += _view.StartRun;
         _model.OnStopRun += _view.StopRun;
+
+        _model.OnFreezeEnd += _view.Unfreeze;
+        _model.OnFreeze += _view.Freeze;
     }
 
     private void DeactivateEvents()
@@ -44,6 +47,9 @@ public class PlayerMovePresenter : IPlayerMoveProvider, IPlayerJumpMoveProvider,
         _model.OnJump -= _view.Jump;
         _model.OnStartRun -= _view.StartRun;
         _model.OnStopRun -= _view.StopRun;
+
+        _model.OnFreezeEnd -= _view.Unfreeze;
+        _model.OnFreeze -= _view.Freeze;
     }
 
     #region Output
@@ -79,6 +85,16 @@ public class PlayerMovePresenter : IPlayerMoveProvider, IPlayerJumpMoveProvider,
         _model.Jump();
     }
 
+    public void Freeze()
+    {
+        _model.Freeze();
+    }
+
+    public void Unfreeze()
+    {
+        _model.Unfreeze();
+    }
+
     #endregion
 }
 
@@ -92,6 +108,8 @@ public interface IPlayerMoveProvider
     void StartRun();
     void StopRun();
     void Jump();
+    void Freeze();
+    void Unfreeze();
 }
 
 public interface IPlayerGroundEventsProvider

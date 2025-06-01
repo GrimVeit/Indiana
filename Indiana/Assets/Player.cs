@@ -13,7 +13,9 @@ public class Player : KinematicObject
     public JumpState jumpState = JumpState.Grounded;
     private bool stopJump;
     public Collider2D collider2d;
+
     public bool isActive = true;
+    public bool isFreeze = false;
 
     bool jump;
     Vector2 move;
@@ -51,10 +53,31 @@ public class Player : KinematicObject
         isActive = false;
     }
 
+    public void Freeze()
+    {
+        isFreeze = true;
+
+        move = Vector2.zero;
+    }
+
+    public void Unfreeze()
+    {
+        isFreeze = false;
+    }
+
     #region Base
+
+    protected override void FixedUpdate()
+    {
+        if (isFreeze) return;
+
+        base.FixedUpdate();
+    }
 
     protected override void Update()
     {
+        if (isFreeze) return;
+
         if (!isActive && jumpState == JumpState.Grounded)
         {
             move.x = 0;

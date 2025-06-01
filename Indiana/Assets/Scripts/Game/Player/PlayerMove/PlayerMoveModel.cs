@@ -39,6 +39,16 @@ public class PlayerMoveModel
         OnJump?.Invoke();
     }
 
+    public void Freeze()
+    {
+        OnFreeze?.Invoke();
+    }
+
+    public void Unfreeze()
+    {
+        OnFreezeEnd?.Invoke();
+    }
+
     #region Output
 
     public event Action OnPlayerInGround;
@@ -47,6 +57,9 @@ public class PlayerMoveModel
     public event Action OnStartRun;
     public event Action OnStopRun;
     public event Action OnJump;
+
+    public event Action OnFreeze;
+    public event Action OnFreezeEnd;
 
     #endregion
 }
