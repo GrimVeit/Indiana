@@ -2324,12 +2324,18 @@ MonoBehaviour:
   transformHigh: {fileID: 707639850}
   platformIndexes:
     platformIndexes:
-    - platform: {fileID: 1515668733722544802, guid: f28586fef97c9994aa7f75af2a897227,
+    - platform: {fileID: 4441761399691283783, guid: 081b93ffea6fc7048ac3f79b8a019852,
         type: 3}
       index: 0
-    - platform: {fileID: 4098121273723903716, guid: 92f59932c2ce5544593155c10d076518,
+    - platform: {fileID: 1337911956198171245, guid: 0205ce14177c0df4bba19b8bd405a3dd,
         type: 3}
       index: 1
+    - platform: {fileID: 5176276867388445658, guid: ff7d62d0759e40349a78214d37d7825e,
+        type: 3}
+      index: 2
+    - platform: {fileID: 288010707724475053, guid: 082b051414ac56b49813d00d8c0ea5ea,
+        type: 3}
+      index: 3
 --- !u!1 &596706131
 GameObject:
   m_ObjectHideFlags: 0
@@ -3254,7 +3260,7 @@ MonoBehaviour:
   weaponGroup: {fileID: 11400000, guid: 5d134a81bfd713b4ca6ac67b66d6c51b, type: 2}
   clothesDesignGroup: {fileID: 11400000, guid: e7167f6aad6c4364aad4a1fb3613f256, type: 2}
   playerDesignGroup: {fileID: 11400000, guid: ab6d870f3e8a26d4780891c04f885b63, type: 2}
-  platformPathGroup: {fileID: 11400000, guid: 3c2361ee2f9ee8646affb07c10c0c80d, type: 2}
+  platformPathGroup: {fileID: 11400000, guid: 82a9fa409d6ef6f40918397f63f27dac, type: 2}
   menuRootPrefab: {fileID: 1759006223}
 --- !u!1 &855673695
 GameObject:
