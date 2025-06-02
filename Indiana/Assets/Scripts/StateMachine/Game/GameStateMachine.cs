@@ -19,7 +19,9 @@ public class GameStateMachine : IGlobalStateMachineProvider
         IPlayerZoneActionProvider playerZoneActionProvider,
         IPlayerColliderProvider playerColliderProvider,
         IObstacleStateProvider obstacleStateProvider,
-        IStoreWeaponProvider storeWeaponProvider)
+        IStoreWeaponProvider storeWeaponProvider, 
+        IStoreOpenLevelProvider storeOpenLevelProvider,
+        int level)
     {
         states[typeof(IntroState_Game)] = new IntroState_Game(this, gameEventsProvider, playerColliderProvider);
         states[typeof(MainState_Game)] = new MainState_Game(this, sceneRoot, loseEventProvider, gameEventsProvider, playerInputEventsProvider);
@@ -28,7 +30,7 @@ public class GameStateMachine : IGlobalStateMachineProvider
         states[typeof(AttackKnifeState_Game)] = new AttackKnifeState_Game(this, playerMoveProvider, playerAnimationProvider, loseEventProvider, gameEventsProvider, playerZoneActionProvider, storeWeaponProvider);
         states[typeof(AttackWhipState_Game)] = new AttackWhipState_Game(this, playerMoveProvider, playerAnimationProvider, loseEventProvider, gameEventsProvider, playerZoneActionProvider, storeWeaponProvider);
         states[typeof(PauseState_Game)] = new PauseState_Game(this, sceneRoot, playerMoveProvider, playerAnimationProvider, obstacleStateProvider);
-        states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider);
+        states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider, storeOpenLevelProvider, level);
         states[typeof(LoseState_Game)] = new LoseState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider, playerColliderProvider);
     }
 

@@ -185,19 +185,19 @@ public class MainMenuEntryPoint : MonoBehaviour
     private void HandleGoToLevel2()
     {
         Deactivate();
-        OnGoToLevel1?.Invoke();
+        OnGoToLevel2?.Invoke();
     }
 
     private void HandleGoToLevel3()
     {
         Deactivate();
-        OnGoToLevel1?.Invoke();
+        OnGoToLevel3?.Invoke();
     }
 
     private void HandleGoToLevel4()
     {
         Deactivate();
-        OnGoToLevel1?.Invoke();
+        OnGoToLevel4?.Invoke();
     }
 
     #endregion

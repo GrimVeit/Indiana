@@ -9,14 +9,19 @@ public class WinState_Game : IState
     private readonly ICameraProvider _cameraProvider;
     private readonly IPlayerMoveProvider _playerMoveProvider;
     private readonly IPlayerAnimationProvider _playerAnimationProvider;
+    private readonly IStoreOpenLevelProvider _storeOpenLevelProvider;
 
-    public WinState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ICameraProvider cameraProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider)
+    private readonly int _level;
+
+    public WinState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ICameraProvider cameraProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, IStoreOpenLevelProvider storeOpenLevelProvider, int level)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
         _cameraProvider = cameraProvider;
         _playerMoveProvider = playerMoveProvider;
         _playerAnimationProvider = playerAnimationProvider;
+        _storeOpenLevelProvider = storeOpenLevelProvider;
+        _level = level;
     }
 
     public void EnterState()
@@ -27,6 +32,7 @@ public class WinState_Game : IState
         _cameraProvider.DeactivateLookAt();
         _playerAnimationProvider.Jump();
         _playerMoveProvider.Jump();
+        _storeOpenLevelProvider.OpenLevel(_level);
     }
 
     public void ExitState()

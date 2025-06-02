@@ -140,7 +140,7 @@ MonoBehaviour:
       trophyChances: []
       isSpawnedTrophy: 0
   - platform: {fileID: 11400000, guid: 7ef97714170f6dc4ba8a7132fd4f03dc, type: 2}
-    zoneType: 0
+    zoneType: 2
     pathLevel: 1
     obstacleChances:
       obstacleChances: []

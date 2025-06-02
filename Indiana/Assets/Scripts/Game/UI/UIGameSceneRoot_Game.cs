@@ -42,12 +42,16 @@ public class UIGameSceneRoot_Game : UIRoot
     public void Activate()
     {
         headerPanel.OnClickToPause += HandleClickToPause_Header;
+        headerPanel.OnClickToExit += HandleClickToExit_Header;
+
         pausePanel.OnClickToResume += HandleClickToResume_Pause;
     }
 
     public void Deactivate()
     {
         headerPanel.OnClickToPause -= HandleClickToPause_Header;
+        headerPanel.OnClickToExit -= HandleClickToExit_Header;
+
         pausePanel.OnClickToResume -= HandleClickToResume_Pause;
 
         if (currentPanel != null)
@@ -59,10 +63,16 @@ public class UIGameSceneRoot_Game : UIRoot
     #region HEADER
 
     public event Action OnClickToPause_Header;
+    public event Action OnClickToExit_Header;
 
     private void HandleClickToPause_Header()
     {
         OnClickToPause_Header?.Invoke();
+    }
+
+    private void HandleClickToExit_Header()
+    {
+        OnClickToExit_Header?.Invoke();
     }
 
     #endregion

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GameSceneEntryPoint : MonoBehaviour
 {
+    [SerializeField] private int secondLevel;
     [SerializeField] private Sounds sounds;
     [SerializeField] private WeaponGroup weaponGroup;
     [SerializeField] private ClothesDesignGroup clothesDesignGroup;
@@ -38,6 +39,8 @@ public class GameSceneEntryPoint : MonoBehaviour
     private PlayerZoneActionPresenter playerZoneActionPresenter;
     private PlayerAnimationPresenter playerAnimationPresenter;
 
+    private StoreLevelPresenter storeLevelPresenter;
+
     private ZonePresenter zonePresenter;
     private DeadZonePresenter deadZonePresenter;
 
@@ -45,16 +48,11 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private GameStateMachine gameStateMachine;
 
-    private void Start()
-    {
-        Run();
-    }
-
-    public void Run()
+    public void Run(UIRootView uIRootView)
     {
         sceneRoot = menuRootPrefab;
 
-        //uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
+        uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
 
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
@@ -68,6 +66,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             viewContainer.GetView<ParticleEffectView>());
 
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
+
+        storeLevelPresenter = new StoreLevelPresenter(new StoreLevelModel());
 
         storeWeaponPresenter = new StoreWeaponPresenter(new StoreWeaponModel(weaponGroup));
         weaponGameVisualPresenter = new WeaponGameVisualPresenter(new WeaponGameVisualModel(storeWeaponPresenter), viewContainer.GetView<WeaponGameVisualView>());
@@ -101,8 +101,10 @@ public class GameSceneEntryPoint : MonoBehaviour
             playerInputPresenter, 
             playerZoneActionPresenter, 
             playerColliderPresenter,
-            obstacleSpawnerPresenter, 
-            storeWeaponPresenter);
+            obstacleSpawnerPresenter,
+            storeWeaponPresenter,
+            storeLevelPresenter,
+            secondLevel);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -115,6 +117,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         bankPresenter.Initialize();
 
         cameraPresenter.Initialize();
+
+        storeLevelPresenter.Initialize();
 
         weaponGameVisualPresenter.Initialize();
         storeWeaponPresenter.Initialize();
@@ -155,12 +159,12 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private void ActivateTransitions()
     {
-
+        sceneRoot.OnClickToExit_Header += HandleGoToMenu;
     }
 
     private void DeactivateTransitions()
     {
-
+        sceneRoot.OnClickToExit_Header -= HandleGoToMenu;
     }
 
     private void Deactivate()
@@ -177,6 +181,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         sceneRoot?.Dispose();
         particleEffectPresenter?.Dispose();
         bankPresenter?.Dispose();
+
+        storeLevelPresenter?.Dispose();
 
         weaponGameVisualPresenter?.Dispose();
         storeWeaponPresenter?.Dispose();

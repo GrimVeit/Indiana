@@ -53,26 +53,80 @@ public class GameEntryPoint
 
         sceneEntryPoint.Run(rootView);
 
-        sceneEntryPoint.OnGoToLevel1 += () => coroutines.StartCoroutine(LoadAndStartGameScene());
+        sceneEntryPoint.OnGoToLevel1 += () => coroutines.StartCoroutine(LoadAndStartGameScene_Level1());
+        sceneEntryPoint.OnGoToLevel2 += () => coroutines.StartCoroutine(LoadAndStartGameScene_Level2());
+        sceneEntryPoint.OnGoToLevel3 += () => coroutines.StartCoroutine(LoadAndStartGameScene_Level3());
+        sceneEntryPoint.OnGoToLevel4 += () => coroutines.StartCoroutine(LoadAndStartGameScene_Level4());
 
         yield return rootView.HideLoadingScreen(0);
     }
 
-    private IEnumerator LoadAndStartGameScene()
+    private IEnumerator LoadAndStartGameScene_Level1()
     {
         yield return rootView.ShowLoadingScreen(1);
 
         yield return LoadScene(Scenes.BOOT);
-        yield return LoadScene(Scenes.GAME);
+        yield return LoadScene(Scenes.GAME_LEVEL1);
 
         yield return new WaitForEndOfFrame();
 
         var sceneEntryPoint = Object.FindObjectOfType<GameSceneEntryPoint>();
-        //sceneEntryPoint.Run(rootView);
+        sceneEntryPoint.Run(rootView);
 
         sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
 
         yield return rootView.HideLoadingScreen(1);
+    }
+
+    private IEnumerator LoadAndStartGameScene_Level2()
+    {
+        yield return rootView.ShowLoadingScreen(2);
+
+        yield return LoadScene(Scenes.BOOT);
+        yield return LoadScene(Scenes.GAME_LEVEL2);
+
+        yield return new WaitForEndOfFrame();
+
+        var sceneEntryPoint = Object.FindObjectOfType<GameSceneEntryPoint>();
+        sceneEntryPoint.Run(rootView);
+
+        sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
+
+        yield return rootView.HideLoadingScreen(2);
+    }
+
+    private IEnumerator LoadAndStartGameScene_Level3()
+    {
+        yield return rootView.ShowLoadingScreen(3);
+
+        yield return LoadScene(Scenes.BOOT);
+        yield return LoadScene(Scenes.GAME_LEVEL3);
+
+        yield return new WaitForEndOfFrame();
+
+        var sceneEntryPoint = Object.FindObjectOfType<GameSceneEntryPoint>();
+        sceneEntryPoint.Run(rootView);
+
+        sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
+
+        yield return rootView.HideLoadingScreen(3);
+    }
+
+    private IEnumerator LoadAndStartGameScene_Level4()
+    {
+        yield return rootView.ShowLoadingScreen(4);
+
+        yield return LoadScene(Scenes.BOOT);
+        yield return LoadScene(Scenes.GAME_LEVEL4);
+
+        yield return new WaitForEndOfFrame();
+
+        var sceneEntryPoint = Object.FindObjectOfType<GameSceneEntryPoint>();
+        sceneEntryPoint.Run(rootView);
+
+        sceneEntryPoint.OnGoToMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
+
+        yield return rootView.HideLoadingScreen(4);
     }
 
     private IEnumerator LoadScene(string scene)
