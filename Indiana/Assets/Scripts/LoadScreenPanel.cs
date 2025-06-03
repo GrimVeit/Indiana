@@ -6,6 +6,8 @@ public class LoadScreenPanel : MovePanel
 {
     [SerializeField] private LazyMotionGroup lazyMotionGroup;
 
+    [SerializeField] private List<Panel> panels = new();
+
     private void Awake()
     {
         OnDeactivatePanel += lazyMotionGroup.Deactivate;
@@ -25,6 +27,8 @@ public class LoadScreenPanel : MovePanel
         base.Initialize();
 
         lazyMotionGroup.Initialize();
+
+        panels.ForEach(data => data.Initialize());
     }
 
     public override void Dispose()
@@ -32,6 +36,8 @@ public class LoadScreenPanel : MovePanel
         base.Dispose();
 
         lazyMotionGroup.Dispose();
+
+        panels.ForEach(data => data.Dispose());
     }
 
     public override void ActivatePanel()
@@ -39,5 +45,14 @@ public class LoadScreenPanel : MovePanel
         base.ActivatePanel();
 
         lazyMotionGroup.Activate();
+
+        panels.ForEach(data => data.ActivatePanel());
+    }
+
+    public override void DeactivatePanel()
+    {
+        base.DeactivatePanel();
+
+        panels.ForEach(data => data.DeactivatePanel());
     }
 }

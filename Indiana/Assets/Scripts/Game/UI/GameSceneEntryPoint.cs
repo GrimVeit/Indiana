@@ -39,6 +39,8 @@ public class GameSceneEntryPoint : MonoBehaviour
     private PlayerZoneActionPresenter playerZoneActionPresenter;
     private PlayerAnimationPresenter playerAnimationPresenter;
 
+    private GameButtonsHiderPresenter gameButtonsHiderPresenter;
+
     private StoreLevelPresenter storeLevelPresenter;
 
     private ZonePresenter zonePresenter;
@@ -91,6 +93,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
         platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter), viewContainer.GetView<PlatformSpawnView>());
 
+        gameButtonsHiderPresenter = new GameButtonsHiderPresenter(new GameButtonsHiderModel(playerMovePresenter), viewContainer.GetView<GameButtonsHiderView>());
+
         gameStateMachine = new GameStateMachine
             (sceneRoot, 
             zonePresenter, 
@@ -138,6 +142,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         obstacleSpawnerPresenter.Initialize();
         platformSpawnPresenter.Initialize();
         platformSpawnPresenter.SpawnPlatforms();
+
+        gameButtonsHiderPresenter.Initialize();
 
         storePlayerPresenter.Initialize();
         storeClothesPresenter.Initialize();
@@ -203,6 +209,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         trophySpawnerPresenter?.Dispose();
         obstacleSpawnerPresenter?.Dispose();
         platformSpawnPresenter?.Dispose();
+
+        gameButtonsHiderPresenter?.Dispose();
 
         storePlayerPresenter?.Dispose();
         storeClothesPresenter?.Dispose();

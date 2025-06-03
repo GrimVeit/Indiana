@@ -13,11 +13,20 @@ public class Test : MonoBehaviour
     private Vector2 uvOffset;
     private Vector3 lastCameraPosition;
 
+    private IEnumerator test;
+
 
     private void Start()
     {
-        Coroutines.Start(TestCoro());
+        test = TestCoro();
+        Coroutines.Start(test);
         lastCameraPosition = _camera.transform.position;
+    }
+
+    private void OnDestroy()
+    {
+        if (test != null)
+           Coroutines.Stop(test);
     }
 
     private IEnumerator TestCoro()
