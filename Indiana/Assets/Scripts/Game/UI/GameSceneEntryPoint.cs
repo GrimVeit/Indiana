@@ -7,6 +7,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 {
     [SerializeField] private int secondLevel;
     [SerializeField] private Sounds sounds;
+    [SerializeField] private ItemCollectionGroup itemCollectionGroup;
     [SerializeField] private WeaponGroup weaponGroup;
     [SerializeField] private ClothesDesignGroup clothesDesignGroup;
     [SerializeField] private PlayerDesignGroup playerDesignGroup;
@@ -42,6 +43,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private GameButtonsHiderPresenter gameButtonsHiderPresenter;
 
     private StoreLevelPresenter storeLevelPresenter;
+    private StoreCollectionPresenter storeCollectionPresenter;
 
     private ZonePresenter zonePresenter;
     private DeadZonePresenter deadZonePresenter;
@@ -70,6 +72,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
         storeLevelPresenter = new StoreLevelPresenter(new StoreLevelModel());
+        storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup));
 
         storeWeaponPresenter = new StoreWeaponPresenter(new StoreWeaponModel(weaponGroup));
         weaponGameVisualPresenter = new WeaponGameVisualPresenter(new WeaponGameVisualModel(storeWeaponPresenter), viewContainer.GetView<WeaponGameVisualView>());
@@ -89,7 +92,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         playerZoneActionPresenter = new PlayerZoneActionPresenter(new PlayerZoneActionModel(), viewContainer.GetView<PlayerZoneActionView>());
         deadZonePresenter = new DeadZonePresenter(new DeadZoneModel(healthPresenter), viewContainer.GetView<DeadZoneView>());
         zonePresenter = new ZonePresenter(new ZoneModel(cameraPresenter), viewContainer.GetView<ZoneView>());
-        trophySpawnerPresenter = new TrophySpawnerPresenter(new TrophySpawnerModel(), viewContainer.GetView<TrophySpawnerView>());
+        trophySpawnerPresenter = new TrophySpawnerPresenter(new TrophySpawnerModel(storeCollectionPresenter), viewContainer.GetView<TrophySpawnerView>());
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
         platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter), viewContainer.GetView<PlatformSpawnView>());
 
@@ -108,7 +111,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             obstacleSpawnerPresenter,
             storeWeaponPresenter,
             storeLevelPresenter,
-            secondLevel);
+            secondLevel,
+            gameButtonsHiderPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -123,6 +127,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         cameraPresenter.Initialize();
 
         storeLevelPresenter.Initialize();
+        storeCollectionPresenter.Initialize();
 
         weaponGameVisualPresenter.Initialize();
         storeWeaponPresenter.Initialize();
@@ -189,6 +194,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         bankPresenter?.Dispose();
 
         storeLevelPresenter?.Dispose();
+        storeCollectionPresenter?.Dispose();
 
         weaponGameVisualPresenter?.Dispose();
         storeWeaponPresenter?.Dispose();

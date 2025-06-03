@@ -46,9 +46,6 @@ public class MainState_Game : IState
         _playerInputEventsProvider.OnClickToHitPunch -= ChangeStateToAttackPunch;
         _playerInputEventsProvider.OnClickToHitKnife -= ChangeStateToAttackKnife;
         _playerInputEventsProvider.OnClickToHitWhip -= ChangeStateToAttackWhip;
-
-        _sceneRoot.CloseFooterPanel();
-        _sceneRoot.CloseHeaderPanel();
     }
 
     private void ChangeStateToPause()

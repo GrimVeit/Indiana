@@ -38,9 +38,9 @@ public class TrophySpawnerView : View
     {
         int id = trophy.Id;
 
-        DestroyTrophy(trophy);
-
         OnSendTrophy?.Invoke(id);
+
+        DestroyTrophy(trophy);
     }
 
     #endregion

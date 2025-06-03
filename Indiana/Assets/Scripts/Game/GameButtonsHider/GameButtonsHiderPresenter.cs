@@ -47,6 +47,16 @@ public class GameButtonsHiderPresenter : IGameButtonsHiderProvider
         _model.Hide();
     }
 
+    public void Show(int id)
+    {
+        _view.Show(id);
+    }
+
+    public void Hide(int id)
+    {
+        _view.Hide(id);
+    }
+
     #endregion
 }
 
@@ -54,4 +64,6 @@ public interface IGameButtonsHiderProvider
 {
     void Show();
     void Hide();
+    void Show(int id);
+    void Hide(int id);
 }

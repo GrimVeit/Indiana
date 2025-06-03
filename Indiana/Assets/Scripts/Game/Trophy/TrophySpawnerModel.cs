@@ -7,6 +7,13 @@ public class TrophySpawnerModel
 {
     public event Action<int, Vector3> OnSpawnTrophy;
 
+    private readonly IItemCollectionProvider _itemCollectionProvider;
+
+    public TrophySpawnerModel(IItemCollectionProvider itemCollectionProvider)
+    {
+        _itemCollectionProvider = itemCollectionProvider;
+    }
+
     public void SpawnTrophy(TrophyChances trophyChances, Vector3 position)
     {
         var index = trophyChances.GetRandomIndexTrophy();
@@ -18,5 +25,10 @@ public class TrophySpawnerModel
         }
 
         OnSpawnTrophy?.Invoke(index, position);
+    }
+
+    public void SendTrophy(int id)
+    {
+        _itemCollectionProvider.AddItemCollection(id);
     }
 }

@@ -94,11 +94,15 @@ public class UIGameSceneRoot_Game : UIRoot
 
     public void OpenHeaderPanel()
     {
+        if (headerPanel.IsActive) return;
+
         OpenOtherPanel(headerPanel);
     }
 
     public void CloseHeaderPanel()
     {
+        if (!headerPanel.IsActive) return;
+
         CloseOtherPanel(headerPanel);
     }
 
@@ -106,11 +110,15 @@ public class UIGameSceneRoot_Game : UIRoot
 
     public void OpenFooterPanel()
     {
+        if (footerPanel.IsActive) return;
+
         OpenOtherPanel(footerPanel);
     }
 
     public void CloseFooterPanel()
     {
+        if (!footerPanel.IsActive) return;
+
         CloseOtherPanel(footerPanel);
     }
 
@@ -118,11 +126,15 @@ public class UIGameSceneRoot_Game : UIRoot
 
     public void OpenPausePanel()
     {
+        if (pausePanel.IsActive) return;
+
         OpenOtherPanel(pausePanel);
     }
 
     public void ClosePausePanel()
     {
+        if (!pausePanel.IsActive) return;
+
         CloseOtherPanel(pausePanel);
     }
 
@@ -149,5 +161,6 @@ public class UIGameSceneRoot_Game : UIRoot
     {
         CloseOtherPanel(losePanel);
     }
+
     #endregion
 }

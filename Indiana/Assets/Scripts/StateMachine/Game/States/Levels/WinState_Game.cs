@@ -28,7 +28,10 @@ public class WinState_Game : IState
     {
         Debug.Log("<color=red>ACTIVATE STATE - WIN STATE / GAME</color>");
 
+        _sceneRoot.CloseFooterPanel();
+        _sceneRoot.CloseHeaderPanel();
         _sceneRoot.OpenWinPanel();
+
         _cameraProvider.DeactivateLookAt();
         _playerAnimationProvider.Jump();
         _playerMoveProvider.Jump();

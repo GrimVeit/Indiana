@@ -26,6 +26,8 @@ public class LoseState_Game : IState
     {
         Debug.Log("<color=red>ACTIVATE STATE - LOSE STATE / GAME</color>");
 
+        _sceneRoot.CloseFooterPanel();
+        _sceneRoot.CloseHeaderPanel();
         _sceneRoot.OpenLosePanel();
         _playerColliderProvider.ActivateDie();
         _cameraProvider.DeactivateLookAt();

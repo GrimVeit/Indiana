@@ -12,10 +12,11 @@ public class AttackWhipState_Game : IState
     private readonly IGameEventsProvider _gameEventsProvider;
     private readonly IPlayerZoneActionProvider _playerZoneActionProvider;
     private readonly IStoreWeaponProvider _weaponProvider;
+    private readonly IGameButtonsHiderProvider _gameButtonsHiderProvider;
 
     private IEnumerator timer;
 
-    public AttackWhipState_Game(IGlobalStateMachineProvider machineProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider, IPlayerZoneActionProvider playerZoneActionProvider, IStoreWeaponProvider weaponProvider)
+    public AttackWhipState_Game(IGlobalStateMachineProvider machineProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider, IPlayerZoneActionProvider playerZoneActionProvider, IStoreWeaponProvider weaponProvider, IGameButtonsHiderProvider gameButtonsHiderProvider)
     {
         _machineProvider = machineProvider;
         _playerMoveProvider = playerMoveProvider;
@@ -24,6 +25,7 @@ public class AttackWhipState_Game : IState
         _gameEventsProvider = gameEventsProvider;
         _playerZoneActionProvider = playerZoneActionProvider;
         _weaponProvider = weaponProvider;
+        _gameButtonsHiderProvider = gameButtonsHiderProvider;
     }
 
     public void EnterState()
@@ -36,6 +38,8 @@ public class AttackWhipState_Game : IState
         _weaponProvider.RemoveWeapon(1);
         _playerAnimationProvider.AttackWhip();
         _playerMoveProvider.StopRun();
+        _gameButtonsHiderProvider.Hide(0);
+        _gameButtonsHiderProvider.Hide();
 
         if (timer != null) Coroutines.Stop(timer);
 

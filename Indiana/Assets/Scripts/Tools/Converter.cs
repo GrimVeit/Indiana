@@ -14,4 +14,20 @@ public static class Converter
     {
         return new System.Numerics.Vector3(vector.x, vector.y, vector.z);
     }
+
+
+
+    private static readonly System.Random rng = new System.Random();
+
+    public static void Shuffle<T>(this IList<T> list)
+    {
+        int n = list.Count;
+
+        while(n > 0)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            (list[k], list[n]) = (list[n], list[k]);
+        }
+    }
 }

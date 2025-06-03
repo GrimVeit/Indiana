@@ -11,10 +11,11 @@ public class AttackPunchState_Game : IState
     private readonly ILoseEventProvider _loseEventProvider;
     private readonly IGameEventsProvider _gameEventsProvider;
     private readonly IPlayerZoneActionProvider _playerZoneActionProvider;
+    private readonly IGameButtonsHiderProvider _gameButtonsHiderProvider;
 
     private IEnumerator timer;
 
-    public AttackPunchState_Game(IGlobalStateMachineProvider machineProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider, IPlayerZoneActionProvider playerZoneActionProvider)
+    public AttackPunchState_Game(IGlobalStateMachineProvider machineProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider, IPlayerZoneActionProvider playerZoneActionProvider, IGameButtonsHiderProvider gameButtonsHiderProvider)
     {
         _machineProvider = machineProvider;
         _playerMoveProvider = playerMoveProvider;
@@ -22,6 +23,7 @@ public class AttackPunchState_Game : IState
         _loseEventProvider = loseEventProvider;
         _gameEventsProvider = gameEventsProvider;
         _playerZoneActionProvider = playerZoneActionProvider;
+        _gameButtonsHiderProvider = gameButtonsHiderProvider;
     }
     
     public void EnterState()
@@ -33,6 +35,8 @@ public class AttackPunchState_Game : IState
 
         _playerAnimationProvider.AttackPunch();
         _playerMoveProvider.StopRun();
+        _gameButtonsHiderProvider.Hide(0);
+        _gameButtonsHiderProvider.Hide();
 
         if(timer != null) Coroutines.Stop(timer);
 

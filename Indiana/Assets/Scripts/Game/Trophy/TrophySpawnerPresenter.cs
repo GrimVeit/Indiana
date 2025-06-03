@@ -25,11 +25,15 @@ public class TrophySpawnerPresenter : ITrophySpawnerProvider
 
     private void ActivateEvents()
     {
+        _view.OnSendTrophy += _model.SendTrophy;
+
         _model.OnSpawnTrophy += _view.SpawnTrophy;
     }
 
     private void DeactivateEvents()
     {
+        _view.OnSendTrophy -= _model.SendTrophy;
+
         _model.OnSpawnTrophy -= _view.SpawnTrophy;
     }
 

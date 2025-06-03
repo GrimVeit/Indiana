@@ -10,14 +10,17 @@ public class RunState_Game : IState
 
     private readonly ILoseEventProvider _loseEventProvider;
     private readonly IGameEventsProvider _gameEventsProvider;
+    private readonly IGameButtonsHiderProvider _gameButtonsHiderProvider;
 
-    public RunState_Game(IGlobalStateMachineProvider machineProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider)
+    public RunState_Game(IGlobalStateMachineProvider machineProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, ILoseEventProvider loseEventProvider, IGameEventsProvider gameEventsProvider, IGameButtonsHiderProvider gameButtonsHiderProvider)
     {
         _machineProvider = machineProvider;
         _playerMoveProvider = playerMoveProvider;
         _playerAnimationProvider = playerAnimationProvider;
         _loseEventProvider = loseEventProvider;
         _gameEventsProvider = gameEventsProvider;
+        _gameButtonsHiderProvider = gameButtonsHiderProvider;
+
     }
 
     public void EnterState()
@@ -29,6 +32,8 @@ public class RunState_Game : IState
 
         _playerAnimationProvider.Run();
         _playerMoveProvider.StartRun();
+        _gameButtonsHiderProvider.Show(0);
+        _gameButtonsHiderProvider.Show();
 
         ChangeStateToMain();
     }
