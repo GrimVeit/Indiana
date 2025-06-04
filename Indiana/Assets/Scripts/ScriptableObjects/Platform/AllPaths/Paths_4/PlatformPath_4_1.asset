@@ -25,7 +25,145 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+  - platform: {fileID: 11400000, guid: 8fe24e74cec49534bbac1b10f4d6cf2d, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 1
+      - idObstacle: 1
+        dropChance: 1
+      - idObstacle: 2
+        dropChance: 4
+      - idObstacle: 3
+        dropChance: 6
+      isSpawnedObstacle: 1
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
   - platform: {fileID: 11400000, guid: 88fa8c52e3e44b148b92e32d6653609a, type: 2}
+    zoneType: 0
+    pathLevel: 2
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+  - platform: {fileID: 11400000, guid: 8fe24e74cec49534bbac1b10f4d6cf2d, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 1
+      - idObstacle: 1
+        dropChance: 1
+      - idObstacle: 2
+        dropChance: 4
+      - idObstacle: 3
+        dropChance: 6
+      isSpawnedObstacle: 1
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+  - platform: {fileID: 11400000, guid: 88fa8c52e3e44b148b92e32d6653609a, type: 2}
+    zoneType: 0
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances:
+      - idWeapon: 0
+        dropChance: 3
+      - idWeapon: 0
+        dropChance: 1
+      isSpawnedWeapon: 1
+  - platform: {fileID: 11400000, guid: 0d5196c8728eadd4b939a6dcb938c18d, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+  - platform: {fileID: 11400000, guid: 95c7be59902bb0440b87af25462965aa, type: 2}
+    zoneType: 0
+    pathLevel: 2
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 1
+      - idObstacle: 1
+        dropChance: 1
+      - idObstacle: 2
+        dropChance: 4
+      - idObstacle: 3
+        dropChance: 6
+      isSpawnedObstacle: 1
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+  - platform: {fileID: 11400000, guid: 88fa8c52e3e44b148b92e32d6653609a, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances:
+      - idTrophy: 0
+        dropChance: 1
+      - idTrophy: 1
+        dropChance: 1
+      - idTrophy: 2
+        dropChance: 1
+      - idTrophy: 3
+        dropChance: 1
+      - idTrophy: 4
+        dropChance: 1
+      - idTrophy: 5
+        dropChance: 1
+      - idTrophy: 6
+        dropChance: 1
+      isSpawnedTrophy: 1
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+  - platform: {fileID: 11400000, guid: 0d5196c8728eadd4b939a6dcb938c18d, type: 2}
+    zoneType: 0
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+  - platform: {fileID: 11400000, guid: 8fe24e74cec49534bbac1b10f4d6cf2d, type: 2}
     zoneType: 0
     pathLevel: 1
     obstacleChances:
@@ -41,65 +179,23 @@ MonoBehaviour:
       - idWeapon: 1
         dropChance: 1
       isSpawnedWeapon: 1
-  - platform: {fileID: 11400000, guid: 0d5196c8728eadd4b939a6dcb938c18d, type: 2}
-    zoneType: 0
-    pathLevel: 0
-    obstacleChances:
-      obstacleChances: []
-      isSpawnedObstacle: 0
-    trophyChances:
-      trophyChances:
-      - idTrophy: 2
-        dropChance: 1
-      isSpawnedTrophy: 1
-    weaponChances:
-      weaponChances: []
-      isSpawnedWeapon: 0
-  - platform: {fileID: 11400000, guid: 8fe24e74cec49534bbac1b10f4d6cf2d, type: 2}
-    zoneType: 0
-    pathLevel: 1
-    obstacleChances:
-      obstacleChances:
-      - idObstacle: 3
-        dropChance: 1
-      isSpawnedObstacle: 1
-    trophyChances:
-      trophyChances:
-      - idTrophy: 3
-        dropChance: 1
-      isSpawnedTrophy: 1
-    weaponChances:
-      weaponChances: []
-      isSpawnedWeapon: 0
-  - platform: {fileID: 11400000, guid: 8fe24e74cec49534bbac1b10f4d6cf2d, type: 2}
-    zoneType: 0
-    pathLevel: 2
-    obstacleChances:
-      obstacleChances: []
-      isSpawnedObstacle: 0
-    trophyChances:
-      trophyChances:
-      - idTrophy: 4
-        dropChance: 1
-      isSpawnedTrophy: 1
-    weaponChances:
-      weaponChances: []
-      isSpawnedWeapon: 0
   - platform: {fileID: 11400000, guid: 95c7be59902bb0440b87af25462965aa, type: 2}
     zoneType: 0
-    pathLevel: 1
+    pathLevel: 2
     obstacleChances:
       obstacleChances:
       - idObstacle: 0
         dropChance: 1
       - idObstacle: 1
         dropChance: 1
+      - idObstacle: 2
+        dropChance: 4
+      - idObstacle: 3
+        dropChance: 6
       isSpawnedObstacle: 1
     trophyChances:
-      trophyChances:
-      - idTrophy: 5
-        dropChance: 1
-      isSpawnedTrophy: 1
+      trophyChances: []
+      isSpawnedTrophy: 0
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
@@ -110,10 +206,8 @@ MonoBehaviour:
       obstacleChances: []
       isSpawnedObstacle: 0
     trophyChances:
-      trophyChances:
-      - idTrophy: 6
-        dropChance: 1
-      isSpawnedTrophy: 1
+      trophyChances: []
+      isSpawnedTrophy: 0
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
@@ -121,24 +215,20 @@ MonoBehaviour:
     zoneType: 0
     pathLevel: 0
     obstacleChances:
-      obstacleChances:
-      - idObstacle: 1
-        dropChance: 1
-      isSpawnedObstacle: 1
+      obstacleChances: []
+      isSpawnedObstacle: 0
     trophyChances:
       trophyChances: []
-      isSpawnedTrophy: 1
+      isSpawnedTrophy: 0
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
-  - platform: {fileID: 11400000, guid: 8fe24e74cec49534bbac1b10f4d6cf2d, type: 2}
+  - platform: {fileID: 11400000, guid: 0d5196c8728eadd4b939a6dcb938c18d, type: 2}
     zoneType: 0
-    pathLevel: 0
+    pathLevel: 1
     obstacleChances:
-      obstacleChances:
-      - idObstacle: 2
-        dropChance: 1
-      isSpawnedObstacle: 1
+      obstacleChances: []
+      isSpawnedObstacle: 0
     trophyChances:
       trophyChances: []
       isSpawnedTrophy: 0
@@ -147,7 +237,7 @@ MonoBehaviour:
       isSpawnedWeapon: 0
   - platform: {fileID: 11400000, guid: 95c7be59902bb0440b87af25462965aa, type: 2}
     zoneType: 2
-    pathLevel: 1
+    pathLevel: 2
     obstacleChances:
       obstacleChances: []
       isSpawnedObstacle: 0

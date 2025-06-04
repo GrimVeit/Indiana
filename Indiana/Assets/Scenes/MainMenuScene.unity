@@ -3500,7 +3500,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 285b1a0d7e12ca7469fadae6d3a4a039, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f4a7d8715a146342865d54452caafdd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3533,7 +3533,7 @@ MonoBehaviour:
   id: 2
   buttonLevel: {fileID: 1055427633}
   imageLevel: {fileID: 1055427630}
-  spriteOpen: {fileID: 21300000, guid: 285b1a0d7e12ca7469fadae6d3a4a039, type: 3}
+  spriteOpen: {fileID: 21300000, guid: 1f4a7d8715a146342865d54452caafdd, type: 3}
   spriteClose: {fileID: 21300000, guid: f13d692156db3214db5afd9ad7a4d221, type: 3}
 --- !u!114 &1055427633
 MonoBehaviour:
@@ -5882,7 +5882,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1f4a7d8715a146342865d54452caafdd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 285b1a0d7e12ca7469fadae6d3a4a039, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5915,7 +5915,7 @@ MonoBehaviour:
   id: 1
   buttonLevel: {fileID: 1536796945}
   imageLevel: {fileID: 1536796942}
-  spriteOpen: {fileID: 21300000, guid: 1f4a7d8715a146342865d54452caafdd, type: 3}
+  spriteOpen: {fileID: 21300000, guid: 285b1a0d7e12ca7469fadae6d3a4a039, type: 3}
   spriteClose: {fileID: 21300000, guid: f13d692156db3214db5afd9ad7a4d221, type: 3}
 --- !u!114 &1536796945
 MonoBehaviour:
