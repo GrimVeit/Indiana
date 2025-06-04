@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4325816135882629263}
-  - component: {fileID: 7607064544142303899}
+  - component: {fileID: 787880696792983099}
   m_Layer: 0
   m_Name: Whip_Weapon
   m_TagString: Untagged
@@ -120,7 +120,7 @@ Transform:
   - {fileID: 601791945556337520}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7607064544142303899
+--- !u!114 &787880696792983099
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,13 +129,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 620342547904976003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e886fb163d0f91c48a158c8b3b49b6c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c0b28e5a38f47d47b41805d0e70bc7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3
+  id: 1
   transformUp: {fileID: 8929274206212707464}
   transformDown: {fileID: 8923420329310300644}
-  transformTrophy: {fileID: 601791945556337520}
+  transformWeapon: {fileID: 601791945556337520}
   duration: 2
   trigger: {fileID: 7981934046600864631}
 --- !u!1 &719144899573911733

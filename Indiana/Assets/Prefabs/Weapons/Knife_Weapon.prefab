@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1503404121634024096}
-  - component: {fileID: 4850037157889128816}
+  - component: {fileID: 2440806397928305064}
   m_Layer: 0
   m_Name: Knife_Weapon
   m_TagString: Untagged
@@ -66,7 +66,7 @@ Transform:
   - {fileID: 4317625217615734527}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4850037157889128816
+--- !u!114 &2440806397928305064
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,13 +75,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4835142180353791293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e886fb163d0f91c48a158c8b3b49b6c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c0b28e5a38f47d47b41805d0e70bc7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 3
+  id: 0
   transformUp: {fileID: 7325970490669076516}
   transformDown: {fileID: 3826763320785535040}
-  transformTrophy: {fileID: 4317625217615734527}
+  transformWeapon: {fileID: 4317625217615734527}
   duration: 2
   trigger: {fileID: 3459856720597014998}
 --- !u!1 &5340477553981787203

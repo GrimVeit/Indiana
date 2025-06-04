@@ -18,6 +18,7 @@ public class PlatformUnit
     public PathLevel PathLevel => pathLevel;
     public ObstacleChances ObstacleChances => obstacleChances;
     public TrophyChances TrophyChances => trophyChances;
+    public WeaponChances WeaponChances => weaponChances;
 
 
     [SerializeField] private Platform platform;
@@ -31,6 +32,9 @@ public class PlatformUnit
 
     [Header("Trophy")]
     [SerializeField] private TrophyChances trophyChances;
+
+    [Header("Weapon")]
+    [SerializeField] private WeaponChances weaponChances;
 
 }
 
@@ -128,5 +132,47 @@ public class TrophyChance
     public float DropChance => dropChance;
 
     [SerializeField] private int idTrophy;
+    [SerializeField] private float dropChance;
+}
+
+
+
+
+[Serializable]
+public class WeaponChances
+{
+    [SerializeField] private List<WeaponChance> weaponChances = new();
+    [SerializeField] private bool isSpawnedWeapon;
+
+    public int GetRandomIndexWeapon()
+    {
+        float totalChance = 0;
+
+        weaponChances.ForEach(data => totalChance += data.DropChance);
+
+        float randomPoint = Random.Range(0, totalChance);
+        float currentSum = 0f;
+
+        foreach (var data in weaponChances)
+        {
+            currentSum += data.DropChance;
+
+            if (randomPoint <= currentSum)
+            {
+                return data.IdWeapon;
+            }
+        }
+
+        return -1;
+    }
+}
+
+[Serializable]
+public class WeaponChance
+{
+    public int IdWeapon => idWeapon;
+    public float DropChance => dropChance;
+
+    [SerializeField] private int idWeapon;
     [SerializeField] private float dropChance;
 }
