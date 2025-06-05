@@ -80,6 +80,6 @@ public class AttackKnifeState_Game : IState
 
     private void ChangeStateToLose()
     {
-        _machineProvider.SetState(_machineProvider.GetState<LoseState_Game>());
+        _machineProvider.SetState(_machineProvider.GetState<WaitLoseState_Game>());
     }
 }

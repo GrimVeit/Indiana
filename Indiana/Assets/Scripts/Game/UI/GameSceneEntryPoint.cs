@@ -51,6 +51,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
     private CameraPresenter cameraPresenter;
 
+    private AnimationElementPresenter animationElementPresenter;
+
     private GameStateMachine gameStateMachine;
 
     public void Run(UIRootView uIRootView)
@@ -100,6 +102,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         gameButtonsHiderPresenter = new GameButtonsHiderPresenter(new GameButtonsHiderModel(playerMovePresenter), viewContainer.GetView<GameButtonsHiderView>());
 
+        animationElementPresenter = new AnimationElementPresenter(new AnimationElementModel(), viewContainer.GetView<AnimationElementView>());
+
         gameStateMachine = new GameStateMachine
             (sceneRoot, 
             zonePresenter, 
@@ -114,7 +118,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             storeWeaponPresenter,
             storeLevelPresenter,
             secondLevel,
-            gameButtonsHiderPresenter);
+            gameButtonsHiderPresenter,
+            animationElementPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();
@@ -156,6 +161,8 @@ public class GameSceneEntryPoint : MonoBehaviour
         storePlayerPresenter.Initialize();
         storeClothesPresenter.Initialize();
 
+        animationElementPresenter.Initialize();
+
         gameStateMachine.Initialize();
 
         playerAnimationPresenter.Run();
@@ -174,11 +181,13 @@ public class GameSceneEntryPoint : MonoBehaviour
     private void ActivateTransitions()
     {
         sceneRoot.OnClickToExit_Header += HandleGoToMenu;
+        sceneRoot.OnClickToExit_Lose += HandleGoToMenu;
     }
 
     private void DeactivateTransitions()
     {
         sceneRoot.OnClickToExit_Header -= HandleGoToMenu;
+        sceneRoot.OnClickToExit_Lose -= HandleGoToMenu;
     }
 
     private void Deactivate()
@@ -224,6 +233,8 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         storePlayerPresenter?.Dispose();
         storeClothesPresenter?.Dispose();
+
+        animationElementPresenter?.Dispose();
 
         gameStateMachine?.Dispose();
     }

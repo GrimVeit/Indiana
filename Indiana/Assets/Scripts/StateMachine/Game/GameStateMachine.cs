@@ -22,7 +22,8 @@ public class GameStateMachine : IGlobalStateMachineProvider
         IStoreWeaponProvider storeWeaponProvider, 
         IStoreOpenLevelProvider storeOpenLevelProvider,
         int level,
-        IGameButtonsHiderProvider gameButtonsHiderProvider)
+        IGameButtonsHiderProvider gameButtonsHiderProvider,
+        IAnimationElementProvider animationElementProvider)
     {
         states[typeof(IntroState_Game)] = new IntroState_Game(this, gameEventsProvider, playerColliderProvider);
         states[typeof(MainState_Game)] = new MainState_Game(this, sceneRoot, loseEventProvider, gameEventsProvider, playerInputEventsProvider);
@@ -31,8 +32,13 @@ public class GameStateMachine : IGlobalStateMachineProvider
         states[typeof(AttackKnifeState_Game)] = new AttackKnifeState_Game(this, playerMoveProvider, playerAnimationProvider, loseEventProvider, gameEventsProvider, playerZoneActionProvider, storeWeaponProvider, gameButtonsHiderProvider);
         states[typeof(AttackWhipState_Game)] = new AttackWhipState_Game(this, playerMoveProvider, playerAnimationProvider, loseEventProvider, gameEventsProvider, playerZoneActionProvider, storeWeaponProvider, gameButtonsHiderProvider);
         states[typeof(PauseState_Game)] = new PauseState_Game(this, sceneRoot, playerMoveProvider, playerAnimationProvider, obstacleStateProvider);
+
+
         states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider, storeOpenLevelProvider, level);
-        states[typeof(LoseState_Game)] = new LoseState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider, playerColliderProvider);
+
+        states[typeof(WaitLoseState_Game)] = new WaitLoseState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider, playerColliderProvider);
+        states[typeof(StartLoseState_Game)] = new StartLoseState_Game(this, sceneRoot, animationElementProvider);
+        states[typeof(FinishLoseState_Game)] = new FinishLoseState_Game(this, sceneRoot);
     }
 
     public void Initialize()
