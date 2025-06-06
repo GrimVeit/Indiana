@@ -32,6 +32,8 @@ public class MainMenuEntryPoint : MonoBehaviour
     private LevelVisualPresenter levelVisualPresenter;
     private LevelPresenter levelPresenter;
 
+    private AnimationElementPresenter animationElementPresenter;
+
     private MenuStateMachine stateMachine;
 
     private bool isSceneActive = false;
@@ -72,6 +74,8 @@ public class MainMenuEntryPoint : MonoBehaviour
         levelVisualPresenter = new LevelVisualPresenter(new LevelVisualModel(storeLevelPresenter, storeLevelPresenter), viewContainer.GetView<LevelVisualView>());
         levelPresenter = new LevelPresenter(new LevelModel(storeLevelPresenter), viewContainer.GetView<LevelView>());
 
+        animationElementPresenter = new AnimationElementPresenter(new AnimationElementModel(), viewContainer.GetView<AnimationElementView>());
+
         stateMachine = new MenuStateMachine(sceneRoot);
 
         sceneRoot.SetSoundProvider(soundPresenter);
@@ -98,6 +102,8 @@ public class MainMenuEntryPoint : MonoBehaviour
         levelVisualPresenter.Initialize();
         levelPresenter.Initialize();
         storeLevelPresenter.Initialize();
+
+        animationElementPresenter.Initialize();
 
         stateMachine.Initialize();
     }
@@ -159,6 +165,8 @@ public class MainMenuEntryPoint : MonoBehaviour
             levelVisualPresenter.Dispose();
             levelPresenter.Dispose();
             storeLevelPresenter.Dispose();
+
+            animationElementPresenter.Dispose();
 
             stateMachine.Dispose();
         }

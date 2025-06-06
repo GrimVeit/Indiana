@@ -502,6 +502,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316515097}
   m_CullTransparentMesh: 1
+--- !u!1 &326851774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 326851775}
+  - component: {fileID: 326851776}
+  m_Layer: 5
+  m_Name: AnimationElement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &326851775
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326851774}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 426014025604183617}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &326851776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326851774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f751663ff56a5d428ef0f8a52f2c409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationElements:
+  - {fileID: 1990561946}
+  - {fileID: 1805077835}
+  - {fileID: 343968451}
 --- !u!1 &343968449
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,6 +563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 343968450}
+  - component: {fileID: 343968451}
   m_Layer: 5
   m_Name: Plant
   m_TagString: Untagged
@@ -525,19 +578,37 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 343968449}
-  m_LocalRotation: {x: 0.022949087, y: -0.99973667, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1323852215}
   m_Father: {fileID: 1594682825}
-  m_LocalEulerAnglesHint: {x: 0, y: -180, z: -2.63}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -60, y: -349}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &343968451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343968449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9103e7288309cc48a46bfe69958e0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Grass_2
+  element: {fileID: 343968450}
+  minAngle: 2
+  maxAngle: 5
+  minDuration: 2
+  maxDuration: 4
 --- !u!1 &373213121
 GameObject:
   m_ObjectHideFlags: 0
@@ -6935,6 +7006,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1805077834}
+  - component: {fileID: 1805077835}
   m_Layer: 5
   m_Name: Plant
   m_TagString: Untagged
@@ -6962,6 +7034,24 @@ RectTransform:
   m_AnchoredPosition: {x: 443, y: -349}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1805077835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805077833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9103e7288309cc48a46bfe69958e0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Grass_1
+  element: {fileID: 1805077834}
+  minAngle: 2
+  maxAngle: 5
+  minDuration: 2
+  maxDuration: 4
 --- !u!1 &1828115980
 GameObject:
   m_ObjectHideFlags: 0
@@ -7535,6 +7625,7 @@ GameObject:
   - component: {fileID: 1990561944}
   - component: {fileID: 1990561943}
   - component: {fileID: 1990561945}
+  - component: {fileID: 1990561946}
   m_Layer: 5
   m_Name: Play_BUTTON
   m_TagString: Untagged
@@ -7643,6 +7734,24 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1990561946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990561941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f8beb79914e1324eabe03d6571909c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Indiacator
+  element: {fileID: 1990561942}
+  minAngle: 5
+  maxAngle: 15
+  minDuration: 1.5
+  maxDuration: 2
 --- !u!1 &2031929890
 GameObject:
   m_ObjectHideFlags: 0
@@ -8432,6 +8541,7 @@ RectTransform:
   - {fileID: 2117596201}
   - {fileID: 1622624891}
   - {fileID: 1337804798}
+  - {fileID: 326851775}
   m_Father: {fileID: 7268127844772316494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
