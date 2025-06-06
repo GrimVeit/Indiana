@@ -51,7 +51,7 @@ public class RunState_Game : IState
 
     private void ChangeStateToWin()
     {
-        _machineProvider.SetState(_machineProvider.GetState<WinState_Game>());
+        _machineProvider.SetState(_machineProvider.GetState<WaitWinState_Game>());
     }
 
     private void ChangeStateToLose()

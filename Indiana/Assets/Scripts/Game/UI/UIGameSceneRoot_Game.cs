@@ -12,7 +12,8 @@ public class UIGameSceneRoot_Game : UIRoot
     [SerializeField] private PausePanel_Game pausePanel;
 
 
-    [SerializeField] private WinPanel_Game winPanel;
+    [SerializeField] private MoveRotatePanel winStartPanel;
+    [SerializeField] private WinPanel_Game winFinishPanel;
 
     [SerializeField] private MoveRotatePanel loseStartPanel;
     [SerializeField] private LosePanel_Game loseFinishPanel;
@@ -30,7 +31,7 @@ public class UIGameSceneRoot_Game : UIRoot
         footerPanel.Initialize();
 
         pausePanel.Initialize();
-        winPanel.Initialize();
+        winFinishPanel.Initialize();
         loseFinishPanel.Initialize();
     }
 
@@ -40,7 +41,7 @@ public class UIGameSceneRoot_Game : UIRoot
         footerPanel.Dispose();
 
         pausePanel.Dispose();
-        winPanel.Dispose();
+        winFinishPanel.Dispose();
         loseFinishPanel.Dispose();
     }
 
@@ -52,6 +53,7 @@ public class UIGameSceneRoot_Game : UIRoot
         pausePanel.OnClickToResume += HandleClickToResume_Pause;
 
         loseFinishPanel.OnClickToExit += HandleClickToExit_Lose;
+        winFinishPanel.OnClickToExit += HandleClickToExit_Win;
     }
 
     public void Deactivate()
@@ -62,12 +64,16 @@ public class UIGameSceneRoot_Game : UIRoot
         pausePanel.OnClickToResume -= HandleClickToResume_Pause;
 
         loseFinishPanel.OnClickToExit -= HandleClickToExit_Lose;
+        winFinishPanel.OnClickToExit -= HandleClickToExit_Win;
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
 
         CloseFinishLosePanel();
         CloseStartLosePanel();
+
+        CloseStartWinPanel();
+        CloseFinishWinPanel();
     }
 
     #region Output
@@ -107,6 +113,17 @@ public class UIGameSceneRoot_Game : UIRoot
     private void HandleClickToExit_Lose()
     {
         OnClickToExit_Lose?.Invoke();
+    }
+
+    #endregion
+
+    #region WIN
+
+    public event Action OnClickToExit_Win;
+
+    private void HandleClickToExit_Win()
+    {
+        OnClickToExit_Win?.Invoke();
     }
 
     #endregion
@@ -179,14 +196,35 @@ public class UIGameSceneRoot_Game : UIRoot
 
 
 
-    public void OpenWinPanel()
+
+
+    public void OpenStartWinPanel()
     {
-        OpenOtherPanel(winPanel);
+        if(winStartPanel.IsActive) return;
+
+        OpenOtherPanel(winStartPanel);
     }
 
-    public void CloseWinPanel()
+    public void CloseStartWinPanel()
     {
-        CloseOtherPanel(winPanel);
+        if (!winStartPanel.IsActive) return;
+
+        CloseOtherPanel(winStartPanel);
+    }
+
+
+    public void OpenFinishWinPanel()
+    {
+        if (winFinishPanel.IsActive) return;
+
+        OpenOtherPanel(winFinishPanel);
+    }
+
+    public void CloseFinishWinPanel()
+    {
+        if (!winFinishPanel.IsActive) return;
+
+        CloseOtherPanel(winFinishPanel);
     }
 
 
@@ -194,22 +232,30 @@ public class UIGameSceneRoot_Game : UIRoot
 
     public void OpenStartLosePanel()
     {
+        if (loseStartPanel.IsActive) return;
+
         OpenOtherPanel(loseStartPanel);
     }
 
     public void CloseStartLosePanel()
     {
+        if (!loseStartPanel.IsActive) return;
+
         CloseOtherPanel(loseStartPanel);
     }
 
 
     public void OpenFinishLosePanel()
     {
+        if (loseFinishPanel.IsActive) return;
+
         OpenOtherPanel(loseFinishPanel);
     }
 
     public void CloseFinishLosePanel()
     {
+        if (!loseFinishPanel.IsActive) return;
+
         CloseOtherPanel(loseFinishPanel);
     }
 

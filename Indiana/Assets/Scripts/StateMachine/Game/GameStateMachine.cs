@@ -34,7 +34,9 @@ public class GameStateMachine : IGlobalStateMachineProvider
         states[typeof(PauseState_Game)] = new PauseState_Game(this, sceneRoot, playerMoveProvider, playerAnimationProvider, obstacleStateProvider);
 
 
-        states[typeof(WinState_Game)] = new WinState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider, storeOpenLevelProvider, level);
+        states[typeof(WaitWinState_Game)] = new WaitWinState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider, storeOpenLevelProvider, level);
+        states[typeof(StartWinState_Game)] = new StartWinState_Game(this, sceneRoot, animationElementProvider);
+        states[typeof(FinishWinState_Game)] = new FinishWinState_Game(this, sceneRoot);
 
         states[typeof(WaitLoseState_Game)] = new WaitLoseState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider, playerColliderProvider);
         states[typeof(StartLoseState_Game)] = new StartLoseState_Game(this, sceneRoot, animationElementProvider);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WinState_Game : IState
+public class WaitWinState_Game : IState
 {
     private readonly IGlobalStateMachineProvider _machineProvider;
     private readonly UIGameSceneRoot_Game _sceneRoot;
@@ -13,7 +13,9 @@ public class WinState_Game : IState
 
     private readonly int _level;
 
-    public WinState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ICameraProvider cameraProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, IStoreOpenLevelProvider storeOpenLevelProvider, int level)
+    private IEnumerator timer;
+
+    public WaitWinState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ICameraProvider cameraProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, IStoreOpenLevelProvider storeOpenLevelProvider, int level)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
@@ -30,16 +32,32 @@ public class WinState_Game : IState
 
         _sceneRoot.CloseFooterPanel();
         _sceneRoot.CloseHeaderPanel();
-        _sceneRoot.OpenWinPanel();
 
         _cameraProvider.DeactivateLookAt();
         _playerAnimationProvider.Jump();
         _playerMoveProvider.Jump();
         _storeOpenLevelProvider.OpenLevel(_level);
+
+        if (timer != null) Coroutines.Stop(timer);
+
+        timer = Timer(1);
+        Coroutines.Start(timer);
     }
 
     public void ExitState()
     {
+        if (timer != null) Coroutines.Stop(timer);
+    }
 
+    private IEnumerator Timer(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        ChangeStateToLose();
+    }
+
+    private void ChangeStateToLose()
+    {
+        _machineProvider.SetState(_machineProvider.GetState<StartWinState_Game>());
     }
 }

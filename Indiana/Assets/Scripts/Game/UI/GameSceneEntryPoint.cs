@@ -182,12 +182,14 @@ public class GameSceneEntryPoint : MonoBehaviour
     {
         sceneRoot.OnClickToExit_Header += HandleGoToMenu;
         sceneRoot.OnClickToExit_Lose += HandleGoToMenu;
+        sceneRoot.OnClickToExit_Win += HandleGoToMenu;
     }
 
     private void DeactivateTransitions()
     {
         sceneRoot.OnClickToExit_Header -= HandleGoToMenu;
         sceneRoot.OnClickToExit_Lose -= HandleGoToMenu;
+        sceneRoot.OnClickToExit_Win -= HandleGoToMenu;
     }
 
     private void Deactivate()
