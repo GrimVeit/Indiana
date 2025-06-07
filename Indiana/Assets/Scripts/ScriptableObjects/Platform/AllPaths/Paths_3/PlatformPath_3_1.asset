@@ -25,6 +25,9 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 9572f2f0b714f8a42b79953fbd13f752, type: 2}
     zoneType: 0
     pathLevel: 1
@@ -37,6 +40,9 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 9572f2f0b714f8a42b79953fbd13f752, type: 2}
     zoneType: 0
     pathLevel: 0
@@ -53,6 +59,9 @@ MonoBehaviour:
       - idWeapon: 1
         dropChance: 1
       isSpawnedWeapon: 1
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 9572f2f0b714f8a42b79953fbd13f752, type: 2}
     zoneType: 0
     pathLevel: 1
@@ -65,6 +74,15 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances:
+      - idCoins: 0
+        dropChance: 6
+      - idCoins: 1
+        dropChance: 3
+      - idCoins: 2
+        dropChance: 1
+      isSpawnedCoins: 1
   - platform: {fileID: 11400000, guid: 7ef97714170f6dc4ba8a7132fd4f03dc, type: 2}
     zoneType: 0
     pathLevel: 0
@@ -77,6 +95,9 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 7ef97714170f6dc4ba8a7132fd4f03dc, type: 2}
     zoneType: 0
     pathLevel: 1
@@ -97,6 +118,9 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 9572f2f0b714f8a42b79953fbd13f752, type: 2}
     zoneType: 0
     pathLevel: 2
@@ -109,6 +133,15 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances:
+      - idCoins: 0
+        dropChance: 6
+      - idCoins: 1
+        dropChance: 3
+      - idCoins: 2
+        dropChance: 1
+      isSpawnedCoins: 1
   - platform: {fileID: 11400000, guid: 9572f2f0b714f8a42b79953fbd13f752, type: 2}
     zoneType: 0
     pathLevel: 1
@@ -135,6 +168,9 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 7ef97714170f6dc4ba8a7132fd4f03dc, type: 2}
     zoneType: 0
     pathLevel: 0
@@ -151,6 +187,9 @@ MonoBehaviour:
       - idWeapon: 1
         dropChance: 1
       isSpawnedWeapon: 1
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 7ef97714170f6dc4ba8a7132fd4f03dc, type: 2}
     zoneType: 0
     pathLevel: 1
@@ -171,6 +210,9 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 9572f2f0b714f8a42b79953fbd13f752, type: 2}
     zoneType: 0
     pathLevel: 0
@@ -183,6 +225,15 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances:
+      - idCoins: 0
+        dropChance: 6
+      - idCoins: 1
+        dropChance: 3
+      - idCoins: 2
+        dropChance: 1
+      isSpawnedCoins: 1
   - platform: {fileID: 11400000, guid: 9572f2f0b714f8a42b79953fbd13f752, type: 2}
     zoneType: 0
     pathLevel: 1
@@ -195,6 +246,9 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 7ef97714170f6dc4ba8a7132fd4f03dc, type: 2}
     zoneType: 0
     pathLevel: 2
@@ -215,6 +269,9 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 9572f2f0b714f8a42b79953fbd13f752, type: 2}
     zoneType: 0
     pathLevel: 1
@@ -227,6 +284,9 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
   - platform: {fileID: 11400000, guid: 7ef97714170f6dc4ba8a7132fd4f03dc, type: 2}
     zoneType: 2
     pathLevel: 0
@@ -239,3 +299,6 @@ MonoBehaviour:
     weaponChances:
       weaponChances: []
       isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
