@@ -31,6 +31,7 @@ public class GameSceneEntryPoint : MonoBehaviour
     private ObstacleSpawnerPresenter obstacleSpawnerPresenter;
     private TrophySpawnerPresenter trophySpawnerPresenter;
     private WeaponSpawnerPresenter weaponSpawnerPresenter;
+    private CoinSpawnerPresenter coinSpawnerPresenter;
 
     private HealthPresenter healthPresenter;
 
@@ -95,10 +96,11 @@ public class GameSceneEntryPoint : MonoBehaviour
         playerZoneActionPresenter = new PlayerZoneActionPresenter(new PlayerZoneActionModel(), viewContainer.GetView<PlayerZoneActionView>());
         deadZonePresenter = new DeadZonePresenter(new DeadZoneModel(healthPresenter), viewContainer.GetView<DeadZoneView>());
         zonePresenter = new ZonePresenter(new ZoneModel(cameraPresenter), viewContainer.GetView<ZoneView>());
+        coinSpawnerPresenter = new CoinSpawnerPresenter(new CoinSpawnerModel(bankPresenter), viewContainer.GetView<CoinSpawnerView>());
         trophySpawnerPresenter = new TrophySpawnerPresenter(new TrophySpawnerModel(storeCollectionPresenter), viewContainer.GetView<TrophySpawnerView>());
         weaponSpawnerPresenter = new WeaponSpawnerPresenter(new WeaponSpawnerModel(storeWeaponPresenter), viewContainer.GetView<WeaponSpawnerView>());
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
-        platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter, weaponSpawnerPresenter), viewContainer.GetView<PlatformSpawnView>());
+        platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter, weaponSpawnerPresenter, coinSpawnerPresenter), viewContainer.GetView<PlatformSpawnView>());
 
         gameButtonsHiderPresenter = new GameButtonsHiderPresenter(new GameButtonsHiderModel(playerMovePresenter), viewContainer.GetView<GameButtonsHiderView>());
 
@@ -150,6 +152,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         deadZonePresenter.Initialize();
         zonePresenter.Initialize();
+        coinSpawnerPresenter.Initialize();
         trophySpawnerPresenter.Initialize();
         weaponSpawnerPresenter.Initialize();
         obstacleSpawnerPresenter.Initialize();
@@ -226,6 +229,7 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         deadZonePresenter?.Dispose();
         zonePresenter?.Dispose();
+        coinSpawnerPresenter?.Dispose();
         trophySpawnerPresenter?.Dispose();
         weaponSpawnerPresenter?.Dispose();
         obstacleSpawnerPresenter?.Dispose();

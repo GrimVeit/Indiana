@@ -19,6 +19,7 @@ public class PlatformUnit
     public ObstacleChances ObstacleChances => obstacleChances;
     public TrophyChances TrophyChances => trophyChances;
     public WeaponChances WeaponChances => weaponChances;
+    public CoinsChances CoinsChances => coinsChances;
 
 
     [SerializeField] private Platform platform;
@@ -35,6 +36,9 @@ public class PlatformUnit
 
     [Header("Weapon")]
     [SerializeField] private WeaponChances weaponChances;
+
+    [Header("Coins")]
+    [SerializeField] private CoinsChances coinsChances;
 
 }
 
@@ -55,7 +59,7 @@ public enum PathLevel
 [Serializable]
 public class ObstacleChances
 {
-    public bool IsSpawnerObstacle => isSpawnedObstacle;
+    public bool IsSpawnedObstacle => isSpawnedObstacle;
 
     [SerializeField] private List<ObstacleChance> obstacleChances = new();
     [SerializeField] private bool isSpawnedObstacle;
@@ -99,6 +103,8 @@ public class ObstacleChance
 [Serializable]
 public class TrophyChances
 {
+    public bool IsSpawnedTrophy => isSpawnedTrophy;
+
     [SerializeField] private List<TrophyChance> trophyChances = new();
     [SerializeField] private bool isSpawnedTrophy;
 
@@ -141,6 +147,8 @@ public class TrophyChance
 [Serializable]
 public class WeaponChances
 {
+    public bool IsSpawnerWeapon => isSpawnedWeapon;
+
     [SerializeField] private List<WeaponChance> weaponChances = new();
     [SerializeField] private bool isSpawnedWeapon;
 
@@ -174,5 +182,50 @@ public class WeaponChance
     public float DropChance => dropChance;
 
     [SerializeField] private int idWeapon;
+    [SerializeField] private float dropChance;
+}
+
+
+
+
+
+[Serializable]
+public class CoinsChances
+{
+    public bool IsSpawnedCoins => isSpawnedCoins;
+
+    [SerializeField] private List<CoinChance> coinChances = new();
+    [SerializeField] private bool isSpawnedCoins;
+
+    public int GetRandomIndexCoinsGroup()
+    {
+        float totalChance = 0;
+
+        coinChances.ForEach(data => totalChance += data.DropChance);
+
+        float randomPoint = Random.Range(0, totalChance);
+        float currentSum = 0f;
+
+        foreach (var data in coinChances)
+        {
+            currentSum += data.DropChance;
+
+            if (randomPoint <= currentSum)
+            {
+                return data.IdCoins;
+            }
+        }
+
+        return -1;
+    }
+}
+
+[Serializable]
+public class CoinChance
+{
+    public int IdCoins => idCoins;
+    public float DropChance => dropChance;
+
+    [SerializeField] private int idCoins;
     [SerializeField] private float dropChance;
 }
