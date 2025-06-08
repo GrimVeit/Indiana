@@ -23,7 +23,8 @@ public class GameStateMachine : IGlobalStateMachineProvider
         IStoreOpenLevelProvider storeOpenLevelProvider,
         int level,
         IGameButtonsHiderProvider gameButtonsHiderProvider,
-        IAnimationElementProvider animationElementProvider)
+        IAnimationElementProvider animationElementProvider,
+        ISoundProvider soundProvider)
     {
         states[typeof(IntroState_Game)] = new IntroState_Game(this, gameEventsProvider, playerColliderProvider);
         states[typeof(MainState_Game)] = new MainState_Game(this, sceneRoot, loseEventProvider, gameEventsProvider, playerInputEventsProvider);
@@ -34,7 +35,7 @@ public class GameStateMachine : IGlobalStateMachineProvider
         states[typeof(PauseState_Game)] = new PauseState_Game(this, sceneRoot, playerMoveProvider, playerAnimationProvider, obstacleStateProvider);
 
 
-        states[typeof(WaitWinState_Game)] = new WaitWinState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider, storeOpenLevelProvider, level);
+        states[typeof(WaitWinState_Game)] = new WaitWinState_Game(this, sceneRoot, cameraProvider, playerMoveProvider, playerAnimationProvider, storeOpenLevelProvider, level, soundProvider);
         states[typeof(StartWinState_Game)] = new StartWinState_Game(this, sceneRoot, animationElementProvider);
         states[typeof(FinishWinState_Game)] = new FinishWinState_Game(this, sceneRoot);
 

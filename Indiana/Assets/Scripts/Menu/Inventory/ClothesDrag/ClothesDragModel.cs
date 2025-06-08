@@ -50,6 +50,7 @@ public class ClothesDragModel
         {
             if (collider.gameObject.TryGetComponent(out IIndianaPreviewInput indianaPreview))
             {
+                _soundProvider.PlayOneShot("ChangeClothes");
                 indianaPreview.SetData(itemClothes);
                 Teleport();
                 return;

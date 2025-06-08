@@ -10,12 +10,13 @@ public class WaitWinState_Game : IState
     private readonly IPlayerMoveProvider _playerMoveProvider;
     private readonly IPlayerAnimationProvider _playerAnimationProvider;
     private readonly IStoreOpenLevelProvider _storeOpenLevelProvider;
+    private readonly ISoundProvider _soundProvider;
 
     private readonly int _level;
 
     private IEnumerator timer;
 
-    public WaitWinState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ICameraProvider cameraProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, IStoreOpenLevelProvider storeOpenLevelProvider, int level)
+    public WaitWinState_Game(IGlobalStateMachineProvider machineProvider, UIGameSceneRoot_Game sceneRoot, ICameraProvider cameraProvider, IPlayerMoveProvider playerMoveProvider, IPlayerAnimationProvider playerAnimationProvider, IStoreOpenLevelProvider storeOpenLevelProvider, int level, ISoundProvider soundProvider)
     {
         _machineProvider = machineProvider;
         _sceneRoot = sceneRoot;
@@ -24,6 +25,8 @@ public class WaitWinState_Game : IState
         _playerAnimationProvider = playerAnimationProvider;
         _storeOpenLevelProvider = storeOpenLevelProvider;
         _level = level;
+        _soundProvider = soundProvider;
+
     }
 
     public void EnterState()
@@ -32,6 +35,8 @@ public class WaitWinState_Game : IState
 
         _sceneRoot.CloseFooterPanel();
         _sceneRoot.CloseHeaderPanel();
+
+        _soundProvider.PlayOneShot("Yes");
 
         _cameraProvider.DeactivateLookAt();
         _playerAnimationProvider.Jump();

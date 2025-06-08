@@ -121,7 +121,8 @@ public class GameSceneEntryPoint : MonoBehaviour
             storeLevelPresenter,
             secondLevel,
             gameButtonsHiderPresenter,
-            animationElementPresenter);
+            animationElementPresenter,
+            soundPresenter);
 
         sceneRoot.SetSoundProvider(soundPresenter);
         sceneRoot.Activate();

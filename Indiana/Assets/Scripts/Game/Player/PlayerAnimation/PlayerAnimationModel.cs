@@ -53,14 +53,14 @@ public class PlayerAnimationModel
     {
         if (isDie) return;
 
-        Change(_currentPlayerDesign.SpritesRun, 0.2f, true);
+        Change(_currentPlayerDesign.SpritesRun, 0.15f, true);
     }
 
     public void EndJump()
     {
         if(isDie) return;
 
-        Change(_currentPlayerDesign.SpritesEndJump, 0.2f, false, Run);
+        Change(_currentPlayerDesign.SpritesEndJump, 0.15f, false, Run);
     }
 
     public void Jump()
@@ -69,14 +69,14 @@ public class PlayerAnimationModel
 
         _soundProvider.PlayOneShot("Jump");
 
-        Change(_currentPlayerDesign.SpritesJump, 0.2f, false);
+        Change(_currentPlayerDesign.SpritesJump, 0.15f, false);
     }
 
     public void Die()
     {
         isDie = true;
 
-        Change(_currentPlayerDesign.SpritesDie, 0.2f, false);
+        Change(_currentPlayerDesign.SpritesDie, 0.15f, false);
     }
 
     public void AttackPunch()
@@ -85,7 +85,7 @@ public class PlayerAnimationModel
 
         _soundProvider.PlayOneShot("Hand");
 
-        Change(_currentPlayerDesign.SpritesHitPunch, 0.2f, false);
+        Change(_currentPlayerDesign.SpritesHitPunch, 0.17f, false);
     }
 
     public void AttackKnife()
@@ -94,7 +94,7 @@ public class PlayerAnimationModel
 
         _soundProvider.PlayOneShot("Knife");
 
-        Change(_currentPlayerDesign.SpritesHitKnife, 0.2f, false);
+        Change(_currentPlayerDesign.SpritesHitKnife, 0.17f, false);
     }
 
     public void AttackWhip()
