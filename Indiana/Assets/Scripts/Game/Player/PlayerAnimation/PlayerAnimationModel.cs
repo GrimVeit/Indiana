@@ -16,13 +16,16 @@ public class PlayerAnimationModel
 
     private bool isResume = true;
 
-    public PlayerAnimationModel(IStorePlayerDesignEventsProvider storePlayerDesignEventsProvider, IPlayerGroundEventsProvider playerGroundEventsProvider)
+    private ISoundProvider _soundProvider;
+
+    public PlayerAnimationModel(IStorePlayerDesignEventsProvider storePlayerDesignEventsProvider, IPlayerGroundEventsProvider playerGroundEventsProvider, ISoundProvider soundProvider)
     {
         _storePlayerDesignEventsProvider = storePlayerDesignEventsProvider;
         _playerGroundEventsProvider = playerGroundEventsProvider;
 
         _storePlayerDesignEventsProvider.OnChooseDesign += SetDesign;
         _playerGroundEventsProvider.OnPlayerOutGround += EndJump;
+        _soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -64,6 +67,8 @@ public class PlayerAnimationModel
     {
         if (isDie) return;
 
+        _soundProvider.PlayOneShot("Jump");
+
         Change(_currentPlayerDesign.SpritesJump, 0.2f, false);
     }
 
@@ -78,6 +83,8 @@ public class PlayerAnimationModel
     {
         if (isDie) return;
 
+        _soundProvider.PlayOneShot("Hand");
+
         Change(_currentPlayerDesign.SpritesHitPunch, 0.2f, false);
     }
 
@@ -85,12 +92,16 @@ public class PlayerAnimationModel
     {
         if (isDie) return;
 
+        _soundProvider.PlayOneShot("Knife");
+
         Change(_currentPlayerDesign.SpritesHitKnife, 0.2f, false);
     }
 
     public void AttackWhip()
     {
         if (isDie) return;
+
+        _soundProvider.PlayOneShot("Whip");
 
         Change(_currentPlayerDesign.SpritesHitWhip, 0.1f, false);
     }

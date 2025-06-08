@@ -12,11 +12,13 @@ public class HealthModel
     private int _currentHealth = 0;
 
     private readonly IPlayerDamageEffectProvider _damageEffectProvider;
+    private readonly ISoundProvider _soundProvider;
 
-    public HealthModel(int maxHealth, IPlayerDamageEffectProvider damageEffectProvider)
+    public HealthModel(int maxHealth, IPlayerDamageEffectProvider damageEffectProvider, ISoundProvider soundProvider)
     {
         _maxHealth = maxHealth;
         _damageEffectProvider = damageEffectProvider;
+        _soundProvider = soundProvider;
     }
 
     public void Initalize()
@@ -40,8 +42,13 @@ public class HealthModel
             _currentHealth = 0;
         }
 
-        if(_currentHealth == 0)
+        if(_currentHealth > 0)
         {
+            _soundProvider.PlayOneShot("Damage");
+        }
+        else if(_currentHealth == 0)
+        {
+            _soundProvider.PlayOneShot("Die");
             OnLose?.Invoke();
         }
 

@@ -75,16 +75,22 @@ public class UIMainMenuRoot : UIRoot
     private void HandleClickToLevel_Main()
     {
         OnClickToLevel_Main?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     private void HandleClickToCollection_Main()
     {
         OnClickToCollection_Main?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     private void HandleClickToInventory_Main()
     {
         OnClickToInventory_Main?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     #endregion
@@ -97,6 +103,8 @@ public class UIMainMenuRoot : UIRoot
     private void HandleClickToBack_Level()
     {
         OnClickToBack_Level?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     #endregion
@@ -109,6 +117,8 @@ public class UIMainMenuRoot : UIRoot
     private void HandleClickToBack_Collection()
     {
         OnClickToBack_Collection?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     #endregion
@@ -121,6 +131,8 @@ public class UIMainMenuRoot : UIRoot
     private void HandleClickToBack_Inventory()
     {
         OnClickToBack_Inventory?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     #endregion

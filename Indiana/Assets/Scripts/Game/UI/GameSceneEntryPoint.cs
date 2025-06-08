@@ -86,10 +86,10 @@ public class GameSceneEntryPoint : MonoBehaviour
 
         playerMovePresenter = new PlayerMovePresenter(new PlayerMoveModel(), viewContainer.GetView<PlayerMoveView>());
         playerColliderPresenter = new PlayerColliderPresenter(new PlayerColliderModel(), viewContainer.GetView<PlayerColliderView>());
-        playerAnimationPresenter = new PlayerAnimationPresenter(new PlayerAnimationModel(storePlayerPresenter, playerMovePresenter), viewContainer.GetView<PlayerAnimationView>());
+        playerAnimationPresenter = new PlayerAnimationPresenter(new PlayerAnimationModel(storePlayerPresenter, playerMovePresenter, soundPresenter), viewContainer.GetView<PlayerAnimationView>());
         playerInputPresenter = new PlayerInputPresenter(new PlayerInputModel(playerMovePresenter, playerAnimationPresenter), viewContainer.GetView<PlayerInputView>());
         playerDamageEffectPresenter = new PlayerDamageEffectPresenter(new PlayerDamageEffectModel(), viewContainer.GetView<PlayerDamageEffectView>());
-        healthPresenter = new HealthPresenter(new HealthModel(5, playerDamageEffectPresenter), viewContainer.GetView<HealthView>());
+        healthPresenter = new HealthPresenter(new HealthModel(5, playerDamageEffectPresenter, soundPresenter), viewContainer.GetView<HealthView>());
 
         cameraPresenter = new CameraPresenter(new CameraModel(), viewContainer.GetView<CameraView>());
 
