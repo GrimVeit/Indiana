@@ -6,10 +6,13 @@ public class WeaponSpawnerModel
     public event Action<int, Vector3> OnSpawnWeapon;
 
     private readonly IStoreWeaponProvider _storeWeaponProvider;
+    private readonly ISoundProvider _soundProvider;
 
-    public WeaponSpawnerModel(IStoreWeaponProvider storeWeaponProvider)
+    public WeaponSpawnerModel(IStoreWeaponProvider storeWeaponProvider, ISoundProvider soundProvider)
     {
         _storeWeaponProvider = storeWeaponProvider;
+        _soundProvider = soundProvider;
+
     }
 
     public void SpawnWeapon(WeaponChances weaponChances, Vector3 position)
@@ -28,5 +31,7 @@ public class WeaponSpawnerModel
     public void SendWeapon(int id)
     {
         _storeWeaponProvider.AddWeapon(id);
+
+        _soundProvider.PlayOneShot("Item");
     }
 }

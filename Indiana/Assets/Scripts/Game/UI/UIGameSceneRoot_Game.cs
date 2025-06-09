@@ -86,11 +86,15 @@ public class UIGameSceneRoot_Game : UIRoot
     private void HandleClickToPause_Header()
     {
         OnClickToPause_Header?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     private void HandleClickToExit_Header()
     {
         OnClickToExit_Header?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     #endregion
@@ -102,6 +106,8 @@ public class UIGameSceneRoot_Game : UIRoot
     private void HandleClickToResume_Pause()
     {
         OnClickToResume_Pause?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     #endregion
@@ -113,6 +119,8 @@ public class UIGameSceneRoot_Game : UIRoot
     private void HandleClickToExit_Lose()
     {
         OnClickToExit_Lose?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     #endregion
@@ -124,6 +132,8 @@ public class UIGameSceneRoot_Game : UIRoot
     private void HandleClickToExit_Win()
     {
         OnClickToExit_Win?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     #endregion

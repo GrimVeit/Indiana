@@ -72,7 +72,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 
         storeLevelPresenter = new StoreLevelPresenter(new StoreLevelModel());
         levelVisualPresenter = new LevelVisualPresenter(new LevelVisualModel(storeLevelPresenter, storeLevelPresenter), viewContainer.GetView<LevelVisualView>());
-        levelPresenter = new LevelPresenter(new LevelModel(storeLevelPresenter), viewContainer.GetView<LevelView>());
+        levelPresenter = new LevelPresenter(new LevelModel(storeLevelPresenter, soundPresenter), viewContainer.GetView<LevelView>());
 
         animationElementPresenter = new AnimationElementPresenter(new AnimationElementModel(), viewContainer.GetView<AnimationElementView>());
 

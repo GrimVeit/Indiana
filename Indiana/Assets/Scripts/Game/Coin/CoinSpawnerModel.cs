@@ -6,10 +6,13 @@ public class CoinSpawnerModel
     public event Action<int, Vector3> OnSpawnCoins;
 
     private readonly IMoneyProvider _moneyProvider;
+    private readonly ISoundProvider _soundProvider;
 
-    public CoinSpawnerModel(IMoneyProvider moneyProvider)
+    public CoinSpawnerModel(IMoneyProvider moneyProvider, ISoundProvider soundProvider)
     {
         _moneyProvider = moneyProvider;
+        _soundProvider = soundProvider;
+
     }
 
     public void SpawnCoins(CoinsChances coinsChances, Vector3 position)
@@ -30,5 +33,7 @@ public class CoinSpawnerModel
     public void SendCoins(int money)
     {
         _moneyProvider.SendMoney(money);
+
+        _soundProvider.PlayOneShot("Item");
     }
 }

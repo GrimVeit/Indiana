@@ -3,13 +3,16 @@ using System;
 public class LevelModel
 { 
     private readonly IStoreSelectLevelEventsProvider _eventsProvider;
+    private readonly ISoundProvider _soundProvider;
 
     private int _levelId = 0;
 
-    public LevelModel(IStoreSelectLevelEventsProvider eventsProvider)
+    public LevelModel(IStoreSelectLevelEventsProvider eventsProvider, ISoundProvider soundProvider)
     {
         _eventsProvider = eventsProvider;
         _eventsProvider.OnSelectLevel += SelectLevel;
+        _soundProvider = soundProvider;
+
     }
 
     public void Initialize()
@@ -41,6 +44,8 @@ public class LevelModel
                 OnActivate4Level?.Invoke();
                 break;
         }
+
+        _soundProvider.PlayOneShot("Click");
     }
 
     private void SelectLevel(int id)

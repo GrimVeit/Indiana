@@ -96,9 +96,9 @@ public class GameSceneEntryPoint : MonoBehaviour
         playerZoneActionPresenter = new PlayerZoneActionPresenter(new PlayerZoneActionModel(), viewContainer.GetView<PlayerZoneActionView>());
         deadZonePresenter = new DeadZonePresenter(new DeadZoneModel(healthPresenter), viewContainer.GetView<DeadZoneView>());
         zonePresenter = new ZonePresenter(new ZoneModel(cameraPresenter), viewContainer.GetView<ZoneView>());
-        coinSpawnerPresenter = new CoinSpawnerPresenter(new CoinSpawnerModel(bankPresenter), viewContainer.GetView<CoinSpawnerView>());
-        trophySpawnerPresenter = new TrophySpawnerPresenter(new TrophySpawnerModel(storeCollectionPresenter), viewContainer.GetView<TrophySpawnerView>());
-        weaponSpawnerPresenter = new WeaponSpawnerPresenter(new WeaponSpawnerModel(storeWeaponPresenter), viewContainer.GetView<WeaponSpawnerView>());
+        coinSpawnerPresenter = new CoinSpawnerPresenter(new CoinSpawnerModel(bankPresenter, soundPresenter), viewContainer.GetView<CoinSpawnerView>());
+        trophySpawnerPresenter = new TrophySpawnerPresenter(new TrophySpawnerModel(storeCollectionPresenter, soundPresenter), viewContainer.GetView<TrophySpawnerView>());
+        weaponSpawnerPresenter = new WeaponSpawnerPresenter(new WeaponSpawnerModel(storeWeaponPresenter, soundPresenter), viewContainer.GetView<WeaponSpawnerView>());
         obstacleSpawnerPresenter = new ObstacleSpawnerPresenter(new ObstacleSpawnerModel(healthPresenter), viewContainer.GetView<ObstacleSpawnerView>());
         platformSpawnPresenter = new PlatformSpawnPresenter(new PlatformSpawnModel(platformPathGroup, obstacleSpawnerPresenter, trophySpawnerPresenter, zonePresenter, weaponSpawnerPresenter, coinSpawnerPresenter), viewContainer.GetView<PlatformSpawnView>());
 

@@ -8,10 +8,12 @@ public class TrophySpawnerModel
     public event Action<int, Vector3> OnSpawnTrophy;
 
     private readonly IItemCollectionProvider _itemCollectionProvider;
+    private readonly ISoundProvider _soundProvider;
 
-    public TrophySpawnerModel(IItemCollectionProvider itemCollectionProvider)
+    public TrophySpawnerModel(IItemCollectionProvider itemCollectionProvider, ISoundProvider soundProvider)
     {
         _itemCollectionProvider = itemCollectionProvider;
+        _soundProvider = soundProvider;
     }
 
     public void SpawnTrophy(TrophyChances trophyChances, Vector3 position)
@@ -30,5 +32,7 @@ public class TrophySpawnerModel
     public void SendTrophy(int id)
     {
         _itemCollectionProvider.AddItemCollection(id);
+
+        _soundProvider.PlayOneShot("ManCollect");
     }
 }

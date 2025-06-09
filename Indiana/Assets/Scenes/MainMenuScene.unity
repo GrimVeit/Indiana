@@ -7477,7 +7477,7 @@ MonoBehaviour:
     isPlayAwake: 0
   - id: ChangeClothes
     audioSource: {fileID: 495155951}
-    audioClip: {fileID: 8300000, guid: 9a128011bbf229a4a90fc8c47be48c2d, type: 3}
+    audioClip: {fileID: 8300000, guid: 95aa756824ae5b84abb14b28a73deb24, type: 3}
     volume: 1
     pitch: 1
     isLoop: 0
