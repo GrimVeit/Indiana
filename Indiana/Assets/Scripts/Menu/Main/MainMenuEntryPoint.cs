@@ -1,4 +1,8 @@
 using System;
+using Firebase;
+using Firebase.Auth;
+using Firebase.Database;
+using Firebase.Extensions;
 using UnityEngine;
 
 public class MainMenuEntryPoint : MonoBehaviour
@@ -16,6 +20,11 @@ public class MainMenuEntryPoint : MonoBehaviour
     private BankPresenter bankPresenter;
     private ParticleEffectPresenter particleEffectPresenter;
     private SoundPresenter soundPresenter;
+
+    private NicknameRandomPresenter nicknameRandomPresenter;
+    private FirebaseAuthenticationPresenter firebaseAuthenticationPresenter;
+    private FirebaseDatabasePresenter firebaseDatabasePresenter;
+    private InternetPresenter internetPresenter;
 
     private StoreCollectionPresenter storeCollectionPresenter;
     private CollectionVisualPresenter collectionVisualPresenter;
@@ -49,63 +58,91 @@ public class MainMenuEntryPoint : MonoBehaviour
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
 
-        soundPresenter = new SoundPresenter
-            (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
-            viewContainer.GetView<SoundView>());
 
-        particleEffectPresenter = new ParticleEffectPresenter
-            (new ParticleEffectModel(),
-            viewContainer.GetView<ParticleEffectView>());
+        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
+            var dependencyStatus = task.Result;
+            if (dependencyStatus == Firebase.DependencyStatus.Available)
+            {
+                FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
+                FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
+                DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
+                internetPresenter = new InternetPresenter(new InternetModel(), viewContainer.GetView<InternetView>());
 
-        storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup));
-        collectionVisualPresenter = new CollectionVisualPresenter(new CollectionVisualModel(storeCollectionPresenter), viewContainer.GetView<CollectionVisualView>());
+                firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter
+                    (new FirebaseAuthenticationModel(firebaseAuth, soundPresenter),
+                viewContainer.GetView<FirebaseAuthenticationView>());
 
-        storeWeaponPresenter = new StoreWeaponPresenter(new StoreWeaponModel(weaponGroup));
-        weaponMenuVisualPresenter = new WeaponMenuVisualPresenter(new WeaponMenuVisualModel(storeWeaponPresenter), viewContainer.GetView<WeaponMenuVisualView>());
+                firebaseDatabasePresenter = new FirebaseDatabasePresenter
+                (new FirebaseDatabaseModel(firebaseAuth, databaseReference, soundPresenter));
 
-        storeClothesPresenter = new StoreClothesPresenter(new StoreClothesModel(clothesDesignGroup));
-        indianaPreviewInputPresenter = new IndianaPreviewInputPresenter(new IndianaPreviewInputModel(storeClothesPresenter), viewContainer.GetView<IndianaPreviewInputView>());
-        clothesDragPresenter = new ClothesDragPresenter(new ClothesDragModel(soundPresenter), viewContainer.GetView<ClothesDragView>());
-        indianaDesignPreviewPresenter = new IndianaDesignPreviewPresenter(new IndianaDesignPreviewModel(designIndianaPreviewGroup, storeClothesPresenter), viewContainer.GetView<IndianaDesignPreviewView>());
+                nicknameRandomPresenter = new NicknameRandomPresenter(new NicknameRandomModel());
 
-        storeLevelPresenter = new StoreLevelPresenter(new StoreLevelModel());
-        levelVisualPresenter = new LevelVisualPresenter(new LevelVisualModel(storeLevelPresenter, storeLevelPresenter), viewContainer.GetView<LevelVisualView>());
-        levelPresenter = new LevelPresenter(new LevelModel(storeLevelPresenter, soundPresenter), viewContainer.GetView<LevelView>());
+                soundPresenter = new SoundPresenter
+                    (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
+                    viewContainer.GetView<SoundView>());
 
-        animationElementPresenter = new AnimationElementPresenter(new AnimationElementModel(), viewContainer.GetView<AnimationElementView>());
+                particleEffectPresenter = new ParticleEffectPresenter
+                    (new ParticleEffectModel(),
+                    viewContainer.GetView<ParticleEffectView>());
 
-        stateMachine = new MenuStateMachine(sceneRoot);
+                bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
-        sceneRoot.SetSoundProvider(soundPresenter);
-        sceneRoot.Activate();
+                storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup));
+                collectionVisualPresenter = new CollectionVisualPresenter(new CollectionVisualModel(storeCollectionPresenter), viewContainer.GetView<CollectionVisualView>());
 
-        ActivateEvents();
+                storeWeaponPresenter = new StoreWeaponPresenter(new StoreWeaponModel(weaponGroup));
+                weaponMenuVisualPresenter = new WeaponMenuVisualPresenter(new WeaponMenuVisualModel(storeWeaponPresenter), viewContainer.GetView<WeaponMenuVisualView>());
 
-        soundPresenter.Initialize();
-        particleEffectPresenter.Initialize();
-        sceneRoot.Initialize();
-        bankPresenter.Initialize();
+                storeClothesPresenter = new StoreClothesPresenter(new StoreClothesModel(clothesDesignGroup));
+                indianaPreviewInputPresenter = new IndianaPreviewInputPresenter(new IndianaPreviewInputModel(storeClothesPresenter), viewContainer.GetView<IndianaPreviewInputView>());
+                clothesDragPresenter = new ClothesDragPresenter(new ClothesDragModel(soundPresenter), viewContainer.GetView<ClothesDragView>());
+                indianaDesignPreviewPresenter = new IndianaDesignPreviewPresenter(new IndianaDesignPreviewModel(designIndianaPreviewGroup, storeClothesPresenter), viewContainer.GetView<IndianaDesignPreviewView>());
 
-        collectionVisualPresenter.Initialize();
-        storeCollectionPresenter.Initialize();
+                storeLevelPresenter = new StoreLevelPresenter(new StoreLevelModel());
+                levelVisualPresenter = new LevelVisualPresenter(new LevelVisualModel(storeLevelPresenter, storeLevelPresenter), viewContainer.GetView<LevelVisualView>());
+                levelPresenter = new LevelPresenter(new LevelModel(storeLevelPresenter, soundPresenter), viewContainer.GetView<LevelView>());
 
-        weaponMenuVisualPresenter.Initialize();
-        storeWeaponPresenter.Initialize();
+                animationElementPresenter = new AnimationElementPresenter(new AnimationElementModel(), viewContainer.GetView<AnimationElementView>());
 
-        clothesDragPresenter.Initialize();
-        indianaDesignPreviewPresenter.Initialize();
-        indianaPreviewInputPresenter.Initialize();
-        storeClothesPresenter.Initialize();
+                stateMachine = new MenuStateMachine(sceneRoot, firebaseAuthenticationPresenter, firebaseDatabasePresenter, nicknameRandomPresenter, internetPresenter);
 
-        levelVisualPresenter.Initialize();
-        levelPresenter.Initialize();
-        storeLevelPresenter.Initialize();
+                sceneRoot.SetSoundProvider(soundPresenter);
+                sceneRoot.Activate();
 
-        animationElementPresenter.Initialize();
+                ActivateEvents();
 
-        stateMachine.Initialize();
+                soundPresenter.Initialize();
+                particleEffectPresenter.Initialize();
+                sceneRoot.Initialize();
+                bankPresenter.Initialize();
+
+                collectionVisualPresenter.Initialize();
+                storeCollectionPresenter.Initialize();
+
+                weaponMenuVisualPresenter.Initialize();
+                storeWeaponPresenter.Initialize();
+
+                clothesDragPresenter.Initialize();
+                indianaDesignPreviewPresenter.Initialize();
+                indianaPreviewInputPresenter.Initialize();
+                storeClothesPresenter.Initialize();
+
+                levelVisualPresenter.Initialize();
+                levelPresenter.Initialize();
+                storeLevelPresenter.Initialize();
+
+                animationElementPresenter.Initialize();
+
+                stateMachine.Initialize();
+            }
+            else
+            {
+                Debug.LogError(string.Format(
+                  "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+                // Firebase Unity SDK is not safe to use here.
+            }
+        });
     }
 
     private void ActivateEvents()

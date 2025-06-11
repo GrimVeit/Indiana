@@ -55,7 +55,7 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
 
                 ActivateActions();
 
-                internetPresenter.StartCheckInternet();
+                internetPresenter.StartCheckConnection();
             }
             else
             {

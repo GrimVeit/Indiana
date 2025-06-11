@@ -8,6 +8,7 @@ public class UIMainMenuRoot : UIRoot
     [SerializeField] private LevelPanel_Menu levelPanel;
     [SerializeField] private CollectionPanel_Menu collectionPanel;
     [SerializeField] private InventoryPanel_Menu inventoryPanel;
+    [SerializeField] private Panel authorizationPanel;
 
     private ISoundProvider _soundProvider;
 
@@ -159,6 +160,11 @@ public class UIMainMenuRoot : UIRoot
     public void OpenInventoryPanel()
     {
         OpenPanel(inventoryPanel);
+    }
+
+    public void OpenAuthorizationPanel()
+    {
+        OpenPanel(authorizationPanel);
     }
 
     #endregion

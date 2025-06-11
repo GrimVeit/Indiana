@@ -31,9 +31,9 @@ public class InternetPresenter
 
     }
 
-    public void StartCheckInternet()
+    public void StartCheckConnection()
     {
-        internetModel.StartCheckInternet();
+        internetModel.StartCheckConnection();
     }
 
     public event Action OnInternetUnavailable

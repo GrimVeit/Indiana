@@ -9,8 +9,17 @@ public class MenuStateMachine : IGlobalStateMachineProvider
 
     private IState _currentState;
 
-    public MenuStateMachine(UIMainMenuRoot sceneRoot)
+    public MenuStateMachine
+        (UIMainMenuRoot sceneRoot, 
+        FirebaseAuthenticationPresenter firebaseAuthenticationPresenter,
+        FirebaseDatabasePresenter firebaseDatabasePresenter,
+        NicknameRandomPresenter nicknameRandomPresenter,
+        InternetPresenter internetPresenter)
     {
+        states[typeof(CheckAuthorizationState_Menu)] = new CheckAuthorizationState_Menu(this, firebaseAuthenticationPresenter);
+        states[typeof(AuthorizationState_Menu)] = new AuthorizationState_Menu(this, nicknameRandomPresenter, firebaseAuthenticationPresenter, firebaseDatabasePresenter, sceneRoot, internetPresenter);
+
+        states[typeof(StartMainState_Menu)] = new StartMainState_Menu(this, firebaseDatabasePresenter, firebaseAuthenticationPresenter);
         states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot);
         states[typeof(LeveLState_Menu)] = new LeveLState_Menu(this, sceneRoot);
         states[typeof(CollectionState_Menu)] = new CollectionState_Menu(this, sceneRoot);
@@ -19,7 +28,7 @@ public class MenuStateMachine : IGlobalStateMachineProvider
 
     public void Initialize()
     {
-        SetState(GetState<MainState_Menu>());
+        SetState(GetState<CheckAuthorizationState_Menu>());
     }
 
     public void Dispose()
