@@ -30,7 +30,7 @@ public class InternetModel
         while (Application.internetReachability == NetworkReachability.NotReachable)
         {
             Debug.Log("Подключения к интернету нет");
-            OnGetStatusDescription?.Invoke("Please check internet connection");
+            OnGetStatusDescription?.Invoke("Please check internet connection...");
             yield return new WaitForSeconds(1);
         }
 

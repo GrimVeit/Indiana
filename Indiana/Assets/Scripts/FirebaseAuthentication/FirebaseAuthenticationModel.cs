@@ -107,7 +107,7 @@ public class FirebaseAuthenticationModel
             switch (authError)
             {
                 case AuthError.NetworkRequestFailed:
-                    OnSignUpMessage_Action?.Invoke("Network error. Please check your internet connection.");
+                    OnSignUpMessage_Action?.Invoke("Network error. Please check your internet connection...");
                     break;
                 //case AuthError.EmailAlreadyInUse:
                 //    OnSignUpMessage_Action?.Invoke("This nickname is already in use.");
@@ -116,7 +116,7 @@ public class FirebaseAuthenticationModel
                 //    OnSignUpMessage_Action?.Invoke("Invalid nickname format.");
                 //    break;
                 default:
-                    OnSignUpMessage_Action?.Invoke("Unknown error or network error");
+                    OnSignUpMessage_Action?.Invoke("Unknown error or network error...");
                     break;
             }
 
@@ -128,7 +128,7 @@ public class FirebaseAuthenticationModel
 
         Debug.Log("Аккаунт создан");
         _soundProvider.PlayOneShot("SignUpSuccess");
-        OnSignUpMessage_Action?.Invoke("Success!");
+        OnSignUpMessage_Action?.Invoke("Success...");
         OnChangeUser?.Invoke(_auth.CurrentUser.UserId);
         OnSignUp_Action?.Invoke();
 

@@ -2,13 +2,13 @@ using System;
 
 public class InternetPresenter
 {
-    private InternetModel internetModel;
-    private InternetView internetView;
+    private readonly InternetModel _model;
+    private readonly InternetView _view;
 
     public InternetPresenter(InternetModel internetModel, InternetView internetView)
     {
-        this.internetModel = internetModel;
-        this.internetView = internetView;
+        _model = internetModel;
+        _view = internetView;
     }
 
     public void Initialize()
@@ -23,28 +23,28 @@ public class InternetPresenter
 
     private void ActivateEvents()
     {
-
+        _model.OnGetStatusDescription += _view.OnGetStatusDescription;
     }
 
     private void DeactivateEvents()
     {
-
+        _model.OnGetStatusDescription -= _view.OnGetStatusDescription;
     }
 
     public void StartCheckConnection()
     {
-        internetModel.StartCheckConnection();
+        _model.StartCheckConnection();
     }
 
     public event Action OnInternetUnavailable
     {
-        add { internetModel.OnInternetUnvailable += value; }
-        remove { internetModel.OnInternetUnvailable -= value; }
+        add { _model.OnInternetUnvailable += value; }
+        remove { _model.OnInternetUnvailable -= value; }
     }
 
     public event Action OnInternetAvailable
     {
-        add { internetModel.OnInternetAvailable += value;}
-        remove { internetModel.OnInternetAvailable += value; }
+        add { _model.OnInternetAvailable += value;}
+        remove { _model.OnInternetAvailable += value; }
     }
 }

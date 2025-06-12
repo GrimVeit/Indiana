@@ -15,11 +15,6 @@ public class StartMainState_Menu : IState
         _firebaseAuthenticationPresenter = firebaseAuthenticationPresenter;
     }
 
-    public StartMainState_Menu(IGlobalStateMachineProvider machineProvider)
-    {
-        _machineProvider = machineProvider;
-    }
-
     public void EnterState()
     {
         Debug.Log("<color=red>ACTIVATE STATE - START MAIN STATE / MENU</color>");

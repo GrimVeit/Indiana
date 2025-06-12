@@ -24,6 +24,8 @@ public class AuthorizationState_Menu : IState
 
     public void EnterState()
     {
+        Debug.Log("<color=red>ACTIVATE STATE - AUTHORIZATION STATE / MENU</color>");
+
         _internetPresenter.OnInternetAvailable += CreateRandomNickname;
 
         _nicknameRandomPresenter.OnFailure += CreateRandomNickname;

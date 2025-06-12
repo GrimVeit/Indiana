@@ -23,6 +23,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 
     private NicknameRandomPresenter nicknameRandomPresenter;
     private FirebaseAuthenticationPresenter firebaseAuthenticationPresenter;
+    private FirebaseAuthenticationInfoPresenter firebaseAuthenticationInfoPresenter;
     private FirebaseDatabasePresenter firebaseDatabasePresenter;
     private InternetPresenter internetPresenter;
 
@@ -58,10 +59,20 @@ public class MainMenuEntryPoint : MonoBehaviour
         viewContainer = sceneRoot.GetComponent<ViewContainer>();
         viewContainer.Initialize();
 
+        soundPresenter = new SoundPresenter
+                    (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
+                    viewContainer.GetView<SoundView>());
+
+        particleEffectPresenter = new ParticleEffectPresenter
+            (new ParticleEffectModel(),
+            viewContainer.GetView<ParticleEffectView>());
+
+        bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
+
 
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
             var dependencyStatus = task.Result;
-            if (dependencyStatus == Firebase.DependencyStatus.Available)
+            if (dependencyStatus == DependencyStatus.Available)
             {
                 FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
                 FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
@@ -70,23 +81,17 @@ public class MainMenuEntryPoint : MonoBehaviour
                 internetPresenter = new InternetPresenter(new InternetModel(), viewContainer.GetView<InternetView>());
 
                 firebaseAuthenticationPresenter = new FirebaseAuthenticationPresenter
-                    (new FirebaseAuthenticationModel(firebaseAuth, soundPresenter),
-                viewContainer.GetView<FirebaseAuthenticationView>());
+                    (new FirebaseAuthenticationModel(firebaseAuth, soundPresenter));
 
                 firebaseDatabasePresenter = new FirebaseDatabasePresenter
-                (new FirebaseDatabaseModel(firebaseAuth, databaseReference, soundPresenter));
+                (new FirebaseDatabaseModel(firebaseAuth, databaseReference, soundPresenter),
+                viewContainer.GetView<FirebaseDatabaseView>());
+
+                firebaseAuthenticationInfoPresenter = new FirebaseAuthenticationInfoPresenter
+                (new FirebaseAuthenticationInfoModel(firebaseAuthenticationPresenter), 
+                viewContainer.GetView<FirebaseAuthenticationInfoView>());
 
                 nicknameRandomPresenter = new NicknameRandomPresenter(new NicknameRandomModel());
-
-                soundPresenter = new SoundPresenter
-                    (new SoundModel(sounds.sounds, PlayerPrefsKeys.IS_MUTE_SOUNDS),
-                    viewContainer.GetView<SoundView>());
-
-                particleEffectPresenter = new ParticleEffectPresenter
-                    (new ParticleEffectModel(),
-                    viewContainer.GetView<ParticleEffectView>());
-
-                bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
                 storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup));
                 collectionVisualPresenter = new CollectionVisualPresenter(new CollectionVisualModel(storeCollectionPresenter), viewContainer.GetView<CollectionVisualView>());
@@ -116,6 +121,12 @@ public class MainMenuEntryPoint : MonoBehaviour
                 particleEffectPresenter.Initialize();
                 sceneRoot.Initialize();
                 bankPresenter.Initialize();
+
+                firebaseAuthenticationInfoPresenter.Initialize();
+                internetPresenter.Initialize();
+                nicknameRandomPresenter.Initialize();
+                firebaseDatabasePresenter.Initialize();
+                firebaseAuthenticationPresenter.Initialize();
 
                 collectionVisualPresenter.Initialize();
                 storeCollectionPresenter.Initialize();
@@ -187,6 +198,12 @@ public class MainMenuEntryPoint : MonoBehaviour
             sceneRoot.Dispose();
             particleEffectPresenter.Dispose();
             bankPresenter?.Dispose();
+
+            firebaseAuthenticationInfoPresenter.Dispose();
+            internetPresenter.Dispose();
+            nicknameRandomPresenter.Dispose();
+            firebaseDatabasePresenter.Dispose();
+            firebaseAuthenticationPresenter.Dispose();
 
             collectionVisualPresenter.Dispose();
             storeCollectionPresenter.Dispose();

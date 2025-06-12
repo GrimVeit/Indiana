@@ -8,6 +8,7 @@ public class UIMainMenuRoot : UIRoot
     [SerializeField] private LevelPanel_Menu levelPanel;
     [SerializeField] private CollectionPanel_Menu collectionPanel;
     [SerializeField] private InventoryPanel_Menu inventoryPanel;
+    [SerializeField] private LeaderboardPanel_Menu leaderboardPanel;
     [SerializeField] private Panel authorizationPanel;
 
     private ISoundProvider _soundProvider;
@@ -24,6 +25,7 @@ public class UIMainMenuRoot : UIRoot
         levelPanel.Initialize();
         collectionPanel.Initialize();
         inventoryPanel.Initialize();
+        leaderboardPanel.Initialize();
     }
 
     public void Activate()
@@ -31,10 +33,12 @@ public class UIMainMenuRoot : UIRoot
         mainPanel.OnClickToLevel += HandleClickToLevel_Main;
         mainPanel.OnClickToCollection += HandleClickToCollection_Main;
         mainPanel.OnClickToInventory += HandleClickToInventory_Main;
+        mainPanel.OnClickToLeaderboard += HandleClickToLeaderboard_Main;
 
         levelPanel.OnClickToBack += HandleClickToBack_Level;
         collectionPanel.OnClickToBack += HandleClickToBack_Collection;
         inventoryPanel.OnClickToBack += HandleClickToBack_Inventory;
+        leaderboardPanel.OnClickToBack += HandleClickToBack_Leaderboard;
 
         backgroundPanel.ActivatePanel();
     }
@@ -45,10 +49,12 @@ public class UIMainMenuRoot : UIRoot
         mainPanel.OnClickToLevel -= HandleClickToLevel_Main;
         mainPanel.OnClickToCollection -= HandleClickToCollection_Main;
         mainPanel.OnClickToInventory -= HandleClickToInventory_Main;
+        mainPanel.OnClickToLeaderboard -= HandleClickToLeaderboard_Main;
 
         levelPanel.OnClickToBack -= HandleClickToBack_Level;
         collectionPanel.OnClickToBack -= HandleClickToBack_Collection;
         inventoryPanel.OnClickToBack -= HandleClickToBack_Inventory;
+        leaderboardPanel.OnClickToBack -= HandleClickToBack_Leaderboard;
 
         if (currentPanel != null)
             CloseOtherPanel(currentPanel);
@@ -63,6 +69,7 @@ public class UIMainMenuRoot : UIRoot
         levelPanel.Dispose();
         collectionPanel.Dispose();
         inventoryPanel.Dispose();
+        leaderboardPanel.Dispose();
     }
 
     #region Output
@@ -72,6 +79,7 @@ public class UIMainMenuRoot : UIRoot
     public event Action OnClickToLevel_Main;
     public event Action OnClickToInventory_Main;
     public event Action OnClickToCollection_Main;
+    public event Action OnClickToLeaderboard_Main;
 
     private void HandleClickToLevel_Main()
     {
@@ -90,6 +98,13 @@ public class UIMainMenuRoot : UIRoot
     private void HandleClickToInventory_Main()
     {
         OnClickToInventory_Main?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
+    }
+
+    private void HandleClickToLeaderboard_Main()
+    {
+        OnClickToLeaderboard_Main?.Invoke();
 
         _soundProvider.PlayOneShot("Click");
     }
@@ -138,6 +153,19 @@ public class UIMainMenuRoot : UIRoot
 
     #endregion
 
+    #region LEADERBOARD
+
+    public event Action OnClickToBack_Leaderboard;
+
+    private void HandleClickToBack_Leaderboard()
+    {
+        OnClickToBack_Leaderboard?.Invoke();
+
+        _soundProvider.PlayOneShot("Click");
+    }
+
+    #endregion
+
     #endregion
 
     #region Input
@@ -160,6 +188,11 @@ public class UIMainMenuRoot : UIRoot
     public void OpenInventoryPanel()
     {
         OpenPanel(inventoryPanel);
+    }
+
+    public void OpenLeaderboardPanel()
+    {
+        OpenPanel(leaderboardPanel);
     }
 
     public void OpenAuthorizationPanel()

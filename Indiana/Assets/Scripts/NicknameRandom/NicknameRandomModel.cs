@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -13,7 +14,7 @@ public class NicknameRandomModel
 
     private readonly Regex mainRegex = new("^[a-zA-Z0-9._]*$");
     private readonly Regex invalidRegex = new(@"(\.{2,}|/{2,})");
-    private const string URL = "https://usernameapiv1.vercel.app/api/random-usernames?count=1";
+    private const string URL = "https://random-word-api.herokuapp.com/word?number=1";
 
     private IEnumerator coroutineRequest;
 
@@ -47,9 +48,9 @@ public class NicknameRandomModel
             yield break;
         }
 
-        RandomNicknamesData data = JsonUtility.FromJson<RandomNicknamesData>(request.downloadHandler.text);
+        //RandomNicknamesData data = JsonUtility.FromJson<RandomNicknamesData>(request.downloadHandler.text);
 
-        nicknamesUsers = new List<string>(data.usernames);
+        nicknamesUsers = JsonHelper.FromJson<string>(request.downloadHandler.text).ToList();
 
         string nickname = nicknamesUsers[0];
 

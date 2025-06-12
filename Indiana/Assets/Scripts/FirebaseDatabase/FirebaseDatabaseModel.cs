@@ -20,7 +20,6 @@ public class FirebaseDatabaseModel
 
     public string Nickname { get; private set; }
     public int Record { get; private set; }
-    public int Avatar { get; private set; }
 
     private List<UserData> userRecordsDictionary = new List<UserData>();
 
@@ -40,7 +39,6 @@ public class FirebaseDatabaseModel
     public void Initialize()
     {
         Record = PlayerPrefs.GetInt(PlayerPrefsKeys.RECORD, 0);
-        Avatar = PlayerPrefs.GetInt(PlayerPrefsKeys.AVATAR, 0);
 
         Debug.Log(Record);
     }
@@ -56,8 +54,7 @@ public class FirebaseDatabaseModel
         Record = 0;
         PlayerPrefs.SetInt(PlayerPrefsKeys.RECORD, 0);
         PlayerPrefs.SetString(PlayerPrefsKeys.NICKNAME, Nickname);
-        PlayerPrefs.SetInt(PlayerPrefsKeys.AVATAR, Avatar);
-        UserData user = new(Nickname, 0, Avatar);
+        UserData user = new(Nickname, 0);
         string json = JsonUtility.ToJson(user);
 
         OnGetNickname?.Invoke(Nickname);
@@ -73,16 +70,10 @@ public class FirebaseDatabaseModel
         OnGetNickname?.Invoke(Nickname);
     }
 
-    public void SetAvatar(int avatar)
-    {
-        Avatar = avatar;
-        OnGetAvatar?.Invoke(Avatar);
-    }
-
     public void SaveChangesToServer()
     {
         Nickname = auth.CurrentUser.Email.Split('@')[0];
-        UserData user = new(Nickname, Record, Avatar);
+        UserData user = new(Nickname, Record);
         string json = JsonUtility.ToJson(user);
         databaseReference.Child("Users").Child(auth.CurrentUser.UserId).SetRawJsonValueAsync(json);
     }
@@ -161,8 +152,7 @@ public class FirebaseDatabaseModel
         {
             string name = user.Child("Nickname").Value.ToString();
             int record = int.Parse(user.Child("Record").Value.ToString());
-            int avatar = int.Parse(user.Child("Avatar").Value.ToString());
-            userRecordsDictionary.Add(new UserData(name, record, avatar));
+            userRecordsDictionary.Add(new UserData(name, record));
         }
 
         userRecordsDictionary.Reverse();
@@ -195,8 +185,7 @@ public class FirebaseDatabaseModel
         {
             string name = user.Child("Nickname").Value.ToString();
             int record = int.Parse(user.Child("Record").Value.ToString());
-            int avatar = int.Parse(user.Child("Avatar").Value.ToString());
-            OnGetUserFromPlace?.Invoke(new UserData(name, record, avatar));
+            OnGetUserFromPlace?.Invoke(new UserData(name, record));
         }
 
         //OnGetUserFromPlace?.Invoke(new UserData(
@@ -211,13 +200,11 @@ public class FirebaseDatabaseModel
 public class UserData
 {
     public string Nickname;
-    public int Avatar;
     public int Record;
 
-    public UserData(string nickname, int record, int avatar)
+    public UserData(string nickname, int record)
     {
         Nickname = nickname;
         Record = record;
-        Avatar = avatar;
     }
 }

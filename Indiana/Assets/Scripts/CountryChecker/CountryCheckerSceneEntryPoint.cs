@@ -46,7 +46,8 @@ public class CountryCheckerSceneEntryPoint : MonoBehaviour
                 DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
                 firebaseDatabaseRealtimePresenter = new FirebaseDatabasePresenter
-                (new FirebaseDatabaseModel(firebaseAuth, databaseReference, soundPresenter));
+                (new FirebaseDatabaseModel(firebaseAuth, databaseReference, soundPresenter), 
+                viewContainer.GetView<FirebaseDatabaseView>());
 
                 geoLocationPresenter = new GeoLocationPresenter(new GeoLocationModel());
 

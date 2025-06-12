@@ -1,39 +1,22 @@
 using System;
 
-public class FirebaseAuthenticationPresenter
+public class FirebaseAuthenticationPresenter : IAuthenticationSignUpInfoProvider
 {
     private readonly FirebaseAuthenticationModel _model;
-    private readonly FirebaseAuthenticationView _view;
 
-    public FirebaseAuthenticationPresenter(FirebaseAuthenticationModel model, FirebaseAuthenticationView view)
+    public FirebaseAuthenticationPresenter(FirebaseAuthenticationModel model)
     {
         _model = model;
-        _view = view;
     }
 
     public void Initialize()
     {
-        ActivateEvents();
-
         _model.Initialize();
-        _view?.Initialize();
     }
 
     public void Dispose()
     {
-        DeactivateEvents();
 
-        _view?.Dispose();
-    }
-
-    private void ActivateEvents()
-    {
-        _model.OnSignUpMessage_Action += _view.SetDescription;
-    }
-
-    private void DeactivateEvents()
-    {
-        _model.OnSignUpMessage_Action -= _view.SetDescription;
     }
 
     #region Input
@@ -77,6 +60,12 @@ public class FirebaseAuthenticationPresenter
         remove { _model.OnSignIn_Action -= value; }
     }
 
+    public event Action<string> OnSignUpMessage_Action
+    {
+        add => _model.OnSignUpMessage_Action += value;
+        remove => _model.OnSignUpMessage_Action -= value;
+    }
+
 
 
     public event Action OnSignUp
@@ -104,5 +93,12 @@ public class FirebaseAuthenticationPresenter
         remove { _model.OnDeleteAccount_Action -= value; }
     }
 
+
+
     #endregion
+}
+
+public interface IAuthenticationSignUpInfoProvider
+{
+    public event Action<string> OnSignUpMessage_Action;
 }

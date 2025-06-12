@@ -18,6 +18,7 @@ public class MainState_Menu : IState
         _sceneRoot.OnClickToLevel_Main += ChangeStateToLevel;
         _sceneRoot.OnClickToCollection_Main += ChangeStateToCollection;
         _sceneRoot.OnClickToInventory_Main += ChangeStateToInventory;
+        _sceneRoot.OnClickToLeaderboard_Main += ChangeStateToLeaderboard;
 
         _sceneRoot.OpenMainPanel();
     }
@@ -27,6 +28,7 @@ public class MainState_Menu : IState
         _sceneRoot.OnClickToLevel_Main -= ChangeStateToLevel;
         _sceneRoot.OnClickToCollection_Main -= ChangeStateToCollection;
         _sceneRoot.OnClickToInventory_Main -= ChangeStateToInventory;
+        _sceneRoot.OnClickToLeaderboard_Main -= ChangeStateToLeaderboard;
     }
 
     private void ChangeStateToLevel()
@@ -42,5 +44,10 @@ public class MainState_Menu : IState
     private void ChangeStateToInventory()
     {
         _machineProvider.SetState(_machineProvider.GetState<InventoryState_Menu>());
+    }
+
+    private void ChangeStateToLeaderboard()
+    {
+        _machineProvider.SetState(_machineProvider.GetState<LeaderboardState_Menu>());
     }
 }

@@ -24,6 +24,7 @@ public class MenuStateMachine : IGlobalStateMachineProvider
         states[typeof(LeveLState_Menu)] = new LeveLState_Menu(this, sceneRoot);
         states[typeof(CollectionState_Menu)] = new CollectionState_Menu(this, sceneRoot);
         states[typeof(InventoryState_Menu)] = new InventoryState_Menu(this, sceneRoot);
+        states[typeof(LeaderboardState_Menu)] = new LeaderboardState_Menu(this, sceneRoot);
     }
 
     public void Initialize()
