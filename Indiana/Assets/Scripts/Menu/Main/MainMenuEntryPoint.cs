@@ -91,7 +91,7 @@ public class MainMenuEntryPoint : MonoBehaviour
                 (new FirebaseAuthenticationInfoModel(firebaseAuthenticationPresenter), 
                 viewContainer.GetView<FirebaseAuthenticationInfoView>());
 
-                nicknameRandomPresenter = new NicknameRandomPresenter(new NicknameRandomModel());
+                nicknameRandomPresenter = new NicknameRandomPresenter(new NicknameRandomModel(), viewContainer.GetView<NicknameRandomView>());
 
                 storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup, PlayerPrefsKeys.RECORD));
                 collectionVisualPresenter = new CollectionVisualPresenter(new CollectionVisualModel(storeCollectionPresenter), viewContainer.GetView<CollectionVisualView>());

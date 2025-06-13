@@ -6,20 +6,32 @@ using UnityEngine;
 public class NicknameRandomPresenter
 {
     private readonly NicknameRandomModel _model;
+    private readonly NicknameRandomView _view;
 
-    public NicknameRandomPresenter(NicknameRandomModel model)
+    public NicknameRandomPresenter(NicknameRandomModel model, NicknameRandomView view)
     {
         _model = model;
+        _view = view;
     }
 
     public void Initialize()
     {
-
+        ActivateEvents();
     }
 
     public void Dispose()
     {
+        DeactivateEvents();
+    }
 
+    private void ActivateEvents()
+    {
+        _model.OnCreateNickname += _view.SetNickname;
+    }
+
+    private void DeactivateEvents()
+    {
+        _model.OnCreateNickname -= _view.SetNickname;
     }
 
     #region Input

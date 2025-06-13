@@ -18,8 +18,6 @@ public class CheckAuthorizationState_Menu : IState
     {
         Debug.Log("<color=red>ACTIVATE STATE - CHECK AUTHORIZATION STATE / MENU</color>");
 
-        //_authenticationPresenter.SignOut();
-
         if (_authenticationPresenter.IsAuthorization())
             ChangeStateToStartMain();
         else

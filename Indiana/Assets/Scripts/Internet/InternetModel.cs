@@ -31,11 +31,12 @@ public class InternetModel
         {
             Debug.Log("Подключения к интернету нет");
             OnGetStatusDescription?.Invoke("Please check internet connection...");
+            OnInternetUnvailable?.Invoke();
             yield return new WaitForSeconds(1);
         }
 
         Debug.Log("Подключения к интернету есть");
-        OnGetStatusDescription?.Invoke("Load data");
+        OnGetStatusDescription?.Invoke("Load data...");
         OnInternetAvailable?.Invoke();
     }
 }

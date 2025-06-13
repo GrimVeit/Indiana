@@ -11,6 +11,11 @@ public class UIMainMenuRoot : UIRoot
     [SerializeField] private LeaderboardPanel_Menu leaderboardPanel;
     [SerializeField] private Panel authorizationPanel;
 
+    [SerializeField] private Panel presentationNickname1Panel;
+    [SerializeField] private Panel presentationNickname2Panel;
+    [SerializeField] private Panel intro1Panel;
+    [SerializeField] private Panel intro2Panel;
+
     private ISoundProvider _soundProvider;
 
     public void SetSoundProvider(ISoundProvider soundProvider)
@@ -195,9 +200,41 @@ public class UIMainMenuRoot : UIRoot
         OpenPanel(leaderboardPanel);
     }
 
+
+
+
     public void OpenAuthorizationPanel()
     {
         OpenPanel(authorizationPanel);
+    }
+
+
+
+    public void OpenNicknamePresentation1Panel()
+    {
+        OpenPanel(presentationNickname1Panel);
+    }
+
+    public void OpenNicknamePresentation2Panel()
+    {
+        OpenPanel(presentationNickname2Panel);
+    }
+    
+    public void OpenIntro1Panel()
+    {
+        OpenPanel(intro1Panel);
+    }
+
+
+
+    public void OpenIntro2Panel()
+    {
+        OpenOtherPanel(intro2Panel);
+    }
+
+    public void CloseIntro2Panel()
+    {
+        CloseOtherPanel(intro2Panel);
     }
 
     #endregion

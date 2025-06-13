@@ -19,6 +19,11 @@ public class MenuStateMachine : IGlobalStateMachineProvider
         states[typeof(CheckAuthorizationState_Menu)] = new CheckAuthorizationState_Menu(this, firebaseAuthenticationPresenter);
         states[typeof(AuthorizationState_Menu)] = new AuthorizationState_Menu(this, nicknameRandomPresenter, firebaseAuthenticationPresenter, firebaseDatabasePresenter, sceneRoot, internetPresenter);
 
+        states[typeof(NicknamePresentation1State_Menu)] = new NicknamePresentation1State_Menu(this, sceneRoot);
+        states[typeof(NicknamePresentation2State_Menu)] = new NicknamePresentation2State_Menu(this, sceneRoot);
+        states[typeof(Intro1State_Menu)] = new Intro1State_Menu(this, sceneRoot);
+        states[typeof(Intro2State_Menu)] = new Intro2State_Menu (this, sceneRoot);
+
         states[typeof(StartMainState_Menu)] = new StartMainState_Menu(this, firebaseDatabasePresenter, firebaseAuthenticationPresenter);
         states[typeof(MainState_Menu)] = new MainState_Menu(this, sceneRoot);
         states[typeof(LeveLState_Menu)] = new LeveLState_Menu(this, sceneRoot);

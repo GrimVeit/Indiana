@@ -14,7 +14,7 @@ public class NicknameRandomModel
 
     private readonly Regex mainRegex = new("^[a-zA-Z0-9._]*$");
     private readonly Regex invalidRegex = new(@"(\.{2,}|/{2,})");
-    private const string URL = "https://random-word-api.herokuapp.com/word?number=1";
+    private const string URL = "https://dinoipsum.com/api/?format=text&paragraphs=1&words=1";
 
     private IEnumerator coroutineRequest;
 
@@ -50,13 +50,18 @@ public class NicknameRandomModel
 
         //RandomNicknamesData data = JsonUtility.FromJson<RandomNicknamesData>(request.downloadHandler.text);
 
-        nicknamesUsers = JsonHelper.FromJson<string>(request.downloadHandler.text).ToList();
+        //nicknamesUsers = JsonHelper.FromJson<string>(request.downloadHandler.text).ToList();
 
-        string nickname = nicknamesUsers[0];
+        string nickname = request.downloadHandler.text.Trim();
 
         if (nickname.EndsWith("_"))
         {
             nickname += UnityEngine.Random.Range(0, 10);
+        }
+
+        if (nickname.EndsWith("."))
+        {
+            nickname = nickname.Substring(0, nickname.Length - 1);
         }
 
         Debug.Log(nickname);

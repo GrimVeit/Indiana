@@ -36,7 +36,7 @@ public class AuthorizationState_Menu : IState
 
         _firebaseAuthenticationPresenter.OnSignUpError += CreateRandomNickname;
         _firebaseAuthenticationPresenter.OnSignUp += _firebaseDatabaseRealtimePresenter.CreateEmptyDataToServer;
-        _firebaseAuthenticationPresenter.OnSignUp += ChangeStateToMainState;
+        _firebaseAuthenticationPresenter.OnSignUp += ChangeStateToNicknamePresentation1;
 
         _sceneRoot.OpenAuthorizationPanel();
 
@@ -55,7 +55,7 @@ public class AuthorizationState_Menu : IState
 
         _firebaseAuthenticationPresenter.OnSignUpError -= CreateRandomNickname;
         _firebaseAuthenticationPresenter.OnSignUp -= _firebaseDatabaseRealtimePresenter.CreateEmptyDataToServer;
-        _firebaseAuthenticationPresenter.OnSignUp -= ChangeStateToMainState;
+        _firebaseAuthenticationPresenter.OnSignUp -= ChangeStateToNicknamePresentation1;
     }
 
     private void CreateRandomNickname()
@@ -63,8 +63,8 @@ public class AuthorizationState_Menu : IState
         _nicknameRandomPresenter.CreateRandomNickname(5, 17);
     }
 
-    private void ChangeStateToMainState()
+    private void ChangeStateToNicknamePresentation1()
     {
-        _globalStateMachineProvider.SetState(_globalStateMachineProvider.GetState<StartMainState_Menu>());
+        _globalStateMachineProvider.SetState(_globalStateMachineProvider.GetState<NicknamePresentation1State_Menu>());
     }
 }
