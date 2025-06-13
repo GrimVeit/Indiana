@@ -76,7 +76,7 @@ public class GameSceneEntryPoint : MonoBehaviour
         bankPresenter = new BankPresenter(new BankModel(), viewContainer.GetView<BankView>());
 
         storeLevelPresenter = new StoreLevelPresenter(new StoreLevelModel());
-        storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup));
+        storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup, PlayerPrefsKeys.RECORD));
 
         storeWeaponPresenter = new StoreWeaponPresenter(new StoreWeaponModel(weaponGroup));
         weaponGameVisualPresenter = new WeaponGameVisualPresenter(new WeaponGameVisualModel(storeWeaponPresenter), viewContainer.GetView<WeaponGameVisualView>());

@@ -37,8 +37,38 @@ public class GameEntryPoint
 
     private void Run()
     {
-        coroutines.StartCoroutine(LoadAndStartMainMenu());
+        coroutines.StartCoroutine(LoadAndStartCountryChecker());
     }
+
+    private IEnumerator LoadAndStartCountryChecker()
+    {
+        yield return LoadScene(Scenes.BOOT);
+        yield return LoadScene(Scenes.COUNTRY_CHECK);
+
+        yield return new WaitForEndOfFrame();
+
+        var sceneEntryPoint = Object.FindObjectOfType<CountryCheckerSceneEntryPoint>();
+
+        sceneEntryPoint.Run(rootView);
+
+        sceneEntryPoint.GoToMainMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
+        sceneEntryPoint.GoToOther += () => coroutines.StartCoroutine(LoadAndStartOther());
+    }
+
+    private IEnumerator LoadAndStartOther()
+    {
+        yield return LoadScene(Scenes.BOOT);
+        yield return LoadScene(Scenes.OTHER);
+
+        yield return new WaitForEndOfFrame();
+
+        var sceneEntryPoint = Object.FindObjectOfType<OtherSceneEntryPoint>();
+
+        sceneEntryPoint.Run(rootView);
+
+        sceneEntryPoint.OnGoToMainMenu += () => coroutines.StartCoroutine(LoadAndStartMainMenu());
+    }
+
 
     private IEnumerator LoadAndStartMainMenu()
     {

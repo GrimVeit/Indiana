@@ -15,9 +15,13 @@ public class StoreCollectionModel
 
     public readonly string FilePath = Path.Combine(Application.persistentDataPath, "ItemCollections.json");
 
-    public StoreCollectionModel(ItemCollectionGroup itemCollectionGroup)
+    private readonly string KEY;
+
+    public StoreCollectionModel(ItemCollectionGroup itemCollectionGroup, string KEY)
     {
         itemGroup = itemCollectionGroup;
+
+        this.KEY = KEY;
 
         if (File.Exists(FilePath))
         {
@@ -58,6 +62,8 @@ public class StoreCollectionModel
     {
         string json = JsonUtility.ToJson(new ItemCollectionDatas(itemCollectionDatas.ToArray()));
         File.WriteAllText(FilePath, json);
+
+        PlayerPrefs.SetInt(KEY, CurrentCountCollection());
     }
 
     public void AddItemCollection(int id)
@@ -72,6 +78,18 @@ public class StoreCollectionModel
 
         itemCollection.Data.AddItem(1);
         OnChangeCountItem?.Invoke(itemCollection, itemCollection.Data.Count);
+    }
+
+    private int CurrentCountCollection()
+    {
+        int count = 0;
+
+        for (int i = 0; i < itemCollectionDatas.Count; i++)
+        {
+            count += itemCollectionDatas[i].Count;
+        }
+
+        return count;
     }
 }
 

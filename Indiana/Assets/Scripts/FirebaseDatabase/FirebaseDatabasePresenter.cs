@@ -61,6 +61,21 @@ public class FirebaseDatabasePresenter : IDatabaseRecordsEvents
 
 
 
+    public event Action<string> OnGetLink
+    {
+        add => _model.OnGetLink += value;
+        remove => _model.OnGetLink -= value;
+    }
+
+    public event Action OnErrorGetLink
+    {
+        add => _model.OnErrorGetLink += value;
+        remove => _model.OnErrorGetLink -= value;
+    }
+
+
+
+
     public event Action<UserData> OnGetUserFromPlace
     {
         add { _model.OnGetUserFromPlace += value; }
@@ -105,6 +120,11 @@ public class FirebaseDatabasePresenter : IDatabaseRecordsEvents
     public void GetCountries()
     {
         _model.GetCountries();
+    }
+
+    public void GetLink()
+    {
+        _model.GetLink();
     }
 
     #endregion

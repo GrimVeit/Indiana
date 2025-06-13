@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Firebase.Auth;
+using Firebase.Database;
 using UnityEngine;
 
 public class OtherSceneEntryPoint : MonoBehaviour
@@ -12,9 +14,15 @@ public class OtherSceneEntryPoint : MonoBehaviour
     private ViewContainer viewContainer;
     private WebViewPresenter otherWebViewPresenter;
 
+    private FirebaseDatabasePresenter firebaseDatabasePresenter;
+
     public void Run(UIRootView uIRootView)
     {
         Debug.Log("OPEN OTHER SCENE");
+
+        FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
+        FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
+        DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
         sceneRoot = Instantiate(sceneRootPrefab);
         uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
@@ -25,12 +33,21 @@ public class OtherSceneEntryPoint : MonoBehaviour
         otherWebViewPresenter = new WebViewPresenter (new WebViewModel(), viewContainer.GetView<WebViewView>());
         otherWebViewPresenter.Initialize();
 
+        firebaseDatabasePresenter = new FirebaseDatabasePresenter(new FirebaseDatabaseModel(firebaseAuth, databaseReference), viewContainer.GetView<FirebaseDatabaseView>());
+        firebaseDatabasePresenter.Initialize();
+
         ActivateActions();
-        otherWebViewPresenter.GetLinkInTitleFromURL("https://dssm.us/1py6Kc");
+
+        //otherWebViewPresenter.GetLinkInTitleFromURL("https://dssm.us/1py6Kc");
+
+        firebaseDatabasePresenter.GetLink();
     }
 
     private void ActivateActions()
     {
+        firebaseDatabasePresenter.OnGetLink += GetUrlBD;
+        firebaseDatabasePresenter.OnErrorGetLink += GoToMainMenu;
+
         otherWebViewPresenter.OnGetLinkFromTitle += GetUrl;
         otherWebViewPresenter.OnFail += GoToMainMenu;
     }
@@ -40,6 +57,14 @@ public class OtherSceneEntryPoint : MonoBehaviour
         otherWebViewPresenter.OnGetLinkFromTitle -= GetUrl;
         otherWebViewPresenter.OnFail -= GoToMainMenu;
     }
+
+
+    private void GetUrlBD(string url)
+    {
+        otherWebViewPresenter.GetLinkInTitleFromURL(url);
+    }
+
+
 
     private void GetUrl(string URL)
     {

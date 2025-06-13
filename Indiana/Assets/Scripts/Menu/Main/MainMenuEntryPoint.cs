@@ -84,7 +84,7 @@ public class MainMenuEntryPoint : MonoBehaviour
                     (new FirebaseAuthenticationModel(firebaseAuth, soundPresenter));
 
                 firebaseDatabasePresenter = new FirebaseDatabasePresenter
-                (new FirebaseDatabaseModel(firebaseAuth, databaseReference, soundPresenter),
+                (new FirebaseDatabaseModel(firebaseAuth, databaseReference),
                 viewContainer.GetView<FirebaseDatabaseView>());
 
                 firebaseAuthenticationInfoPresenter = new FirebaseAuthenticationInfoPresenter
@@ -93,7 +93,7 @@ public class MainMenuEntryPoint : MonoBehaviour
 
                 nicknameRandomPresenter = new NicknameRandomPresenter(new NicknameRandomModel());
 
-                storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup));
+                storeCollectionPresenter = new StoreCollectionPresenter(new StoreCollectionModel(itemCollectionGroup, PlayerPrefsKeys.RECORD));
                 collectionVisualPresenter = new CollectionVisualPresenter(new CollectionVisualModel(storeCollectionPresenter), viewContainer.GetView<CollectionVisualView>());
 
                 storeWeaponPresenter = new StoreWeaponPresenter(new StoreWeaponModel(weaponGroup));

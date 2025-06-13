@@ -18,6 +18,9 @@ public class FirebaseDatabaseModel
     public event Action<List<string>> OnGetCountries;
     public event Action OnErrorGetCountries;
 
+    public event Action<string> OnGetLink;
+    public event Action OnErrorGetLink;
+
     public string Nickname { get; private set; }
     public int Record { get; private set; }
 
@@ -27,13 +30,10 @@ public class FirebaseDatabaseModel
     private FirebaseAuth auth;
     private DatabaseReference databaseReference;
 
-    private ISoundProvider soundProvider;
-
-    public FirebaseDatabaseModel(FirebaseAuth auth, DatabaseReference database, ISoundProvider soundProvider)
+    public FirebaseDatabaseModel(FirebaseAuth auth, DatabaseReference database)
     {
         this.auth = auth;
         this.databaseReference = database;
-        this.soundProvider = soundProvider;
     }
 
     public void Initialize()
@@ -118,6 +118,54 @@ public class FirebaseDatabaseModel
         }
 
         OnGetCountries?.Invoke(countries);
+    }
+
+    #endregion
+
+    #region Link
+
+    public void GetLink()
+    {
+        Coroutines.Start(GetLinkCoro());
+    }
+
+    private IEnumerator GetLinkCoro()
+    {
+        var task = databaseReference.Child("Link").GetValueAsync();
+
+        float timeOut = 5f;
+        float startTime = Time.time;
+
+        yield return new WaitUntil(() => task.IsCompleted || (Time.time - startTime) > timeOut);
+
+        if (task.IsFaulted || task.IsCanceled || !task.IsCompleted)
+        {
+            Debug.Log("Error display link");
+            OnErrorGetLink?.Invoke();
+            yield break;
+        }
+
+        DataSnapshot data = task.Result;
+
+        List<string> links = new();
+
+        foreach (var user in data.Children)
+        {
+            string name = user.Child("link").Value.ToString();
+            links.Add(name);
+            Debug.Log($"{name}");
+        }
+
+        if (links.Count == 0)
+        {
+            Debug.Log("NOT FOUND LINKS");
+            OnErrorGetLink?.Invoke();
+        }
+        else
+        {
+            Debug.Log(links[0]);
+            OnGetLink?.Invoke(links[0]);
+        }
     }
 
     #endregion
