@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformPaths:
   - {fileID: 11400000, guid: a3fe887b6f48ff24fb9ac564603baf60, type: 2}
+  - {fileID: 11400000, guid: ba43871b09828d445a05bf35b38e3e66, type: 2}
+  - {fileID: 11400000, guid: 6af39f53afeb5a24e9ab56ff6b1044b1, type: 2}

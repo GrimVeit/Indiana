@@ -24,7 +24,7 @@ public class OtherSceneEntryPoint : MonoBehaviour
         FirebaseAuth firebaseAuth = FirebaseAuth.DefaultInstance;
         DatabaseReference databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        sceneRoot = Instantiate(sceneRootPrefab);
+        sceneRoot = sceneRootPrefab;
         uIRootView.AttachSceneUI(sceneRoot.gameObject, Camera.main);
 
         viewContainer = sceneRoot.GetComponent<ViewContainer>();

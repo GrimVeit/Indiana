@@ -1,0 +1,312 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53af6c26c694f94c83babc9e75685ee, type: 3}
+  m_Name: PlatformPath_1_4
+  m_EditorClassIdentifier: 
+  platformsUnit:
+  - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
+    zoneType: 1
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: 64f38993d8abacf46a5bf632d904685e, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances:
+      - idWeapon: 0
+        dropChance: 5
+      - idWeapon: 1
+        dropChance: 1
+      isSpawnedWeapon: 1
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: fd39a0e0a4c923146a0f2afdc6e6807c, type: 2}
+    zoneType: 0
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances:
+      - idCoins: 0
+        dropChance: 6
+      - idCoins: 1
+        dropChance: 3
+      - idCoins: 2
+        dropChance: 1
+      isSpawnedCoins: 1
+  - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 6
+      - idObstacle: 1
+        dropChance: 4
+      - idObstacle: 2
+        dropChance: 2
+      - idObstacle: 3
+        dropChance: 1
+      isSpawnedObstacle: 1
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: 64f38993d8abacf46a5bf632d904685e, type: 2}
+    zoneType: 0
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 6
+      - idObstacle: 1
+        dropChance: 4
+      - idObstacle: 2
+        dropChance: 2
+      - idObstacle: 3
+        dropChance: 1
+      isSpawnedObstacle: 1
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances:
+      - idCoins: 0
+        dropChance: 6
+      - idCoins: 1
+        dropChance: 3
+      - idCoins: 2
+        dropChance: 1
+      isSpawnedCoins: 1
+  - platform: {fileID: 11400000, guid: 0867f6337ffab8f4896107346c949cd0, type: 2}
+    zoneType: 0
+    pathLevel: 2
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 1
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: 64f38993d8abacf46a5bf632d904685e, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 1
+    trophyChances:
+      trophyChances:
+      - idTrophy: 0
+        dropChance: 1
+      - idTrophy: 1
+        dropChance: 1
+      - idTrophy: 2
+        dropChance: 1
+      - idTrophy: 3
+        dropChance: 1
+      - idTrophy: 4
+        dropChance: 1
+      - idTrophy: 5
+        dropChance: 1
+      - idTrophy: 6
+        dropChance: 1
+      isSpawnedTrophy: 1
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
+    zoneType: 0
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances:
+      - idCoins: 0
+        dropChance: 6
+      - idCoins: 1
+        dropChance: 3
+      - idCoins: 2
+        dropChance: 1
+      isSpawnedCoins: 1
+  - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 6
+      - idObstacle: 1
+        dropChance: 4
+      - idObstacle: 2
+        dropChance: 2
+      - idObstacle: 3
+        dropChance: 1
+      isSpawnedObstacle: 1
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: fd39a0e0a4c923146a0f2afdc6e6807c, type: 2}
+    zoneType: 0
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances:
+      - idWeapon: 0
+        dropChance: 5
+      - idWeapon: 1
+        dropChance: 1
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: 64f38993d8abacf46a5bf632d904685e, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
+    zoneType: 0
+    pathLevel: 2
+    obstacleChances:
+      obstacleChances:
+      - idObstacle: 0
+        dropChance: 6
+      - idObstacle: 1
+        dropChance: 4
+      - idObstacle: 2
+        dropChance: 2
+      - idObstacle: 3
+        dropChance: 1
+      isSpawnedObstacle: 1
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: 0867f6337ffab8f4896107346c949cd0, type: 2}
+    zoneType: 0
+    pathLevel: 1
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
+  - platform: {fileID: 11400000, guid: 162607c8cbabe9e4cbd24b6d43c22751, type: 2}
+    zoneType: 2
+    pathLevel: 0
+    obstacleChances:
+      obstacleChances: []
+      isSpawnedObstacle: 0
+    trophyChances:
+      trophyChances: []
+      isSpawnedTrophy: 0
+    weaponChances:
+      weaponChances: []
+      isSpawnedWeapon: 0
+    coinsChances:
+      coinChances: []
+      isSpawnedCoins: 0
